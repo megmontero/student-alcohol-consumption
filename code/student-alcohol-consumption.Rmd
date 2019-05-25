@@ -1,0 +1,70 @@
+---
+title: "Código Práctica 2: Limpieza dataset 'Student Alcohol Consumption '"
+author: "Gregorio Andrés García Menéndez (gagarcia) & Manuel Gomez Montero (megmontero)"
+date: "Junio, 2019"
+output:
+  html_document:
+    keep_md: yes
+    number_sections: yes
+    toc: yes
+    toc_depth: 2
+    toc_float: yes
+  pdf_document:
+    toc: yes
+    toc_depth: '2'
+lang: es
+---
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+options(knitr.kable.NA = '')
+```
+
+```{r load_libraries, include=FALSE}
+library(knitr)
+```
+
+**Introducción**
+
+Práctica 2 de .... chapa... 
+
+
+Leemos ambos ficheros mostramos resumén para matemáticas:
+
+```{r}
+students.mat=read.table("../data/student-mat.csv",sep=",",header=TRUE)
+students.por=read.table("../data/student-por.csv",sep=",",header=TRUE)
+summary(students.mat)
+
+
+```
+
+
+Y para portugués: 
+
+```{r}
+summary(students.por)
+```
+
+
+
+En el código de ejemplo los unía a ver que ver si tiene sentido. ya que no son los mismos alumnos.
+
+```{r}
+students=merge(students.mat,students.por,by=c("school","sex","age","address","famsize","Pstatus","Medu","Fedu","Mjob","Fjob","reason","nursery","internet"))
+summary(students)
+```
+
+
+Propongo unirlo así que nos salgan nulos y aplicar una mejor limpieza, habría que ver que campos son comunes y cuales no.
+
+```{r}
+students=merge(students.mat,students.por,by=c("school","sex","age","address","famsize","Pstatus","Medu","Fedu","Mjob","Fjob","reason","nursery","internet", "guardian"), all = TRUE)
+summary(students)
+```
+
+
+
+
