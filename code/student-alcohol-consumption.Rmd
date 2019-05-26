@@ -18,8 +18,11 @@ lang: es
 
 
 ```{r setup, include=FALSE}
+# Change depending on your working directory
+working_directory <- "F:/Drive/Máster Data Science/Tipología y ciclo de la vida de los datos/PRAC2/student-alcohol-consumption"
+
 knitr::opts_chunk$set(echo = TRUE)
-options(knitr.kable.NA = '')
+options(knitr.kable.NA = '', root.dir = working_directory)
 ```
 
 ```{r load_libraries, include=FALSE}
@@ -63,6 +66,8 @@ Propongo unirlo asÃ­ que nos salgan nulos y aplicar una mejor limpieza, habrÃ­a 
 ```{r}
 students=merge(students.mat,students.por,by=c("school","sex","age","address","famsize","Pstatus","Medu","Fedu","Mjob","Fjob","reason","nursery","internet", "guardian"), all = TRUE)
 summary(students)
+
+write.table(students, "../data/students.csv", sep=",", col.names=TRUE, row.names=TRUE, quote=TRUE, na="NA")
 ```
 
 

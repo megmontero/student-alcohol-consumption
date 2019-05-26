@@ -9,12 +9,12 @@ students_mat <- read.table("student-mat.csv", header=TRUE, sep=",", na.strings="
 students_por <- read.table("student-por.csv", header=TRUE, sep=",", na.strings="NA", dec=".", strip.white=TRUE)
 
 
-students <- merge(students_mat, students_por, by=c("school","sex","age","address","famsize","Pstatus","Medu","Fedu","Mjob","Fjob","reason","nursery","internet"))
+students_both <- merge(students_mat, students_por, by=c("school","sex","age","address","famsize","Pstatus","Medu","Fedu","Mjob","Fjob","reason","nursery","internet"))
 
-print(nrow(students))
+print(nrow(students_both))
 
 summary(students_mat)
 summary(students_por)
-summary(students)
+summary(students_both)
 
-write.table(students, "students.csv", sep=",", col.names=TRUE, row.names=TRUE, quote=TRUE, na="NA")
+write.table(students_both, "students_both.csv", sep=",", col.names=TRUE, row.names=TRUE, quote=TRUE, na="NA")
