@@ -64,12 +64,82 @@ summary(students)
 Propongo unirlo asÃ­ que nos salgan nulos y aplicar una mejor limpieza, habrÃ­a que ver que campos son comunes y cuales no.
 
 ```{r}
-students=merge(students.mat,students.por,by=c("school","sex","age","address","famsize","Pstatus","Medu","Fedu","Mjob","Fjob","reason","nursery","internet", "guardian"), all = TRUE)
+students=merge(students.mat,students.por,by=c("school","sex","age","address","famsize","Pstatus","Medu","Fedu","Mjob","Fjob","reason","guardian","traveltime","schoolsup","famsup","activities","nursery","higher","internet","romantic","famrel","freetime","goout","Dalc","Walc","health","absences"), all = TRUE)
 summary(students)
 
+# Save the dataset temporaly 
 write.table(students, "../data/students.csv", sep=",", col.names=TRUE, row.names=TRUE, quote=TRUE, na="NA")
 ```
+Después de hacer varias pruebas quitando y poniendo variables, he llegado a la conclusión de asumir todas como comunes para estudiantes que se encuentran en las dos clases excepto las notas (G1, G2 y G3).
+Es decir, asumimos que alumnos cuyo todo conjunto de variables menos las notas es igual en los dos ficheros, se trata del mismo alumno. Haciéndolo de este modo quedan:
+```{r}
+# 100 alumnos que dan matemáticas y portugués 
+nrow(students[!is.na(students$G1.x) & !is.na(students$G1.y),])
+# 295 alumnos que dan sólo matemáticas
+nrow(students[!is.na(students$G1.x) & is.na(students$G1.y),])
+# 549 alumnos que dan sólo portugués
+nrow(students[is.na(students$G1.x) & !is.na(students$G1.y),])
+# 0 datos anómalos (que no estén en ninguna de las dos clases)
+nrow(students[is.na(students$G1.x) & is.na(students$G1.y),])
+```
+Tras tener este dataset, nuestros objetivos pueden ser ver cómo influyen ciertos factores sociales (tiempo libre, familia, etc) en dos cosas:
+- Consumo de alcohol del alumno
+- Calificaciones del alumno
+(y la una sobre la otra según que caso)
+
+Se me ocurre que de este dataset se puede también estudiar por ejemplo las calificaciones del alumno por campo (técnico - matemáticas - y humanidades - portugués). Aún así, teniendo en cuenta los dos puntos anteriores, veo más sentido tener una media de las calificaciones en total que aplicaría de la siguiente forma:
+========
+OPCIÓN A
+========
+- Para los alumnos que están en matemáticas, la media de las tres evaluaciones como calificacion_tec
+- Para los alumnos que están en portugués, la media de las tres evaluaciones como calificacion_hum
+- Para los alumnos que están en ambas clases, la media de calificacion_tec y calificacion_hum como calificacion_total
+- Los alumnos que no apliquen en calificacion_tec o calificacion_mat, 'NA' como valor, y calificacion_total también 'NA'
+
+Creo que así cubriríamos bastante terreno según lo que queramos hacer. Aún así, algo más simple si no nos interesa la calificación por campos/asignaturas, puede ser:
+========
+OPCIÓN B
+========
+- Para los alumnos que están en matemáticas, la media de las tres evaluaciones como calificacion_total
+- Para los alumnos que están en portugués, la media de las tres evaluaciones como calificacion_total
+
+De esta última forma queda un dataset más "limpio". Dime qué opinas. De momento dejo los datasets en dos variables y luego ya elegimos:
+
+```{r}
+students_a <- students
+students_a$calificacion_tec <- (students_a$G1.x + students_a$G2.x + students_a$G3.x) / 3
+students_a$calificacion_hum <- (students_a$G1.y + students_a$G2.y + students_a$G3.y) / 3
+students_a$calificacion_total <- (students_a$calificacion_tec + students_a$calificacion_hum) / 2
+
+students_b <- students
+students_b$calificacion_total <- ifelse(!is.na(students_a$calificacion_tec), students_a$calificacion_tec, students_a$calificacion_hum)
 
 
+summary(students_a)
+summary(students_b)
+```
+
+# Preparación de datos para ver si existen agrupaciones claras según ciertas variables
+
+km_data <- students_b
+km_data$studytime.x <- NULL
+km_data$studytime.y <- NULL
+km_data$failures.x <- NULL
+km_data$failures.y <- NULL
+km_data$paid.x <- NULL
+km_data$paid.y <- NULL
+km_data$G1.y <- NULL
+km_data$G2.y <- NULL
+km_data$G3.y <- NULL
+km_data$G1.x <- NULL
+km_data$G3.x <- NULL
+km_data$G2.x <- NULL
+km_data$studytime.x <- NULL
+km_data$studytime.y <- NULL
+km_data$failures.x <- NULL
+km_data$failures.y <- NULL
+summary(km_data)
+
+# Seguir preparando datos y haciendo pruebas
 
 
