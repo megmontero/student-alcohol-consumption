@@ -19,7 +19,7 @@ lang: es
 
 ```{r setup, include=FALSE}
 # Change depending on your working directory
-working_directory <- "F:/Drive/Máster Data Science/Tipología y ciclo de la vida de los datos/PRAC2/student-alcohol-consumption"
+working_directory <- "F:/Drive/M?ster Data Science/Tipolog?a y ciclo de la vida de los datos/PRAC2/student-alcohol-consumption"
 
 knitr::opts_chunk$set(echo = TRUE)
 options(knitr.kable.NA = '', root.dir = working_directory)
@@ -61,49 +61,134 @@ summary(students)
 ```
 
 
-Propongo unirlo asÃ­ que nos salgan nulos y aplicar una mejor limpieza, habrÃ­a que ver que campos son comunes y cuales no.
-
 ```{r}
-students=merge(students.mat,students.por,by=c("school","sex","age","address","famsize","Pstatus","Medu","Fedu","Mjob","Fjob","reason","guardian","traveltime","schoolsup","famsup","activities","nursery","higher","internet","romantic","famrel","freetime","goout","Dalc","Walc","health","absences"), all = TRUE)
+students.both=merge(students.mat,students.por,by=c("school","sex","age","address","famsize","Pstatus","Medu","Fedu","Mjob","Fjob","reason","nursery","internet", "traveltime", "failures", "schoolsup", "activities", "higher", "romantic", "famrel", "freetime", "goout", "Dalc", "Walc", "health"))
+summary(students.both)
+```
+
+Vemos cuales realmente serian del mismo conjunto
+```{r}
+print(nrow(students.both[students$guardian.y!=students$guardian.x,c("guardian.x", "guardian.y")]))
+print(nrow(students.both[students$guardian.y!=students$guardian.x,c("famsup.x", "famsup.y")]))
+print(nrow(students.both[students$studytime.y!=students$studytime.x,c("studytime.x", "studytime.y")]))
+print(nrow(students.both[students$paid.y!=students$paid.x,c("paid.x", "paid.y")]))
+print(nrow(students.both[students$absences.y!=students$absences.x,c("absences.x", "absences.y")]))
+
+```
+
+Por lo que creamos el dataset final
+```{r}
+students=merge(students.mat,students.por,by=c("school","sex","age","address","famsize","Pstatus","Medu","Fedu","Mjob","Fjob","reason","nursery","internet", "traveltime", "failures", "schoolsup", "activities", "higher", "romantic", "famrel", "freetime", "goout", "Dalc", "Walc", "health", "guardian", "famsup", "studytime"), all = TRUE,suffixes = c(".mat",".por"))
 summary(students)
 
 # Save the dataset temporaly 
 write.table(students, "../data/students.csv", sep=",", col.names=TRUE, row.names=TRUE, quote=TRUE, na="NA")
 ```
-Después de hacer varias pruebas quitando y poniendo variables, he llegado a la conclusión de asumir todas como comunes para estudiantes que se encuentran en las dos clases excepto las notas (G1, G2 y G3).
-Es decir, asumimos que alumnos cuyo todo conjunto de variables menos las notas es igual en los dos ficheros, se trata del mismo alumno. Haciéndolo de este modo quedan:
+
+
+# AnÃ¡lisis grÃ¡fico inicial
+
+Alcohol fin de sema y entre semana en funciÃ³n del estado de los padres 
 ```{r}
-# 100 alumnos que dan matemáticas y portugués 
+par(mfrow=c(1,2))
+
+boxplot(Walc~Pstatus,data=students,  main="Boxplot Weekend Alcohol", ylab="Weekend Alcohol",col=(c("red","blue")))
+boxplot(Dalc~Pstatus,data=students,  main="Boxplot Weekdays Alcohol", ylab="Weekdays Alcohol",col=(c("red","blue")))
+
+```
+
+DirecciÃ³n
+```{r}
+par(mfrow=c(1,2))
+boxplot(Walc~address,data=students,  main="Boxplot Weekend Alcohol", ylab="Weekend Alcohol",col=(c("red","blue")))
+boxplot(Dalc~address,data=students,  main="Boxplot Weekdays Alcohol", ylab="Weekdays Alcohol",col=(c("red","blue")))
+```
+famsize
+```{r}
+par(mfrow=c(1,2))
+boxplot(Walc~famsize,data=students,  main="Boxplot Weekend Alcohol", ylab="Weekend Alcohol",col=(c("red","blue")))
+boxplot(Dalc~famsize,data=students,  main="Boxplot Weekdays Alcohol", ylab="Weekdays Alcohol",col=(c("red","blue")))
+```
+Parece que los mayores beben mÃ¡s entre semana.
+
+
+Si salen con amigos
+```{r}
+par(mfrow=c(1,2))
+boxplot(Walc~goout,data=students,  main="Boxplot Weekend Alcohol", ylab="Weekend Alcohol",col=(c("red","blue")))
+boxplot(Dalc~goout,data=students,  main="Boxplot Weekdays Alcohol", ylab="Weekdays Alcohol",col=(c("red","blue")))
+```
+
+Parece que los que mÃ¡s salen, beben mÃ¡s los fines de semana. 
+
+```{r}
+par(mfrow=c(1,2))
+boxplot(Walc~romantic,data=students,  main="Boxplot Weekend Alcohol", ylab="Weekend Alcohol",col=(c("red","blue")))
+boxplot(Dalc~romantic,data=students,  main="Boxplot Weekdays Alcohol", ylab="Weekdays Alcohol",col=(c("red","blue")))
+```
+
+El amor da igual 8-).
+
+
+```{r}
+par(mfrow=c(1,2))
+boxplot(Walc~studytime,data=students,  main="Boxplot Weekend Alcohol", ylab="Weekend Alcohol",col=(c("red","blue")))
+boxplot(Dalc~studytime,data=students,  main="Boxplot Weekdays Alcohol", ylab="Weekdays Alcohol",col=(c("red","blue")))
+```
+
+Los que menos estudian, beben mÃ¡s los fines de semana.
+
+
+
+```{r}
+par(mfrow=c(1,2))
+boxplot(Walc~famrel,data=students,  main="Boxplot Weekend Alcohol", ylab="Weekend Alcohol",col=(c("red","blue")))
+boxplot(Dalc~famrel,data=students,  main="Boxplot Weekdays Alcohol", ylab="Weekdays Alcohol",col=(c("red","blue")))
+```
+
+Los que tienen buena relaciÃ³n con la familia no beben a diario. 
+
+
+
+
+
+
+#Backup Goyo
+
+Despu?s de hacer varias pruebas quitando y poniendo variables, he llegado a la conclusi?n de asumir todas como comunes para estudiantes que se encuentran en las dos clases excepto las notas (G1, G2 y G3).
+Es decir, asumimos que alumnos cuyo todo conjunto de variables menos las notas es igual en los dos ficheros, se trata del mismo alumno. Haci?ndolo de este modo quedan:
+```{r}
+# 100 alumnos que dan matem?ticas y portugu?s 
 nrow(students[!is.na(students$G1.x) & !is.na(students$G1.y),])
-# 295 alumnos que dan sólo matemáticas
+# 295 alumnos que dan s?lo matem?ticas
 nrow(students[!is.na(students$G1.x) & is.na(students$G1.y),])
-# 549 alumnos que dan sólo portugués
+# 549 alumnos que dan s?lo portugu?s
 nrow(students[is.na(students$G1.x) & !is.na(students$G1.y),])
-# 0 datos anómalos (que no estén en ninguna de las dos clases)
+# 0 datos an?malos (que no est?n en ninguna de las dos clases)
 nrow(students[is.na(students$G1.x) & is.na(students$G1.y),])
 ```
-Tras tener este dataset, nuestros objetivos pueden ser ver cómo influyen ciertos factores sociales (tiempo libre, familia, etc) en dos cosas:
+Tras tener este dataset, nuestros objetivos pueden ser ver c?mo influyen ciertos factores sociales (tiempo libre, familia, etc) en dos cosas:
 - Consumo de alcohol del alumno
 - Calificaciones del alumno
-(y la una sobre la otra según que caso)
+(y la una sobre la otra seg?n que caso)
 
-Se me ocurre que de este dataset se puede también estudiar por ejemplo las calificaciones del alumno por campo (técnico - matemáticas - y humanidades - portugués). Aún así, teniendo en cuenta los dos puntos anteriores, veo más sentido tener una media de las calificaciones en total que aplicaría de la siguiente forma:
+Se me ocurre que de este dataset se puede tambi?n estudiar por ejemplo las calificaciones del alumno por campo (tÃ©cnico - matemÃ¡ticas - y humanidades - portuguÃ©s). AÃºn asÃ­, teniendo en cuenta los dos puntos anteriores, veo mÃ¡s sentido tener una media de las calificaciones en total que aplicarÃ­a de la siguiente forma:
 ========
-OPCIÓN A
+OPCIÃ“N A
 ========
-- Para los alumnos que están en matemáticas, la media de las tres evaluaciones como calificacion_tec
-- Para los alumnos que están en portugués, la media de las tres evaluaciones como calificacion_hum
-- Para los alumnos que están en ambas clases, la media de calificacion_tec y calificacion_hum como calificacion_total
-- Los alumnos que no apliquen en calificacion_tec o calificacion_mat, 'NA' como valor, y calificacion_total también 'NA'
+- Para los alumnos que estÃ¡n en matemÃ¡ticas, la media de las tres evaluaciones como calificacion_tec
+- Para los alumnos que estÃ¡n en portuguÃ©s, la media de las tres evaluaciones como calificacion_hum
+- Para los alumnos que estÃ¡n en ambas clases, la media de calificacion_tec y calificacion_hum como calificacion_total
+- Los alumnos que no apliquen en calificacion_tec o calificacion_mat, 'NA' como valor, y calificacion_total tambi?n 'NA'
 
-Creo que así cubriríamos bastante terreno según lo que queramos hacer. Aún así, algo más simple si no nos interesa la calificación por campos/asignaturas, puede ser:
+Creo que asÃ­ cubrirÃ­amos bastante terreno segÃºn lo que queramos hacer. AÃºn asÃ­, algo mÃ¡s simple si no nos interesa la calificaciÃ³n por campos/asignaturas, puede ser:
 ========
-OPCIÓN B
+OPCIÃ“N B
 ========
-- Para los alumnos que están en matemáticas, la media de las tres evaluaciones como calificacion_total
-- Para los alumnos que están en portugués, la media de las tres evaluaciones como calificacion_total
+- Para los alumnos que estÃ¡n en matemÃ¡ticas, la media de las tres evaluaciones como calificacion_total
+- Para los alumnos que estÃ¡n en portuguÃ©s, la media de las tres evaluaciones como calificacion_total
 
-De esta última forma queda un dataset más "limpio". Dime qué opinas. De momento dejo los datasets en dos variables y luego ya elegimos:
+De esta Ãºltima forma queda un dataset mÃ¡s "limpio". Dime quÃ© opinas. De momento dejo los datasets en dos variables y luego ya elegimos:
 
 ```{r}
 students_a <- students
@@ -119,7 +204,7 @@ summary(students_a)
 summary(students_b)
 ```
 
-# Preparación de datos para ver si existen agrupaciones claras según ciertas variables
+# PreparaciÃ³n de datos para ver si existen agrupaciones claras segÃºn ciertas variables
 
 km_data <- students_b
 km_data$studytime.x <- NULL
