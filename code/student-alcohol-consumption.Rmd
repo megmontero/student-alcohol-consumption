@@ -27,12 +27,19 @@ options(knitr.kable.NA = '', root.dir = working_directory)
 
 ```{r load_libraries, include=FALSE}
 library(knitr)
+library(statnet.common)
 ```
 
 **Introducción**
 
 Práctica 2 de .... chapa... 
 
+
+
+# Limpieza de datos
+
+
+## Lectura de datos 
 
 Leemos ambos ficheros mostramos resumén para matemáticas:
 
@@ -51,7 +58,7 @@ Y para portugués:
 summary(students.por)
 ```
 
-
+## Union de fuentes
 
 En el código de ejemplo los unía a ver que ver si tiene sentido. ya que no son los mismos alumnos.
 
@@ -78,15 +85,282 @@ print(nrow(students.both[students$absences.y!=students$absences.x,c("absences.x"
 
 Por lo que creamos el dataset final
 ```{r}
-students=merge(students.mat,students.por,by=c("school","sex","age","address","famsize","Pstatus","Medu","Fedu","Mjob","Fjob","reason","nursery","internet", "traveltime", "failures", "schoolsup", "activities", "higher", "romantic", "famrel", "freetime", "goout", "Dalc", "Walc", "health", "guardian", "famsup", "studytime"), all = TRUE,suffixes = c(".mat",".por"))
-summary(students)
+students.merge=merge(students.mat,students.por,by=c("school","sex","age","address","famsize","Pstatus","Medu","Fedu","Mjob","Fjob","reason","nursery","internet", "traveltime", "failures", "schoolsup", "activities", "higher", "romantic", "famrel", "freetime", "goout", "Dalc", "Walc", "health", "guardian", "famsup", "studytime"), all = TRUE,suffixes = c(".mat",".por"))
+summary(students.merge)
 
 # Save the dataset temporaly 
 write.table(students, "../data/students.csv", sep=",", col.names=TRUE, row.names=TRUE, quote=TRUE, na="NA")
 ```
 
 
+
+## Eliminamos NAs
+
+
+Primeros creamos un nuevo dataset y unificamos la variable paid. 
+```{r}
+students.nonas <- students.merge[, c("school","sex","age","address","famsize","Pstatus","Medu","Fedu","Mjob","Fjob","reason","nursery","internet", "traveltime", "failures", "schoolsup", "activities", "higher", "romantic", "famrel", "freetime", "goout", "Dalc", "Walc", "health", "guardian", "famsup", "studytime")]
+students.nonas$paid <- "no"
+students.nonas$paid[NVL(students.merge$paid.mat == 'yes' | students.merge$paid.por == 'yes', FALSE)] <- "yes"
+students.nonas$paid <- as.factor(students.nonas$paid)
+
+summary(students.nonas)
+
+```
+
+
+Aplicamos un proceso similar para las calificaciones, utilizando la media en el caso que existan ambas:
+
+```{r}
+students.nonas$G1 <- rowMeans(students.merge[c('G1.mat', 'G1.por')], na.rm=TRUE)
+students.nonas$G2 <- rowMeans(students.merge[c('G2.mat', 'G2.por')], na.rm=TRUE)
+students.nonas$G3 <- rowMeans(students.merge[c('G3.mat', 'G3.por')], na.rm=TRUE)
+summary(students.nonas)
+
+```
+Por último lo aplicamos a las ausencias, antes de aplicar la media normalizamos los valores
+
+```{r}
+normalized<-function(y) {
+  x<-y[!is.na(y)]
+  x<-(x - min(x)) / (max(x) - min(x))
+  y[!is.na(y)]<-x
+  return(y)
+}
+
+
+students.nonas$absences <- rowMeans(sapply(students.merge[c('absences.mat', 'absences.por')], normalized), na.rm=TRUE)
+
+summary(students.nonas)  
+
+```
+
+
+
+
+## Reducción dimensionalidad
+
+
+Eliminamos School y calculamos la evaluacion como la media
+```{r}
+students.red <- students.nonas[,c("sex","age","address","famsize","Pstatus","Medu","Fedu","Mjob","Fjob","reason","nursery","internet", "traveltime", "failures", "schoolsup", "activities", "higher", "romantic", "famrel", "freetime", "goout", "Dalc", "Walc", "health", "guardian", "famsup", "studytime", "absences", "paid")]
+students.red$G <-  rowMeans(students.nonas[c('G1', 'G2', 'G3')])
+
+summary(students.red)
+
+```
+
+## Tipo de variables
+
+```{r}
+sapply( students.red, class)
+
+```
+
+En los tipos mostrados hay algunos que no es correcto el tipo. En la educación tanto de la madre como del padre consideramos que aunque se use un número para la representación debería ser un factor. Lo mismo ocurre para el tiempo de viaje o el tiempo de estudio. 
+
+```{r}
+students.red$Medu <-as.factor(students.red$Medu) 
+students.red$Fedu <-as.factor(students.red$Fedu) 
+students.red$traveltime <-as.factor(students.red$traveltime) 
+students.red$studytime <-as.factor(students.red$studytime) 
+
+```
+
+
+
+# Análisis Estadístico
+
+## Análisis gráfico inicial
+
+```{r}
+vars = c("sex","age","address","famsize","Pstatus","Medu","Fedu","Mjob","Fjob","reason","nursery","internet", "traveltime", "failures", "schoolsup", "activities", "higher", "romantic", "famrel", "freetime", "goout", "health", "guardian", "famsup", "studytime", "absences", "paid", "G")
+objs = c("Dalc", "Wcalc")
+
+
+
+library(ggplot2)
+
+for(i in vars) 
+{
+  if(is.factor(students.red[,i]))
+  {
+    f1 = students.red[,i]
+plot <- ggplot(data = students.red, aes(x = f1, y = students.red[,"Walc"])) + 
+  geom_boxplot(aes(fill = f1), width = 0.8) + theme_bw()  +
+  xlab(i) + ylab("Weekend Consumption")
+print(plot)
+plot <- ggplot(data = students.red, aes(x = f1, y = students.red[,"Dalc"])) + 
+  geom_boxplot(aes(fill = f1), width = 0.8) + theme_bw()  +
+  xlab(i) + ylab("Weekday Consumption")
+print(plot)
+
+
+    }}
+
+```
+
+
+
+Viendo las gráficas vemos que hay variables que parece que sí tienen influencia a simple vista en el consumo de alcohol tanto a diarío como los fines de semana como pueden ser el sexo, el estado de los padres, sin embargo vemos otros que, a priori, no parece que tengan influencia así que en un primer momento vamos a dejar fuera del análisis si el alumno tiene internet, si tiene una relación, el tutor, la dirección, si realiza actividades extraescolares, si recibe clases de pago, si ha ido a la guarderia, o si  recibe el apoyo de su familia en el estudio. 
+
+El dataset resultante y con el que continuaremos trabajando es el siguiente: 
+
+```{r}
+students <- students.red[,c("sex","age","famsize","Pstatus","Medu","Fedu","Mjob","Fjob","reason", "traveltime", "failures", "schoolsup", "higher",  "famrel", "freetime", "goout", "Dalc", "Walc", "health", "studytime", "absences")]
+summary(students)
+```
+
+
+
+
+## Estadistica Inferencial 
+
+En este apartado vamos a ver si hay diferencia significativas en el consumo de alcohol a diario o fines de semana entre estudiantes de distinto sexo o entre estudiantes con diferente situación de los padres. Se trata de un problema de diferencia de medias entre dos muestras.
+
+
+Para cada caso la hipótesis sería: 
+
+
+$$
+\left\{
+\begin{array}{ll}
+H_{0}: &  \mu_{g1}-\mu_{g2}=0\\
+H_{1}: & \mu_{g1}-\mu_{g2}\ne0
+\end{array}
+\right.
+$$
+
+Se trata de un problema de diferencia de medias en el que no conocemos la varianza poblacional, tampoco sabemos a priori si los datos siguen una distribución normal, prero el tamaño de las muestras es lo suficientemente grande para tener en cuenta el teorema del límite central.
+
+
+Para el alcohol en fines de semana por sexo: 
+
+```{r}
+data_weekend_sex_m <- students$Walc[students$sex == 'M'] 
+data_weekend_sex_f <- students$Walc[students$sex == 'F'] 
+
+t.test(data_weekend_sex_m, data_weekend_sex_f, var.equal = TRUE, conf.level = 0.90)
+```
+Por el p-value vemos que si podemos rechazar la hipótesis nula y concluir que si hay diferencias significativas. 
+
+
+
+Por sexo entre semana: 
+
+```{r}
+data_weekday_sex_m <- students$Dalc[students$sex == 'M'] 
+data_weekday_sex_f <- students$Dalc[students$sex == 'F'] 
+
+t.test(data_weekday_sex_m, data_weekday_sex_f, var.equal = TRUE, conf.level = 0.90)
+```
+Por el p-value vemos que si podemos rechazar la hipótesis nula y concluir que si hay diferencias significativas. 
+
+
+```{r}
+data_weekday_pstatus_t <- students$Dalc[students$Pstatus == 'T'] 
+data_weekday_pstatus_a <- students$Dalc[students$Pstatus == 'A'] 
+
+t.test(data_weekday_pstatus_t, data_weekday_pstatus_a, var.equal = TRUE, conf.level = 0.90)
+```
+Por el p-value vemos que no hay diferencia significativa 
+
+
+
+```{r}
+data_weekend_pstatus_t <- students$Walc[students$Pstatus == 'T'] 
+data_weekend_pstatus_a <- students$Walc[students$Pstatus == 'A'] 
+
+t.test(data_weekend_pstatus_t, data_weekend_pstatus_a, var.equal = TRUE, conf.level = 0.90)
+```
+Por el p-value vemos que no hay diferencia significativa 
+
+
+
+
+## Regresion 
+
+En este apartado aplicaremos un modelo de regresión lineal múltiple que use como variables explicativas el sexo,
+la frecuencia con la que el estudiante sale con amigos, la edad y como variable dependiente el consumo de alcohol los fines de semana. 
+
+Al usar regresores cualitativos, es importante definir una categoría de referencia, para lo que usaremos la función de R *relevel* estableciendo la categoría "F" como referente para el sexo. El resultado lo almacenamos en una nueva  variable.
+
+
+```{r}
+students$sexR <- relevel(students$sex, "F")
+modelo <- lm(Walc ~  goout + sexR + age, data = students )
+summary(modelo)
+```
+
+Los coeficientes obtenidos para cada variable son: 
+
+
+Observando el coeficiente de determinacion $R^{2}$ vemos que la proporción de variabilidad explicada por el modelo con respecto a la variabilidad total  es unicamente del 25% ...
+
+OLD
+------------------------------------------
+
+
+
+
 # Análisis gráfico inicial
+
+
+
+
+
+Sexo
+```{r}
+par(mfrow=c(1,2))
+boxplot(Walc~sex,data=students,  main="Boxplot Weekend Alcohol", ylab="Weekend Alcohol",col=(c("red","blue")))
+boxplot(Dalc~sex,data=students,  main="Boxplot Weekdays Alcohol", ylab="Weekdays Alcohol",col=(c("red","blue")))
+```
+
+Parece que los hombres beben más.
+
+
+Edad
+```{r}
+par(mfrow=c(1,2))
+boxplot(Walc~age,data=students,  main="Boxplot Weekend Alcohol", ylab="Weekend Alcohol",col=(c("red","blue")))
+boxplot(Dalc~age,data=students,  main="Boxplot Weekdays Alcohol", ylab="Weekdays Alcohol",col=(c("red","blue")))
+```
+
+Parece que los mayores beben más entre semana.
+
+
+
+             Fedu             Mjob           Fjob            reason    nursery   internet    traveltime       failures      schoolsup activities higher 
+ 
+ 
+```{r}
+par(mfrow=c(1,2))
+boxplot(Walc~Medu,data=students,  main="Boxplot Weekend Alcohol", ylab="Weekend Alcohol",col=(c("red","blue")))
+boxplot(Dalc~Medu,data=students,  main="Boxplot Weekdays Alcohol", ylab="Weekdays Alcohol",col=(c("red","blue")))
+```
+ 
+ 
+```{r}
+par(mfrow=c(1,2))
+boxplot(Walc~Fedu,data=students,  main="Boxplot Weekend Alcohol", ylab="Weekend Alcohol",col=(c("red","blue")))
+boxplot(Dalc~Fedu,data=students,  main="Boxplot Weekdays Alcohol", ylab="Weekdays Alcohol",col=(c("red","blue")))
+```
+ 
+ 
+ 
+ 
+
+
+famsize
+```{r}
+par(mfrow=c(1,2))
+boxplot(Walc~famsize,data=students,  main="Boxplot Weekend Alcohol", ylab="Weekend Alcohol",col=(c("red","blue")))
+boxplot(Dalc~famsize,data=students,  main="Boxplot Weekdays Alcohol", ylab="Weekdays Alcohol",col=(c("red","blue")))
+```
+
+
+
+
 
 Alcohol fin de sema y entre semana en función del estado de los padres 
 ```{r}
@@ -96,20 +370,6 @@ boxplot(Walc~Pstatus,data=students,  main="Boxplot Weekend Alcohol", ylab="Weeke
 boxplot(Dalc~Pstatus,data=students,  main="Boxplot Weekdays Alcohol", ylab="Weekdays Alcohol",col=(c("red","blue")))
 
 ```
-
-Dirección
-```{r}
-par(mfrow=c(1,2))
-boxplot(Walc~address,data=students,  main="Boxplot Weekend Alcohol", ylab="Weekend Alcohol",col=(c("red","blue")))
-boxplot(Dalc~address,data=students,  main="Boxplot Weekdays Alcohol", ylab="Weekdays Alcohol",col=(c("red","blue")))
-```
-famsize
-```{r}
-par(mfrow=c(1,2))
-boxplot(Walc~famsize,data=students,  main="Boxplot Weekend Alcohol", ylab="Weekend Alcohol",col=(c("red","blue")))
-boxplot(Dalc~famsize,data=students,  main="Boxplot Weekdays Alcohol", ylab="Weekdays Alcohol",col=(c("red","blue")))
-```
-Parece que los mayores beben más entre semana.
 
 
 Si salen con amigos
@@ -121,13 +381,6 @@ boxplot(Dalc~goout,data=students,  main="Boxplot Weekdays Alcohol", ylab="Weekda
 
 Parece que los que más salen, beben más los fines de semana. 
 
-```{r}
-par(mfrow=c(1,2))
-boxplot(Walc~romantic,data=students,  main="Boxplot Weekend Alcohol", ylab="Weekend Alcohol",col=(c("red","blue")))
-boxplot(Dalc~romantic,data=students,  main="Boxplot Weekdays Alcohol", ylab="Weekdays Alcohol",col=(c("red","blue")))
-```
-
-El amor da igual 8-).
 
 
 ```{r}
@@ -191,12 +444,12 @@ OPCIÓN B
 De esta última forma queda un dataset más "limpio". Dime qué opinas. De momento dejo los datasets en dos variables y luego ya elegimos:
 
 ```{r}
-students_a <- students
+students_a <- students.both
 students_a$calificacion_tec <- (students_a$G1.x + students_a$G2.x + students_a$G3.x) / 3
 students_a$calificacion_hum <- (students_a$G1.y + students_a$G2.y + students_a$G3.y) / 3
 students_a$calificacion_total <- (students_a$calificacion_tec + students_a$calificacion_hum) / 2
 
-students_b <- students
+students_b <- students.both
 students_b$calificacion_total <- ifelse(!is.na(students_a$calificacion_tec), students_a$calificacion_tec, students_a$calificacion_hum)
 
 
