@@ -1,0 +1,13 @@
+\babel@toc {spanish}{}
+\contentsline {section}{\numberline {1}Introducci\IeC {\'o}n}{2}{section.1}% 
+\contentsline {subsection}{\numberline {1.1}Objetivos}{2}{subsection.1.1}% 
+\contentsline {subsection}{\numberline {1.2}Descripci\IeC {\'o}n del Dataset}{2}{subsection.1.2}% 
+\contentsline {section}{\numberline {2}Limpieza de datos}{4}{section.2}% 
+\contentsline {subsection}{\numberline {2.1}Uni\IeC {\'o}n de conjuntos}{4}{subsection.2.1}% 
+\contentsline {subsection}{\numberline {2.2}Tratamiento de NAs}{5}{subsection.2.2}% 
+\contentsline {subsection}{\numberline {2.3}Selecci\IeC {\'o}n de variables/Reducci\IeC {\'o}n de dimensionalidad}{5}{subsection.2.3}% 
+\contentsline {subsection}{\numberline {2.4}Tipos de Variables}{7}{subsection.2.4}% 
+\contentsline {section}{\numberline {3}An\IeC {\'a}lisis Estad\IeC {\'\i }stico}{7}{section.3}% 
+\contentsline {subsection}{\numberline {3.1}An\IeC {\'a}lisis gr\IeC {\'a}fico inicial}{7}{subsection.3.1}% 
+\contentsline {subsection}{\numberline {3.2} Estad\IeC {\'\i }stica Inferencial}{8}{subsection.3.2}% 
+\contentsline {section}{\numberline {4}Conclusiones}{8}{section.4}% 
