@@ -9,4 +9,9 @@
 \BOOKMARK [1][-]{section.3}{An\341lisis Estad\355stico}{}% 9
 \BOOKMARK [2][-]{subsection.3.1}{An\341lisis gr\341fico inicial}{section.3}% 10
 \BOOKMARK [2][-]{subsection.3.2}{ Estad\355stica Inferencial}{section.3}% 11
-\BOOKMARK [1][-]{section.4}{Conclusiones}{}% 12
+\BOOKMARK [3][-]{subsubsection.3.2.1}{Estudiantes de distinto sexo}{subsection.3.2}% 12
+\BOOKMARK [3][-]{subsubsection.3.2.2}{Estudiantes con diferente situaci\363n de convivencia de los padres}{subsection.3.2}% 13
+\BOOKMARK [3][-]{subsubsection.3.2.3}{Estudiantes que aprueban \(G >= 10\) y estudiantes que suspenden \(G <10\)}{subsection.3.2}% 14
+\BOOKMARK [2][-]{subsection.3.3}{Modelo de regresi\363n lineal}{section.3}% 15
+\BOOKMARK [1][-]{section.4}{Estudio de correlaci\363n}{}% 16
+\BOOKMARK [1][-]{section.5}{Conclusiones}{}% 17

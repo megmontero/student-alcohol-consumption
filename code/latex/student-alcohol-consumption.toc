@@ -1,13 +1,18 @@
 \babel@toc {spanish}{}
-\contentsline {section}{\numberline {1}Introducci\IeC {\'o}n}{2}{section.1}% 
-\contentsline {subsection}{\numberline {1.1}Objetivos}{2}{subsection.1.1}% 
-\contentsline {subsection}{\numberline {1.2}Descripci\IeC {\'o}n del Dataset}{2}{subsection.1.2}% 
-\contentsline {section}{\numberline {2}Limpieza de datos}{4}{section.2}% 
-\contentsline {subsection}{\numberline {2.1}Uni\IeC {\'o}n de conjuntos}{4}{subsection.2.1}% 
-\contentsline {subsection}{\numberline {2.2}Tratamiento de NAs}{5}{subsection.2.2}% 
-\contentsline {subsection}{\numberline {2.3}Selecci\IeC {\'o}n de variables/Reducci\IeC {\'o}n de dimensionalidad}{5}{subsection.2.3}% 
-\contentsline {subsection}{\numberline {2.4}Tipos de Variables}{7}{subsection.2.4}% 
-\contentsline {section}{\numberline {3}An\IeC {\'a}lisis Estad\IeC {\'\i }stico}{7}{section.3}% 
-\contentsline {subsection}{\numberline {3.1}An\IeC {\'a}lisis gr\IeC {\'a}fico inicial}{7}{subsection.3.1}% 
-\contentsline {subsection}{\numberline {3.2} Estad\IeC {\'\i }stica Inferencial}{8}{subsection.3.2}% 
-\contentsline {section}{\numberline {4}Conclusiones}{8}{section.4}% 
+\contentsline {section}{\numberline {1}Introducci\IeC {\'o}n}{3}{section.1}% 
+\contentsline {subsection}{\numberline {1.1}Objetivos}{3}{subsection.1.1}% 
+\contentsline {subsection}{\numberline {1.2}Descripci\IeC {\'o}n del Dataset}{3}{subsection.1.2}% 
+\contentsline {section}{\numberline {2}Limpieza de datos}{5}{section.2}% 
+\contentsline {subsection}{\numberline {2.1}Uni\IeC {\'o}n de conjuntos}{5}{subsection.2.1}% 
+\contentsline {subsection}{\numberline {2.2}Tratamiento de NAs}{6}{subsection.2.2}% 
+\contentsline {subsection}{\numberline {2.3}Selecci\IeC {\'o}n de variables/Reducci\IeC {\'o}n de dimensionalidad}{7}{subsection.2.3}% 
+\contentsline {subsection}{\numberline {2.4}Tipos de Variables}{8}{subsection.2.4}% 
+\contentsline {section}{\numberline {3}An\IeC {\'a}lisis Estad\IeC {\'\i }stico}{8}{section.3}% 
+\contentsline {subsection}{\numberline {3.1}An\IeC {\'a}lisis gr\IeC {\'a}fico inicial}{8}{subsection.3.1}% 
+\contentsline {subsection}{\numberline {3.2} Estad\IeC {\'\i }stica Inferencial}{9}{subsection.3.2}% 
+\contentsline {subsubsection}{\numberline {3.2.1}Estudiantes de distinto sexo}{10}{subsubsection.3.2.1}% 
+\contentsline {subsubsection}{\numberline {3.2.2}Estudiantes con diferente situaci\IeC {\'o}n de convivencia de los padres}{11}{subsubsection.3.2.2}% 
+\contentsline {subsubsection}{\numberline {3.2.3}Estudiantes que aprueban ($G >= 10$) y estudiantes que suspenden ($G < 10$)}{13}{subsubsection.3.2.3}% 
+\contentsline {subsection}{\numberline {3.3}Modelo de regresi\IeC {\'o}n lineal}{14}{subsection.3.3}% 
+\contentsline {section}{\numberline {4}Estudio de correlaci\IeC {\'o}n}{15}{section.4}% 
+\contentsline {section}{\numberline {5}Conclusiones}{17}{section.5}% 

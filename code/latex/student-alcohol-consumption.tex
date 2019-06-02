@@ -15,6 +15,8 @@
 \usepackage{appendix}
 \usepackage{tikz}
 \usepackage{subfig}
+\usepackage{alltt}
+\usepackage{spverbatim}
 \usetikzlibrary{positioning}
 \usepackage{listings,xcolor}
 \usetikzlibrary {positioning}
@@ -90,13 +92,22 @@
 \section{Introducción}
 
 \subsection{Objetivos}
-El objetivo de esta práctica es aplicar los conocimientos ... bla bla bla.... 
+Los objetivos de esta práctica son:
+\begin{itemize}
+\item Aprender a aplicar los conocimientos adquiridos y su capacidad de resolución de problemas en entornos nuevos o poco conocidos dentro de contextos más amplios o multidisciplinares.
+\item Saber identificar los datos relevantes y los tratamientos necesarios (integración, limpieza y validación) para llevar a cabo un proyecto analítico.
+\item Aprender a analizar los datos adecuadamente para abordar la información contenida en los datos.
+\item Identificar la mejor representación de los resultados para aportar conclusiones sobre el problema planteado en el proceso analítico.
+\item Actuar con los principios éticos y legales relacionados con la manipulación de datos en función del ámbito de aplicación.
+\item Desarrollar las habilidades de aprendizaje que les permitan continuar estudiando de un modo que tendrá que ser en gran medida autodirigido o autónomo.
+\item Desarrollar la capacidad de búsqueda, gestión y uso de información y recursos en el ámbito de la ciencia de datos.
+\end{itemize}
 
 
 \subsection{Descripción del Dataset}
-El dataset escogido ha sido obtenido a través de una encuesta de estudiantes de secundaria que asisten a cursos de matemáticas y  portugués. Este conjunto de datos contiene bastante información de interés sobre los estudiantes. 
+El dataset escogido ha sido obtenido a través de una encuesta de estudiantes de secundaria que asisten a cursos de matemáticas y  portugués. Este conjunto de datos contiene bastante información de interés sobre los estudiantes. Aunque incialmente el objetivo principal del dataset era ver el consumo de alcohol en estudiantes según variables sociodemográficas, dicho dataset contiene suficiente información para otro tipo de estudios, centrados por ejemplo en la calificación de los alumnos.
 
-Los datos han sido obtenidos de \textit{Kaggle} y se encuentran en dos ficheros independientes, cada uno de estos ficheros contiene las siguientes variables: 
+Los datos han sido obtenidos de \textit{Kaggle} y se encuentran en dos ficheros \textit{CSV} independientes, uno para la asignatura de matemáticas y otro para la de portugués. Cada uno de estos ficheros contiene las siguientes variables: 
 
 \begin{enumerate}
 	\item \textit{school}: Define la escuela del estudiante. Puede ser ``GP'' (Gabriel Pereira) o ``MS'' (Mousinho da Silveira).
@@ -139,11 +150,11 @@ Los datos han sido obtenidos de \textit{Kaggle} y se encuentran en dos ficheros 
 
 \section{Limpieza de datos}
 \subsection{Unión de conjuntos}
-El primer paso consiste en unir ambos conjuntos de datos para tener un único dataset que será el que utilizaremos en el resto del documento. 
+El primer paso consiste en unir ambos conjuntos de datos de cada clase para tener un único dataset que será el que utilizaremos en el resto del documento.
 
-Según se indica en Kaggle existen 382 estudiantes que asisten a ambos cursos y estos estudiantes pueden ser identificados por las siguientes características: colegio, sexo, edad, dirección, tamaño de familia, trabajo y nivel de educación de los padres, razón por la que ha elegido el colegio, si han asistido a la guardería y si poseen internet en casa. 
+Según se indica en Kaggle existen 382 estudiantes que asisten a ambos cursos. Como cada alumno en los dos ficheros no viene identificado con un \textit{id} único, explican que estos estudiantes pueden ser identificados por el mismo valor de las siguientes características en ambos ficheros: colegio, sexo, edad, dirección, tamaño de familia, trabajo y nivel de educación de los padres, razón por la que ha elegido el colegio, si han asistido a la guardería y si poseen internet en casa. 
 
-Sin embargo creemos que además de estas características hay otras que no pueden variar en un mismo estudiante en ambos ficheros como son el tiempo de camino a la escuela, número de fracasos en clases pasadas, si realiza actividades extraescolares, si tiene intención de realizar estudios superiores, si tiene una relación, la calidad de las relaciones, la frecuencia de salidas con amigos, la cantidad consumida de alcohol y el estado de salud. Con esta separación vemos que existen 320 estudiantes que asisten a ambas clases. 
+Sin embargo creemos que además de estas características hay otras que no pueden variar en un mismo estudiante en ambos ficheros como son: el tiempo de camino a la escuela, número de fracasos en clases pasadas, si realiza actividades extraescolares, si tiene intención de realizar estudios superiores, si tiene una relación, la calidad de las relaciones, la frecuencia de salidas con amigos, la cantidad consumida de alcohol y el estado de salud. Con esta separación vemos que existen 320 estudiantes que asisten a ambas clases. 
 
 Comparando los valores de ambos cursos del resto del variables vemos que también coinciden en ambos cursos el tutor del alumno, si recibe soporte familiar y el tiempo de estudio. 
 
@@ -162,11 +173,12 @@ El dataset resultado de la unión posee un total de 724 alumnos 75 de los cuales
 \subsection{Tratamiento de NAs}
 En primer lugar vamos a encargarnos de los valores perdidos que se dan unicamente en los casos de que los alumnos no hayan asistido a alguno de los cursos, una opción sería eliminar los datos de cualquier alumno que no posea datos en algunos de los cursos, pero implicaría quedarnos solo con un 44\% de los datos. 
 
+
 Por lo tanto la opción escogida para los valores perdidos es la siguiente: 
 
 \begin{itemize}
 	\item \textit{paid}: Unificaremos las variables de ambos cursos tomando un valor ``yes'' cuando el alumno de clases extras pagadas de alguno de los cursos. 
-	\item \textit{absences}: Viendo los números parece que las ausencias son mayores en matemáticas. Como lo que nos interesa es saber los alumnos que han faltado más o menos y queremos evitar que tenga un mayor peso los alumnos de matemáticas. Normalizaremos estos valores y en el caso de que los alumnos hayan asistido a ambos cursos utilizaremos la media de ambos valores.
+	\item \textit{absences}: Viendo los números parece que las ausencias son mayores en matemáticas. Como lo que nos interesa es saber los alumnos que han faltado más o menos veces y queremos evitar que tenga un mayor peso los alumnos de matemáticas, normalizaremos estos valores y en el caso de que los alumnos hayan asistido a ambos cursos utilizaremos la media de ambos valores.
 	 \item \textit{calificaciones}: En este caso todas las calificaciones se mueven en el mismo rango por lo que en el caso de los alumnos que hayan asistido a ambos cursos aplicaremos la media de ambos. 
 \end{itemize}
  \begin{figure}[ht!]
@@ -209,9 +221,23 @@ En los tipos mostrados hay algunos que no es correcto el tipo. En la educación 
 
 \section{Análisis Estadístico}
 \subsection{Análisis gráfico inicial}
-Observando las gráficas vemos que hay variables que parece que sí tienen influencia a simple vista en el consumo de alcohol tanto a diario como los fines de semana como pueden ser el sexo, el estado de los padres, sin embargo vemos otros que, a priori, no parece que tengan influencia así que en un primer momento vamos a dejar fuera del análisis si el alumno tiene internet, si tiene una relación, el tutor, la dirección, si realiza actividades extraescolares, si recibe clases de pago o si  recibe el apoyo de su familia en el estudio. 
+Observando las gráficas vemos que hay variables que parece que sí tienen influencia a simple vista en el consumo de alcohol tanto a diario como los fines de semana, como pueden ser el sexo y el estado de los padres. Sin embargo vemos otros que, a priori, no parece que tengan influencia así que en un primer momento vamos a dejar fuera del análisis si el alumno tiene internet, si tiene una relación, el tutor, la dirección, si realiza actividades extraescolares, si recibe clases de pago o si  recibe el apoyo de su familia en el estudio. 
 
-TODO meter algunas de las gráficas 
+
+
+\begin{figure}[ht!]
+  \centering
+  \begin{minipage}[b]{0.4\textwidth}
+    \includegraphics[trim = 0mm 0mm 0mm 0mm, clip,scale=0.4]{images/boxplot_walc_sex}
+    \caption{Consumo en fines de semana por sexo}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.4\textwidth}
+    \includegraphics[trim = 0mm 0mm 0mm 0mm, clip,scale=0.4]{images/boxplot_dalc_sex}
+    \caption{Consumo entre semana por sexo}
+  \end{minipage}
+\end{figure}
+
 
 \begin{figure}[ht!]
 	\centering
@@ -226,10 +252,279 @@ En la figura \ref{fig:sum4} podemos ver el resumen del dataset. Tras la fase de 
 
 
 \subsection{ Estadística Inferencial}
-En este apartado vamos a ver si hay diferencia significativas en el consumo de alcohol a diario o fines de semana entre estudiantes de distinto sexo o entre estudiantes con diferente situación de los padres. 
+En este apartado vamos a ver si hay diferencia significativas en el consumo de alcohol a diario y fines de semana entre estudiantes en función del sexo y de situación de los padres. También veremos si el consumo de alcohol es distinto entre estudiantes que aprueban y que suspenden:
+  
+Se trata de un problema de diferencia de medias entre dos muestras en el que no conocemos la varianza poblacional. Tampoco sabemos a priori si los datos siguen una distribución normal, pero el tamaño de las muestras es lo suficientemente grande para tener en cuenta el teorema del límite central.
+
+
+Para cada caso la hipótesis sería: 
+
+$$
+\left\{
+\begin{array}{ll}
+H_{0}: &  \mu_{g1}-\mu_{g2}=0\\
+H_{1}: & \mu_{g1}-\mu_{g2}\ne0
+\end{array}
+\right.
+$$
+
+
+\subsubsection{Estudiantes de distinto sexo}
+
+Separamos el consumo de alcohol los fines de semana en dos conjunto según el sexo:
+
+\begin{spverbatim}
+data_weekend_sex_m <- students$Walc[students$sex == 'M'] 
+data_weekend_sex_f <- students$Walc[students$sex == 'F'] 
+
+t.test(data_weekend_sex_m, data_weekend_sex_f, var.equal = TRUE, conf.level = 0.95)
+
+Two Sample t-test
+
+data:  data_weekend_sex_m and data_weekend_sex_f
+t = 9.7324, df = 722, p-value < 2.2e-16
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ 0.7114636 1.0710375
+sample estimates:
+mean of x mean of y 
+ 2.824104  1.932854
+\end{spverbatim}
+
+Por el p-value vemos que no podemos aceptar la hipótesis nula, y concluimos que al 95\% de nivel de confianza los estudiantes masculinos y femeninos no tienen el mismo consumo de alcohol los fines de semana. 
+
+
+Realizamos las mismas operaciones para el consumo de alcohol entre semana:
+
+\begin{spverbatim}
+data_weekday_sex_m <- students$Dalc[students$sex == 'M'] 
+data_weekday_sex_f <- students$Dalc[students$sex == 'F'] 
+
+t.test(data_weekday_sex_m, data_weekday_sex_f, var.equal = TRUE, conf.level = 0.95)
+
+Two Sample t-test
+
+data:  data_weekday_sex_m and data_weekday_sex_f
+t = 8.2948, df = 722, p-value = 5.321e-16
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ 0.4211673 0.6823564
+sample estimates:
+mean of x mean of y 
+ 1.837134  1.285372
+
+\end{spverbatim}
+
+Por el p-value vemos que ocurre lo mismo que en los fines de semana. No podemos acepta la hipotésis nula y al 95\% afirmamos que hay diferencia en el consumo de alcohol entre estudiantes masculinos y femeninos para los días entre semana.
+
+
+\subsubsection{Estudiantes con diferente situación de convivencia de los padres}
+
+Ahora realizamos el estudio para el consumo de alcohol según la situación de los padres de cada alumno:
+
+Primero, en fines de semana:
+\begin{spverbatim}
+data_weekend_pstatus_t <- students$Walc[students$Pstatus == 'T'] 
+data_weekend_pstatus_a <- students$Walc[students$Pstatus == 'A'] 
+
+t.test(data_weekend_pstatus_t, data_weekend_pstatus_a, var.equal = TRUE, conf.level = 0.95)
+
+Two Sample t-test
+
+data:  data_weekend_pstatus_t and data_weekend_pstatus_a
+t = 1.3035, df = 722, p-value = 0.1928
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -0.09613914  0.47601996
+sample estimates:
+mean of x mean of y 
+ 2.334385  2.144444
+
+\end{spverbatim}
+En el caso del consumo en los fines de semana, no hay diferencias significativas en función del estado de convivencia de los padres a un 95\% de nivel de confianza.
+
+
+Ahora, para el consumo entre semana:
+\begin{spverbatim}
+data_weekday_pstatus_t <- students$Dalc[students$Pstatus == 'T'] 
+data_weekday_pstatus_a <- students$Dalc[students$Pstatus == 'A'] 
+
+t.test(data_weekday_pstatus_t, data_weekday_pstatus_a, var.equal = TRUE, conf.level = 0.95)
+
+Two Sample t-test
+
+data:  data_weekday_pstatus_t and data_weekday_pstatus_a
+t = 0.69872, df = 722, p-value = 0.4849
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -0.1318160  0.2774872
+sample estimates:
+mean of x mean of y 
+ 1.528391  1.455556
+
+\end{spverbatim}
+Con un p-value tan alto aceptamos la hipótesis nula, concluyendo que el consumo de alcohol entre semana es el mismo para estudiantes cuyos padres viven juntos y para estudiatnes cuyos padres viven separados.
+
+
+\subsubsection{Estudiantes que aprueban ($G >= 10$) y estudiantes que suspenden ($G < 10$)}
+  
+Por último, realizamos el estudio para el consumo de alcohol según las calificaciones que obtiene el alumno (si aprueba o suspende):
+
+En el caso del consumo los fines de semana:
+\begin{spverbatim}
+data_weekend_aprobados <- students$Walc[students$G >= 10] 
+data_weekend_suspensos <- students$Walc[students$G < 10] 
+
+t.test(data_weekend_aprobados, data_weekend_suspensos, var.equal = TRUE, conf.level = 0.95)
+
+Two Sample t-test
+
+data:  data_weekend_aprobados and data_weekend_suspensos
+t = -2.8183, df = 722, p-value = 0.00496
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -0.4842420 -0.0865913
+sample estimates:
+mean of x mean of y 
+ 2.214583  2.500000
+ 
+\end{spverbatim}
+Con un p-value menor que 0.05, al 95\% de confianza afirmamos que sí hay diferencia en el consumo de alcohol los fines de semana en función de si el alumno aprueba o no.
+
+\begin{spverbatim}
+data_weekday_aprobados <- students$Dalc[students$G >= 10] 
+data_weekday_suspensos <- students$Dalc[students$G < 10] 
+
+t.test(data_weekday_aprobados, data_weekday_suspensos, var.equal = TRUE, conf.level = 0.95)
+
+Two Sample t-test
+
+data:  data_weekday_aprobados and data_weekday_suspensos
+t = -2.7561, df = 722, p-value = 0.005996
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -0.34170360 -0.05740842
+sample estimates:
+mean of x mean of y 
+ 1.452083  1.651639 
+ 
+\end{spverbatim}
+Viendo el p-value, podemos decir al 95% que también hay diferencias entre alumnos que aprueban y alumnos que suspenden en cuanto al consumo de alcohol entre semana.
+
+\subsection{Modelo de regresión lineal}
+
+En este apartado aplicaremos un modelo de regresión lineal múltiple que use como variables explicativas cuánto sale el estudiante con amigos, cuánto bebe entre semana, su sexo y su edad.
+
+Al usar regresores cualitativos, es importante definir una categoría de referencia, para lo que usaremos la función de R *relevel* estableciendo la categoría "F" como referente para el sexo. El resultado lo almacenamos en una nueva variable.
+
+\begin{spverbatim}
+students$sexR <- relevel(students$sex, "F")
+modelo <- lm(Walc ~ goout + sexR + Dalc + age + studytime, data = students )
+summary(modelo)
+
+Call:
+lm(formula = Walc ~ G + sexR + Dalc + studytime + goout, data = students)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-3.3617 -0.6975 -0.1785  0.6505  2.8745 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  0.42554    0.18484   2.302   0.0216 *  
+G           -0.01084    0.01189  -0.912   0.3623    
+sexRM        0.39053    0.07592   5.144 3.48e-07 ***
+Dalc         0.69001    0.04087  16.885  < 2e-16 ***
+studytime2  -0.14179    0.08172  -1.735   0.0832 .  
+studytime3  -0.25165    0.11580  -2.173   0.0301 *  
+studytime4  -0.43120    0.16952  -2.544   0.0112 *  
+goout        0.28685    0.03076   9.327  < 2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.9339 on 716 degrees of freedom
+Multiple R-squared:  0.4843,	Adjusted R-squared:  0.4793 
+F-statistic: 96.06 on 7 and 716 DF,  p-value: < 2.2e-16
+
+\end{spverbatim}
+
+Como podemos ver, aspectos que influyen mucho en el modelo son:
+\begin{itemize}
+\item Que el alumno salga con amigos
+\item Que el alumno sea de sexo masculino
+\item Si el alumno bebe entre semana tenderá a beber más los fines de semana
+\item Cuanto más tiempo de estudio dedica el alumno, menos bebe
+\end{itemize}
+
+
+La edad no influye de forma significativa para el consumo de alcohol según el modelo.
+
+En este caso, el modelo explica un 48\% de la variabilidad en los datos.
+
+
+\section{Estudio de correlación}
+
+Estudiamos el de nivel de significancia de la relación entre la calificación que obtienen los alumnos y otro tipo de factores:
+\begin{itemize}
+\item Sexo
+\item Edad
+\item Consumo de alcohol los fines de semana
+\item Consumo de alcohol entre semana
+\item Situación de los padres (cohabitando o no)
+\end{itemize}
+
+Al estudiar el nivel de relación entre una variable contínua (la nota) y variables categóricas (el resto), usamos el test ANOVA para obtener este nivel de significancia:
+
+
+\begin{spverbatim}
+# Sexo
+aov1 = aov(students.red$G ~ students.red$sex)
+summary(aov1)
+# Edad
+aov1 = aov(students.red$G ~ students.red$age)
+summary(aov1)
+# Consumo de alcohol fines de semana
+aov1 = aov(students.red$G ~ students.red$Walc)
+summary(aov1)
+# Consumo de alcohol entre semana
+aov1 = aov(students.red$G ~ students.red$Dalc)
+summary(aov1)
+# Situación de los padres
+aov1 = aov(students.red$G ~ students.red$Pstatus)
+summary(aov1)
+
+Output:
+
+                  Df Sum Sq Mean Sq F value Pr(>F)
+students.red\$sex   1     24   24.46   2.688  0.102
+Residuals        722   6570    9.10               
+                  Df Sum Sq Mean Sq F value   Pr(>F)    
+students.red\$age   1    109  109.37   12.18 0.000513 ***
+Residuals        722   6485    8.98                     
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+                   Df Sum Sq Mean Sq F value   Pr(>F)    
+students.red\$Walc   1    150  150.35   16.84 4.52e-05 ***
+Residuals         722   6444    8.93                     
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+                   Df Sum Sq Mean Sq F value   Pr(>F)    
+students.red\$Dalc   1    139  139.34   15.58 8.66e-05 ***
+Residuals         722   6455    8.94                     
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+                      Df Sum Sq Mean Sq F value Pr(>F)
+students.red\$Pstatus   1      1   1.231   0.135  0.714
+Residuals            722   6594   9.132
+
+\end{spverbatim}
+
+Como podemos observar, no hay correlación entre la calificación del estudiante y el sexo o el estado de convivencia de los padres. Sin embargo, en el desempeño escolar de los estudiantes sí que influyen significativamente la edad y el consumo de alcohol tanto en fines de semana como entre semana.
 
 
 \section{Conclusiones}
+
+{ POR COMPLETAR }
 
 
 \newpage
