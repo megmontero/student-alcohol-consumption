@@ -1,6 +1,6 @@
 ---
-title: "Código Práctica 2: Limpieza dataset 'Student Alcohol Consumption '"
-author: "Gregorio Andrés García Menéndez (gagarcia) & Manuel Gomez Montero (megmontero)"
+title: "CÃ³digo PrÃ¡ctica 2: Limpieza dataset 'Student Alcohol Consumption '"
+author: "Gregorio AndrÃ©s GarcÃ­a MenÃ©ndez (gagarcia) & Manuel Gomez Montero (megmontero)"
 date: "Junio, 2019"
 output:
   html_document:
@@ -23,8 +23,7 @@ lang: es
 
 **Introducción**
 
-Práctica 2 de .... chapa... 
-
+[A COMPLETAR]
 
 
 # Limpieza de datos
@@ -32,7 +31,7 @@ Práctica 2 de .... chapa...
 
 ## Lectura de datos 
 
-Leemos ambos ficheros mostramos resumén para matemáticas:
+Leemos ambos ficheros mostramos resumen para matemáticas:
 
 
 ```r
@@ -254,6 +253,7 @@ summary(students)
 
 ```r
 students.both=merge(students.mat,students.por,by=c("school","sex","age","address","famsize","Pstatus","Medu","Fedu","Mjob","Fjob","reason","nursery","internet", "traveltime", "failures", "schoolsup", "activities", "higher", "romantic", "famrel", "freetime", "goout", "Dalc", "Walc", "health"))
+
 summary(students.both)
 ```
 
@@ -323,7 +323,7 @@ summary(students.both)
 ##  Max.   :19.00   Max.   :19.00
 ```
 
-Vemos cuales realmente serian del mismo conjunto
+Vemos cuales realmente serían del mismo conjunto
 
 ```r
 print(nrow(students.both[students$guardian.y!=students$guardian.x,c("guardian.x", "guardian.y")]))
@@ -642,7 +642,7 @@ summary(students.nonas)
 ## Reducción dimensionalidad
 
 
-Eliminamos School y calculamos la evaluacion como la media
+Como no vamos a centrar los estudios comparando estudiantes de distintos colegios, eliminamos la variable School, y calculamos la evaluacion como la media:
 
 ```r
 students.red <- students.nonas[,c("sex","age","address","famsize","Pstatus","Medu","Fedu","Mjob","Fjob","reason","nursery","internet", "traveltime", "failures", "schoolsup", "activities", "higher", "romantic", "famrel", "freetime", "goout", "Dalc", "Walc", "health", "guardian", "famsup", "studytime", "absences", "paid")]
@@ -728,9 +728,9 @@ students.red$studytime <-as.factor(students.red$studytime)
 
 
 
-# Análisis Estadístico
+# AnÃ¡lisis Estadístico
 
-## Análisis gráfico inicial
+## AnÃ¡lisis grÃ¡fico inicial
 
 
 ```r
@@ -740,35 +740,43 @@ objs = c("Dalc", "Wcalc")
 
 
 library(ggplot2)
+```
 
-for(i in vars) 
-{
-  if(is.factor(students.red[,i]))
-  {
+```
+## Registered S3 methods overwritten by 'ggplot2':
+##   method         from 
+##   [.quosures     rlang
+##   c.quosures     rlang
+##   print.quosures rlang
+```
+
+```r
+for(i in vars) {
+  if(is.factor(students.red[,i])){
     f1 = students.red[,i]
-plot <- ggplot(data = students.red, aes(x = f1, y = students.red[,"Walc"])) + 
-  geom_boxplot(aes(fill = f1), width = 0.8) + theme_bw()  +
-  xlab(i) + ylab("Weekend Consumption")
-print(plot)
-plot <- ggplot(data = students.red, aes(x = f1, y = students.red[,"Dalc"])) + 
-  geom_boxplot(aes(fill = f1), width = 0.8) + theme_bw()  +
-  xlab(i) + ylab("Weekday Consumption")
-print(plot)
-
-    }}
+    plot <- ggplot(data = students.red, aes(x = f1, y = students.red[,"Walc"])) + 
+            geom_boxplot(aes(fill = f1), width = 0.8) + theme_bw()  +
+            xlab(i) + ylab("Weekend Consumption")
+    print(plot)
+    plot <- ggplot(data = students.red, aes(x = f1, y = students.red[,"Dalc"])) + 
+            geom_boxplot(aes(fill = f1), width = 0.8) + theme_bw()  +
+            xlab(i) + ylab("Weekday Consumption")
+    print(plot)
+  }
+}
 ```
 
 ![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-1.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-2.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-3.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-4.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-5.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-6.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-7.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-8.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-9.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-10.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-11.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-12.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-13.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-14.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-15.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-16.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-17.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-18.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-19.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-20.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-21.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-22.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-23.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-24.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-25.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-26.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-27.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-28.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-29.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-30.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-31.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-32.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-33.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-34.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-35.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-36.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-37.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-38.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-39.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-40.png)<!-- -->
 
 
 
-Viendo las gráficas vemos que hay variables que parece que sí tienen influencia a simple vista en el consumo de alcohol tanto a diarío como los fines de semana como pueden ser el sexo, el estado de los padres, sin embargo vemos otros que, a priori, no parece que tengan influencia así que en un primer momento vamos a dejar fuera del análisis si el alumno tiene internet, si tiene una relación, el tutor, la dirección, si realiza actividades extraescolares, si recibe clases de pago, si ha ido a la guarderia, o si  recibe el apoyo de su familia en el estudio. 
+Viendo las gráficas vemos que hay variables que parece que sí tienen influencia a simple vista en el consumo de alcohol tanto a diario como los fines de semana como pueden ser el sexo o el estado de los padres. Sin embargo vemos otros que, a priori, no parece que tengan influencia, así que en un primer momento vamos a dejar fuera del análisis si el alumno tiene internet, si tiene una relación, el tutor, la dirección, si realiza actividades extraescolares, si recibe clases de pago, si ha ido a la guardería, o si  recibe el apoyo de su familia en el estudio. 
 
 El dataset resultante y con el que continuaremos trabajando es el siguiente: 
 
 
 ```r
-students <- students.red[,c("sex","age","famsize","Pstatus","Medu","Fedu","Mjob","Fjob","reason", "traveltime", "failures", "schoolsup", "higher",  "famrel", "freetime", "goout", "Dalc", "Walc", "health", "studytime", "absences")]
+students <- students.red[,c("sex","age","famsize","Pstatus","Medu","Fedu","Mjob","Fjob","reason", "traveltime", "failures", "schoolsup", "higher",  "famrel", "freetime", "goout", "Dalc", "Walc", "health", "studytime", "absences", "G")]
 summary(students)
 ```
 
@@ -800,7 +808,14 @@ summary(students)
 ##  Median :2.000   Median :4.000   3:106     Median :0.0625  
 ##  Mean   :2.311   Mean   :3.552   4: 36     Mean   :0.1057  
 ##  3rd Qu.:3.000   3rd Qu.:5.000             3rd Qu.:0.1527  
-##  Max.   :5.000   Max.   :5.000             Max.   :0.8733
+##  Max.   :5.000   Max.   :5.000             Max.   :0.8733  
+##        G         
+##  Min.   : 1.333  
+##  1st Qu.: 9.167  
+##  Median :11.000  
+##  Mean   :10.991  
+##  3rd Qu.:13.000  
+##  Max.   :18.333
 ```
 
 
@@ -808,7 +823,12 @@ summary(students)
 
 ## Estadistica Inferencial 
 
-En este apartado vamos a ver si hay diferencia significativas en el consumo de alcohol a diario o fines de semana entre estudiantes de distinto sexo o entre estudiantes con diferente situación de los padres. Se trata de un problema de diferencia de medias entre dos muestras.
+En este apartado vamos a ver si hay diferencia significativas en el consumo de alcohol a diario o fines de semana entre:
+  - Estudiantes de distinto sexo
+  - Estudiantes con diferente situación de convivencia de los padres.
+  - Estudiantes que aprueban (G >= 10) y estudiantes que suspenden (G < 10)  
+  
+Se trata de un problema de diferencia de medias entre dos muestras.
 
 
 Para cada caso la hipótesis sería: 
@@ -823,7 +843,7 @@ H_{1}: & \mu_{g1}-\mu_{g2}\ne0
 \right.
 $$
 
-Se trata de un problema de diferencia de medias en el que no conocemos la varianza poblacional, tampoco sabemos a priori si los datos siguen una distribución normal, prero el tamaño de las muestras es lo suficientemente grande para tener en cuenta el teorema del límite central.
+Se trata de un problema de diferencia de medias en el que no conocemos la varianza poblacional. Tampoco sabemos a priori si los datos siguen una distribución normal, pero el tamaño de las muestras es lo suficientemente grande para tener en cuenta el teorema del límite central.
 
 
 Para el alcohol en fines de semana por sexo: 
@@ -833,7 +853,7 @@ Para el alcohol en fines de semana por sexo:
 data_weekend_sex_m <- students$Walc[students$sex == 'M'] 
 data_weekend_sex_f <- students$Walc[students$sex == 'F'] 
 
-t.test(data_weekend_sex_m, data_weekend_sex_f, var.equal = TRUE, conf.level = 0.90)
+t.test(data_weekend_sex_m, data_weekend_sex_f, var.equal = TRUE, conf.level = 0.95)
 ```
 
 ```
@@ -843,13 +863,13 @@ t.test(data_weekend_sex_m, data_weekend_sex_f, var.equal = TRUE, conf.level = 0.
 ## data:  data_weekend_sex_m and data_weekend_sex_f
 ## t = 9.7324, df = 722, p-value < 2.2e-16
 ## alternative hypothesis: true difference in means is not equal to 0
-## 90 percent confidence interval:
-##  0.740428 1.042073
+## 95 percent confidence interval:
+##  0.7114636 1.0710375
 ## sample estimates:
 ## mean of x mean of y 
 ##  2.824104  1.932854
 ```
-Por el p-value vemos que si podemos rechazar la hipótesis nula y concluir que si hay diferencias significativas. 
+Por el p-value vemos que no podemos aceptar la hipótesis nula, y concluimos que al 95% de nivel de confianza los estudiantes masculinos y femeninos no tienen el mismo consumo de alcohol los fines de semana.  
 
 
 
@@ -860,7 +880,7 @@ Por sexo entre semana:
 data_weekday_sex_m <- students$Dalc[students$sex == 'M'] 
 data_weekday_sex_f <- students$Dalc[students$sex == 'F'] 
 
-t.test(data_weekday_sex_m, data_weekday_sex_f, var.equal = TRUE, conf.level = 0.90)
+t.test(data_weekday_sex_m, data_weekday_sex_f, var.equal = TRUE, conf.level = 0.95)
 ```
 
 ```
@@ -870,21 +890,22 @@ t.test(data_weekday_sex_m, data_weekday_sex_f, var.equal = TRUE, conf.level = 0.
 ## data:  data_weekday_sex_m and data_weekday_sex_f
 ## t = 8.2948, df = 722, p-value = 5.321e-16
 ## alternative hypothesis: true difference in means is not equal to 0
-## 90 percent confidence interval:
-##  0.4422066 0.6613171
+## 95 percent confidence interval:
+##  0.4211673 0.6823564
 ## sample estimates:
 ## mean of x mean of y 
 ##  1.837134  1.285372
 ```
-Por el p-value vemos que si podemos rechazar la hipótesis nula y concluir que si hay diferencias significativas. 
+Por el p-value vemos que ocurre lo mismo que en los fines de semana. No podemos acepta la hipotésis nula y al 95% afirmamos que hay diferencia en el consumo de alcohol entre estudiantes masculinos y femeninos para los días entre semana.
 
 
+Ahora realizamos el estudio para el consumo de alcohol según la situación de los padres de cada alumno:
 
 ```r
 data_weekday_pstatus_t <- students$Dalc[students$Pstatus == 'T'] 
 data_weekday_pstatus_a <- students$Dalc[students$Pstatus == 'A'] 
 
-t.test(data_weekday_pstatus_t, data_weekday_pstatus_a, var.equal = TRUE, conf.level = 0.90)
+t.test(data_weekday_pstatus_t, data_weekday_pstatus_a, var.equal = TRUE, conf.level = 0.95)
 ```
 
 ```
@@ -894,13 +915,13 @@ t.test(data_weekday_pstatus_t, data_weekday_pstatus_a, var.equal = TRUE, conf.le
 ## data:  data_weekday_pstatus_t and data_weekday_pstatus_a
 ## t = 0.69872, df = 722, p-value = 0.4849
 ## alternative hypothesis: true difference in means is not equal to 0
-## 90 percent confidence interval:
-##  -0.09884577  0.24451700
+## 95 percent confidence interval:
+##  -0.1318160  0.2774872
 ## sample estimates:
 ## mean of x mean of y 
 ##  1.528391  1.455556
 ```
-Por el p-value vemos que no hay diferencia significativa 
+Con un p-value tan alto aceptamos la hipótesis nula, concluyendo que el consumo de alcohol entre semana es el mismo para estudiantes cuyos padres viven juntos y para estudiatnes cuyos padres viven separados
 
 
 
@@ -909,7 +930,7 @@ Por el p-value vemos que no hay diferencia significativa
 data_weekend_pstatus_t <- students$Walc[students$Pstatus == 'T'] 
 data_weekend_pstatus_a <- students$Walc[students$Pstatus == 'A'] 
 
-t.test(data_weekend_pstatus_t, data_weekend_pstatus_a, var.equal = TRUE, conf.level = 0.90)
+t.test(data_weekend_pstatus_t, data_weekend_pstatus_a, var.equal = TRUE, conf.level = 0.95)
 ```
 
 ```
@@ -919,23 +940,73 @@ t.test(data_weekend_pstatus_t, data_weekend_pstatus_a, var.equal = TRUE, conf.le
 ## data:  data_weekend_pstatus_t and data_weekend_pstatus_a
 ## t = 1.3035, df = 722, p-value = 0.1928
 ## alternative hypothesis: true difference in means is not equal to 0
-## 90 percent confidence interval:
-##  -0.05005058  0.42993140
+## 95 percent confidence interval:
+##  -0.09613914  0.47601996
 ## sample estimates:
 ## mean of x mean of y 
 ##  2.334385  2.144444
 ```
-Por el p-value vemos que no hay diferencia significativa 
+En el caso del consumo en los fines de semana, ocurre lo mismo: no hay diferencias significativas en función del estado de convivencia de los padres
 
 
 
+Por último, realizamos el estudio para el consumo de alcohol según las calificaciones que obtiene el alumno (si aprueba o suspende):
 
-## Regresion 
+```r
+data_weekday_aprobados <- students$Dalc[students$G >= 10] 
+data_weekday_suspensos <- students$Dalc[students$G < 10] 
+
+t.test(data_weekday_aprobados, data_weekday_suspensos, var.equal = TRUE, conf.level = 0.95)
+```
+
+```
+## 
+## 	Two Sample t-test
+## 
+## data:  data_weekday_aprobados and data_weekday_suspensos
+## t = -2.7561, df = 722, p-value = 0.005996
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -0.34170360 -0.05740842
+## sample estimates:
+## mean of x mean of y 
+##  1.452083  1.651639
+```
+Viendo el p-value, podemos decir al 95% que sí hay diferencias entre alumnos que aprueban y alumnos que suspenden en cuanto al consumo de alcohol entre semana.
+
+
+En el caso del consumo los fines de semana:
+
+```r
+data_weekend_aprobados <- students$Walc[students$G >= 10] 
+data_weekend_suspensos <- students$Walc[students$G < 10] 
+
+t.test(data_weekend_aprobados, data_weekend_suspensos, var.equal = TRUE, conf.level = 0.95)
+```
+
+```
+## 
+## 	Two Sample t-test
+## 
+## data:  data_weekend_aprobados and data_weekend_suspensos
+## t = -2.8183, df = 722, p-value = 0.00496
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -0.4842420 -0.0865913
+## sample estimates:
+## mean of x mean of y 
+##  2.214583  2.500000
+```
+Con un p-value menor que 0.05, al 95% de confianza afirmamos que también hay diferencia en el consumo de alcohol los fines de semana en función de si el alumno aprueba o no.
+
+
+
+## Regresión 
 
 En este apartado aplicaremos un modelo de regresión lineal múltiple que use como variables explicativas el sexo,
 la frecuencia con la que el estudiante sale con amigos, la edad y como variable dependiente el consumo de alcohol los fines de semana. 
 
-Al usar regresores cualitativos, es importante definir una categoría de referencia, para lo que usaremos la función de R *relevel* estableciendo la categoría "F" como referente para el sexo. El resultado lo almacenamos en una nueva  variable.
+Al usar regresores cualitativos, es importante definir una categoría de referencia, para lo que usaremos la función de R *relevel* estableciendo la categoría "F" como referente para el sexo. El resultado lo almacenamos en una nueva variable.
 
 
 
@@ -971,384 +1042,133 @@ summary(modelo)
 Los coeficientes obtenidos para cada variable son: 
 
 
-Observando el coeficiente de determinacion $R^{2}$ vemos que la proporción de variabilidad explicada por el modelo con respecto a la variabilidad total  es unicamente del 25% ...
-
-OLD
-------------------------------------------
+Observando el coeficiente de determinacion $R^{2}$ vemos que la proporciÃ³n de variabilidad explicada por el modelo con respecto a la variabilidad total  es unicamente del 25%
 
 
 
-
-# Análisis gráfico inicial
-
-
-
-
-
-Sexo
+Otro modelo lineal que podemos estudiar es el consumo de alcohol los fines de semana en función de cuánto sale el estudiante con amigos, cuánto bebe entre semana, su sexo y su edad
 
 ```r
-par(mfrow=c(1,2))
-boxplot(Walc~sex,data=students,  main="Boxplot Weekend Alcohol", ylab="Weekend Alcohol",col=(c("red","blue")))
-boxplot(Dalc~sex,data=students,  main="Boxplot Weekdays Alcohol", ylab="Weekdays Alcohol",col=(c("red","blue")))
+students$sexR <- relevel(students$sex, "F")
+modelo <- lm(Walc ~ goout + sexR + Dalc + age + studytime, data = students )
+summary(modelo)
 ```
 
-![](student-alcohol-consumption_files/figure-html/unnamed-chunk-20-1.png)<!-- -->
+```
+## 
+## Call:
+## lm(formula = Walc ~ goout + sexR + Dalc + age + studytime, data = students)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -3.3612 -0.6851 -0.1506  0.6757  2.9050 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)  0.68470    0.46989   1.457  0.14551    
+## goout        0.29036    0.03079   9.432  < 2e-16 ***
+## sexRM        0.38633    0.07596   5.086 4.67e-07 ***
+## Dalc         0.69840    0.04102  17.026  < 2e-16 ***
+## age         -0.02350    0.02786  -0.843  0.39927    
+## studytime2  -0.14609    0.08144  -1.794  0.07326 .  
+## studytime3  -0.26357    0.11429  -2.306  0.02139 *  
+## studytime4  -0.46156    0.16851  -2.739  0.00632 ** 
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.934 on 716 degrees of freedom
+## Multiple R-squared:  0.4842,	Adjusted R-squared:  0.4792 
+## F-statistic: 96.03 on 7 and 716 DF,  p-value: < 2.2e-16
+```
+Como podemos ver, aspectos que influyen mucho en el modelo son:
+  - Que el alumno salga con amigos
+  - Que el alumno sea de sexo masculino
+  - Si el alumno bebe entre semana tenderá a beber más los fines de semana
+  - Cuanto más tiempo de estudio dedica el alumno, menos bebe
 
-Parece que los hombres beben más.
+La edad no influye de forma significativa para el consumo de alcohol según el modelo.
+
+En este caso, el modelo explica un 48% de la variabilidad en los datos.
 
 
-Edad
+
+# Correlación
+
+Estudiamos el de nivel de significancia de la relación entre la calificación que obtienen los alumnos y otro tipo de factores:
+  - Sexo
+  - Edad
+  - Consumo de alcohol los fines de semana
+  - Consumo de alcohol entre semana
+  - Situación de los padres (cohabitando o no)
+  
+Al estudiar el nivel de relación entre una variable contínua (la nota) y variables categóricas (el resto), usamos el test ANOVA para obtener este nivel de significancia:
 
 ```r
-par(mfrow=c(1,2))
-boxplot(Walc~age,data=students,  main="Boxplot Weekend Alcohol", ylab="Weekend Alcohol",col=(c("red","blue")))
-boxplot(Dalc~age,data=students,  main="Boxplot Weekdays Alcohol", ylab="Weekdays Alcohol",col=(c("red","blue")))
-```
-
-![](student-alcohol-consumption_files/figure-html/unnamed-chunk-21-1.png)<!-- -->
-
-Parece que los mayores beben más entre semana.
-
-
-
-             Fedu             Mjob           Fjob            reason    nursery   internet    traveltime       failures      schoolsup activities higher 
- 
- 
-
-```r
-par(mfrow=c(1,2))
-boxplot(Walc~Medu,data=students,  main="Boxplot Weekend Alcohol", ylab="Weekend Alcohol",col=(c("red","blue")))
-boxplot(Dalc~Medu,data=students,  main="Boxplot Weekdays Alcohol", ylab="Weekdays Alcohol",col=(c("red","blue")))
-```
-
-![](student-alcohol-consumption_files/figure-html/unnamed-chunk-22-1.png)<!-- -->
- 
- 
-
-```r
-par(mfrow=c(1,2))
-boxplot(Walc~Fedu,data=students,  main="Boxplot Weekend Alcohol", ylab="Weekend Alcohol",col=(c("red","blue")))
-boxplot(Dalc~Fedu,data=students,  main="Boxplot Weekdays Alcohol", ylab="Weekdays Alcohol",col=(c("red","blue")))
-```
-
-![](student-alcohol-consumption_files/figure-html/unnamed-chunk-23-1.png)<!-- -->
- 
- 
- 
- 
-
-
-famsize
-
-```r
-par(mfrow=c(1,2))
-boxplot(Walc~famsize,data=students,  main="Boxplot Weekend Alcohol", ylab="Weekend Alcohol",col=(c("red","blue")))
-boxplot(Dalc~famsize,data=students,  main="Boxplot Weekdays Alcohol", ylab="Weekdays Alcohol",col=(c("red","blue")))
-```
-
-![](student-alcohol-consumption_files/figure-html/unnamed-chunk-24-1.png)<!-- -->
-
-
-
-
-
-Alcohol fin de sema y entre semana en función del estado de los padres 
-
-```r
-par(mfrow=c(1,2))
-
-boxplot(Walc~Pstatus,data=students,  main="Boxplot Weekend Alcohol", ylab="Weekend Alcohol",col=(c("red","blue")))
-boxplot(Dalc~Pstatus,data=students,  main="Boxplot Weekdays Alcohol", ylab="Weekdays Alcohol",col=(c("red","blue")))
-```
-
-![](student-alcohol-consumption_files/figure-html/unnamed-chunk-25-1.png)<!-- -->
-
-
-Si salen con amigos
-
-```r
-par(mfrow=c(1,2))
-boxplot(Walc~goout,data=students,  main="Boxplot Weekend Alcohol", ylab="Weekend Alcohol",col=(c("red","blue")))
-boxplot(Dalc~goout,data=students,  main="Boxplot Weekdays Alcohol", ylab="Weekdays Alcohol",col=(c("red","blue")))
-```
-
-![](student-alcohol-consumption_files/figure-html/unnamed-chunk-26-1.png)<!-- -->
-
-Parece que los que más salen, beben más los fines de semana. 
-
-
-
-
-```r
-par(mfrow=c(1,2))
-boxplot(Walc~studytime,data=students,  main="Boxplot Weekend Alcohol", ylab="Weekend Alcohol",col=(c("red","blue")))
-boxplot(Dalc~studytime,data=students,  main="Boxplot Weekdays Alcohol", ylab="Weekdays Alcohol",col=(c("red","blue")))
-```
-
-![](student-alcohol-consumption_files/figure-html/unnamed-chunk-27-1.png)<!-- -->
-
-Los que menos estudian, beben más los fines de semana.
-
-
-
-
-```r
-par(mfrow=c(1,2))
-boxplot(Walc~famrel,data=students,  main="Boxplot Weekend Alcohol", ylab="Weekend Alcohol",col=(c("red","blue")))
-boxplot(Dalc~famrel,data=students,  main="Boxplot Weekdays Alcohol", ylab="Weekdays Alcohol",col=(c("red","blue")))
-```
-
-![](student-alcohol-consumption_files/figure-html/unnamed-chunk-28-1.png)<!-- -->
-
-Los que tienen buena relación con la familia no beben a diario. 
-
-
-
-
-
-
-#Backup Goyo
-
-Despu?s de hacer varias pruebas quitando y poniendo variables, he llegado a la conclusi?n de asumir todas como comunes para estudiantes que se encuentran en las dos clases excepto las notas (G1, G2 y G3).
-Es decir, asumimos que alumnos cuyo todo conjunto de variables menos las notas es igual en los dos ficheros, se trata del mismo alumno. Haci?ndolo de este modo quedan:
-
-```r
-# 100 alumnos que dan matem?ticas y portugu?s 
-nrow(students[!is.na(students$G1.x) & !is.na(students$G1.y),])
+# Sexo
+aov1 = aov(students.red$G ~ students.red$sex)
+summary(aov1)
 ```
 
 ```
-## [1] 0
+##                   Df Sum Sq Mean Sq F value Pr(>F)
+## students.red$sex   1     24   24.46   2.688  0.102
+## Residuals        722   6570    9.10
 ```
 
 ```r
-# 295 alumnos que dan s?lo matem?ticas
-nrow(students[!is.na(students$G1.x) & is.na(students$G1.y),])
+# Edad
+aov1 = aov(students.red$G ~ students.red$age)
+summary(aov1)
 ```
 
 ```
-## [1] 0
-```
-
-```r
-# 549 alumnos que dan s?lo portugu?s
-nrow(students[is.na(students$G1.x) & !is.na(students$G1.y),])
-```
-
-```
-## [1] 0
+##                   Df Sum Sq Mean Sq F value   Pr(>F)    
+## students.red$age   1    109  109.37   12.18 0.000513 ***
+## Residuals        722   6485    8.98                     
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
 ```r
-# 0 datos an?malos (que no est?n en ninguna de las dos clases)
-nrow(students[is.na(students$G1.x) & is.na(students$G1.y),])
+# Consumo de alcohol fines de semana
+aov1 = aov(students.red$G ~ students.red$Walc)
+summary(aov1)
 ```
 
 ```
-## [1] 0
-```
-Tras tener este dataset, nuestros objetivos pueden ser ver c?mo influyen ciertos factores sociales (tiempo libre, familia, etc) en dos cosas:
-- Consumo de alcohol del alumno
-- Calificaciones del alumno
-(y la una sobre la otra seg?n que caso)
-
-Se me ocurre que de este dataset se puede tambi?n estudiar por ejemplo las calificaciones del alumno por campo (técnico - matemáticas - y humanidades - portugués). Aún así, teniendo en cuenta los dos puntos anteriores, veo más sentido tener una media de las calificaciones en total que aplicaría de la siguiente forma:
-========
-OPCIÓN A
-========
-- Para los alumnos que están en matemáticas, la media de las tres evaluaciones como calificacion_tec
-- Para los alumnos que están en portugués, la media de las tres evaluaciones como calificacion_hum
-- Para los alumnos que están en ambas clases, la media de calificacion_tec y calificacion_hum como calificacion_total
-- Los alumnos que no apliquen en calificacion_tec o calificacion_mat, 'NA' como valor, y calificacion_total tambi?n 'NA'
-
-Creo que así cubriríamos bastante terreno según lo que queramos hacer. Aún así, algo más simple si no nos interesa la calificación por campos/asignaturas, puede ser:
-========
-OPCIÓN B
-========
-- Para los alumnos que están en matemáticas, la media de las tres evaluaciones como calificacion_total
-- Para los alumnos que están en portugués, la media de las tres evaluaciones como calificacion_total
-
-De esta última forma queda un dataset más "limpio". Dime qué opinas. De momento dejo los datasets en dos variables y luego ya elegimos:
-
-
-```r
-students_a <- students.both
-students_a$calificacion_tec <- (students_a$G1.x + students_a$G2.x + students_a$G3.x) / 3
-students_a$calificacion_hum <- (students_a$G1.y + students_a$G2.y + students_a$G3.y) / 3
-students_a$calificacion_total <- (students_a$calificacion_tec + students_a$calificacion_hum) / 2
-
-students_b <- students.both
-students_b$calificacion_total <- ifelse(!is.na(students_a$calificacion_tec), students_a$calificacion_tec, students_a$calificacion_hum)
-
-
-summary(students_a)
-```
-
-```
-##  school   sex          age        address famsize   Pstatus
-##  GP:287   F:174   Min.   :15.00   R: 67   GT3:230   A: 31  
-##  MS: 33   M:146   1st Qu.:16.00   U:253   LE3: 90   T:289  
-##                   Median :16.00                            
-##                   Mean   :16.52                            
-##                   3rd Qu.:17.00                            
-##                   Max.   :22.00                            
-##       Medu            Fedu             Mjob           Fjob    
-##  Min.   :0.000   Min.   :0.000   at_home : 44   at_home : 14  
-##  1st Qu.:2.000   1st Qu.:2.000   health  : 30   health  : 15  
-##  Median :3.000   Median :3.000   other   :116   other   :177  
-##  Mean   :2.872   Mean   :2.622   services: 75   services: 87  
-##  3rd Qu.:4.000   3rd Qu.:4.000   teacher : 55   teacher : 27  
-##  Max.   :4.000   Max.   :4.000                                
-##         reason    nursery   internet    traveltime       failures      
-##  course    :118   no : 59   no : 48   Min.   :1.000   Min.   :0.00000  
-##  home      : 87   yes:261   yes:272   1st Qu.:1.000   1st Qu.:0.00000  
-##  other     : 30                       Median :1.000   Median :0.00000  
-##  reputation: 85                       Mean   :1.428   Mean   :0.08125  
-##                                       3rd Qu.:2.000   3rd Qu.:0.00000  
-##                                       Max.   :4.000   Max.   :3.00000  
-##  schoolsup activities higher    romantic      famrel         freetime    
-##  no :277   no :150    no :  7   no :221   Min.   :1.000   Min.   :1.000  
-##  yes: 43   yes:170    yes:313   yes: 99   1st Qu.:4.000   1st Qu.:3.000  
-##                                           Median :4.000   Median :3.000  
-##                                           Mean   :3.987   Mean   :3.203  
-##                                           3rd Qu.:5.000   3rd Qu.:4.000  
-##                                           Max.   :5.000   Max.   :5.000  
-##      goout            Dalc            Walc           health     
-##  Min.   :1.000   Min.   :1.000   Min.   :1.000   Min.   :1.000  
-##  1st Qu.:2.000   1st Qu.:1.000   1st Qu.:1.000   1st Qu.:3.000  
-##  Median :3.000   Median :1.000   Median :2.000   Median :4.000  
-##  Mean   :3.069   Mean   :1.438   Mean   :2.225   Mean   :3.522  
-##  3rd Qu.:4.000   3rd Qu.:2.000   3rd Qu.:3.000   3rd Qu.:5.000  
-##  Max.   :5.000   Max.   :5.000   Max.   :5.000   Max.   :5.000  
-##   guardian.x   studytime.x    famsup.x  paid.x      absences.x    
-##  father: 74   Min.   :1.000   no :117   no :160   Min.   : 0.000  
-##  mother:237   1st Qu.:1.000   yes:203   yes:160   1st Qu.: 0.000  
-##  other :  9   Median :2.000                       Median : 4.000  
-##               Mean   :2.084                       Mean   : 5.412  
-##               3rd Qu.:3.000                       3rd Qu.: 7.250  
-##               Max.   :4.000                       Max.   :75.000  
-##       G1.x            G2.x            G3.x        guardian.y 
-##  Min.   : 5.00   Min.   : 0.00   Min.   : 0.00   father: 74  
-##  1st Qu.: 9.00   1st Qu.: 9.00   1st Qu.: 9.00   mother:237  
-##  Median :11.00   Median :11.00   Median :11.00   other :  9  
-##  Mean   :11.29   Mean   :11.18   Mean   :11.04               
-##  3rd Qu.:14.00   3rd Qu.:14.00   3rd Qu.:14.00               
-##  Max.   :19.00   Max.   :19.00   Max.   :20.00               
-##   studytime.y    famsup.y  paid.y      absences.y          G1.y      
-##  Min.   :1.000   no :117   no :300   Min.   : 0.000   Min.   : 0.00  
-##  1st Qu.:1.000   yes:203   yes: 20   1st Qu.: 0.000   1st Qu.:11.00  
-##  Median :2.000                       Median : 2.000   Median :12.00  
-##  Mean   :2.084                       Mean   : 3.247   Mean   :12.39  
-##  3rd Qu.:3.000                       3rd Qu.: 4.000   3rd Qu.:14.00  
-##  Max.   :4.000                       Max.   :32.000   Max.   :19.00  
-##       G2.y            G3.y       calificacion_tec calificacion_hum
-##  Min.   : 5.00   Min.   : 0.00   Min.   : 2.00    Min.   : 4.00   
-##  1st Qu.:11.00   1st Qu.:11.00   1st Qu.: 9.00    1st Qu.:11.00   
-##  Median :12.00   Median :13.00   Median :11.00    Median :12.67   
-##  Mean   :12.57   Mean   :12.88   Mean   :11.17    Mean   :12.62   
-##  3rd Qu.:14.00   3rd Qu.:15.00   3rd Qu.:13.67    3rd Qu.:14.33   
-##  Max.   :19.00   Max.   :19.00   Max.   :19.33    Max.   :18.67   
-##  calificacion_total
-##  Min.   : 4.00     
-##  1st Qu.:10.00     
-##  Median :11.67     
-##  Mean   :11.89     
-##  3rd Qu.:13.83     
-##  Max.   :18.33
+##                    Df Sum Sq Mean Sq F value   Pr(>F)    
+## students.red$Walc   1    150  150.35   16.84 4.52e-05 ***
+## Residuals         722   6444    8.93                     
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
 ```r
-summary(students_b)
+# Consumo de alcohol entre semana
+aov1 = aov(students.red$G ~ students.red$Dalc)
+summary(aov1)
 ```
 
 ```
-##  school   sex          age        address famsize   Pstatus
-##  GP:287   F:174   Min.   :15.00   R: 67   GT3:230   A: 31  
-##  MS: 33   M:146   1st Qu.:16.00   U:253   LE3: 90   T:289  
-##                   Median :16.00                            
-##                   Mean   :16.52                            
-##                   3rd Qu.:17.00                            
-##                   Max.   :22.00                            
-##       Medu            Fedu             Mjob           Fjob    
-##  Min.   :0.000   Min.   :0.000   at_home : 44   at_home : 14  
-##  1st Qu.:2.000   1st Qu.:2.000   health  : 30   health  : 15  
-##  Median :3.000   Median :3.000   other   :116   other   :177  
-##  Mean   :2.872   Mean   :2.622   services: 75   services: 87  
-##  3rd Qu.:4.000   3rd Qu.:4.000   teacher : 55   teacher : 27  
-##  Max.   :4.000   Max.   :4.000                                
-##         reason    nursery   internet    traveltime       failures      
-##  course    :118   no : 59   no : 48   Min.   :1.000   Min.   :0.00000  
-##  home      : 87   yes:261   yes:272   1st Qu.:1.000   1st Qu.:0.00000  
-##  other     : 30                       Median :1.000   Median :0.00000  
-##  reputation: 85                       Mean   :1.428   Mean   :0.08125  
-##                                       3rd Qu.:2.000   3rd Qu.:0.00000  
-##                                       Max.   :4.000   Max.   :3.00000  
-##  schoolsup activities higher    romantic      famrel         freetime    
-##  no :277   no :150    no :  7   no :221   Min.   :1.000   Min.   :1.000  
-##  yes: 43   yes:170    yes:313   yes: 99   1st Qu.:4.000   1st Qu.:3.000  
-##                                           Median :4.000   Median :3.000  
-##                                           Mean   :3.987   Mean   :3.203  
-##                                           3rd Qu.:5.000   3rd Qu.:4.000  
-##                                           Max.   :5.000   Max.   :5.000  
-##      goout            Dalc            Walc           health     
-##  Min.   :1.000   Min.   :1.000   Min.   :1.000   Min.   :1.000  
-##  1st Qu.:2.000   1st Qu.:1.000   1st Qu.:1.000   1st Qu.:3.000  
-##  Median :3.000   Median :1.000   Median :2.000   Median :4.000  
-##  Mean   :3.069   Mean   :1.438   Mean   :2.225   Mean   :3.522  
-##  3rd Qu.:4.000   3rd Qu.:2.000   3rd Qu.:3.000   3rd Qu.:5.000  
-##  Max.   :5.000   Max.   :5.000   Max.   :5.000   Max.   :5.000  
-##   guardian.x   studytime.x    famsup.x  paid.x      absences.x    
-##  father: 74   Min.   :1.000   no :117   no :160   Min.   : 0.000  
-##  mother:237   1st Qu.:1.000   yes:203   yes:160   1st Qu.: 0.000  
-##  other :  9   Median :2.000                       Median : 4.000  
-##               Mean   :2.084                       Mean   : 5.412  
-##               3rd Qu.:3.000                       3rd Qu.: 7.250  
-##               Max.   :4.000                       Max.   :75.000  
-##       G1.x            G2.x            G3.x        guardian.y 
-##  Min.   : 5.00   Min.   : 0.00   Min.   : 0.00   father: 74  
-##  1st Qu.: 9.00   1st Qu.: 9.00   1st Qu.: 9.00   mother:237  
-##  Median :11.00   Median :11.00   Median :11.00   other :  9  
-##  Mean   :11.29   Mean   :11.18   Mean   :11.04               
-##  3rd Qu.:14.00   3rd Qu.:14.00   3rd Qu.:14.00               
-##  Max.   :19.00   Max.   :19.00   Max.   :20.00               
-##   studytime.y    famsup.y  paid.y      absences.y          G1.y      
-##  Min.   :1.000   no :117   no :300   Min.   : 0.000   Min.   : 0.00  
-##  1st Qu.:1.000   yes:203   yes: 20   1st Qu.: 0.000   1st Qu.:11.00  
-##  Median :2.000                       Median : 2.000   Median :12.00  
-##  Mean   :2.084                       Mean   : 3.247   Mean   :12.39  
-##  3rd Qu.:3.000                       3rd Qu.: 4.000   3rd Qu.:14.00  
-##  Max.   :4.000                       Max.   :32.000   Max.   :19.00  
-##       G2.y            G3.y       calificacion_total
-##  Min.   : 5.00   Min.   : 0.00   Min.   : 2.00     
-##  1st Qu.:11.00   1st Qu.:11.00   1st Qu.: 9.00     
-##  Median :12.00   Median :13.00   Median :11.00     
-##  Mean   :12.57   Mean   :12.88   Mean   :11.17     
-##  3rd Qu.:14.00   3rd Qu.:15.00   3rd Qu.:13.67     
-##  Max.   :19.00   Max.   :19.00   Max.   :19.33
+##                    Df Sum Sq Mean Sq F value   Pr(>F)    
+## students.red$Dalc   1    139  139.34   15.58 8.66e-05 ***
+## Residuals         722   6455    8.94                     
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
-# Preparación de datos para ver si existen agrupaciones claras según ciertas variables
+```r
+# Situación de los padres
+aov1 = aov(students.red$G ~ students.red$Pstatus)
+summary(aov1)
+```
 
-km_data <- students_b
-km_data$studytime.x <- NULL
-km_data$studytime.y <- NULL
-km_data$failures.x <- NULL
-km_data$failures.y <- NULL
-km_data$paid.x <- NULL
-km_data$paid.y <- NULL
-km_data$G1.y <- NULL
-km_data$G2.y <- NULL
-km_data$G3.y <- NULL
-km_data$G1.x <- NULL
-km_data$G3.x <- NULL
-km_data$G2.x <- NULL
-km_data$studytime.x <- NULL
-km_data$studytime.y <- NULL
-km_data$failures.x <- NULL
-km_data$failures.y <- NULL
-summary(km_data)
+```
+##                       Df Sum Sq Mean Sq F value Pr(>F)
+## students.red$Pstatus   1      1   1.231   0.135  0.714
+## Residuals            722   6594   9.132
+```
+Como podemos observar, no hay correlación entre la calificación del estudiante y el sexo o el estado de convivencia de los padres. Sin embargo, en el desempeño escolar de los estudiantes sí que influyen significativamente la edad y el consumo de alcohol tanto en fines de semana como entre semana.
 
-# Seguir preparando datos y haciendo pruebas
 
 
