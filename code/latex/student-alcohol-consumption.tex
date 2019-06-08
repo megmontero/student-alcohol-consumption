@@ -176,11 +176,30 @@ En primer lugar vamos a encargarnos de los valores perdidos que se dan unicament
 
 Por lo tanto la opción escogida para los valores perdidos es la siguiente: 
 
+
+ \begin{figure}[ht!]
+	\centering
+	\includegraphics[trim = 0mm 0mm 0mm 0mm, clip,scale=0.5]{images/nonas_paid}
+	\caption{Unificación variable paid}
+	\label{fig:nonas_paid}
+\end{figure}
+
+
 \begin{itemize}
-	\item \textit{paid}: Unificaremos las variables de ambos cursos tomando un valor ``yes'' cuando el alumno de clases extras pagadas de alguno de los cursos. 
-	\item \textit{absences}: Viendo los números parece que las ausencias son mayores en matemáticas. Como lo que nos interesa es saber los alumnos que han faltado más o menos veces y queremos evitar que tenga un mayor peso los alumnos de matemáticas, normalizaremos estos valores y en el caso de que los alumnos hayan asistido a ambos cursos utilizaremos la media de ambos valores.
-	 \item \textit{calificaciones}: En este caso todas las calificaciones se mueven en el mismo rango por lo que en el caso de los alumnos que hayan asistido a ambos cursos aplicaremos la media de ambos. 
+	\item \textit{paid}: Unificaremos las variables de ambos cursos tomando un valor ``yes'' cuando el alumno de clases extras pagadas de alguno de los cursos.
+	\item \textit{calificaciones} y {absences}: Utilizaremos el método \textit{missForest} que utiliza árboles de decisión para imputar los valores perdidos en variables tanto numéricas como categóricas.  
+	 
 \end{itemize}
+
+ \begin{figure}[ht!]
+	\centering
+	\includegraphics[trim = 0mm 0mm 0mm 0mm, clip,scale=05]{images/nonas_cal}
+	\caption{Imputación valores perdidos con missForest}
+	\label{fig:nonas_cal}
+\end{figure}
+
+
+
  \begin{figure}[ht!]
 	\centering
 	\includegraphics[trim = 0mm 0mm 0mm 0mm, clip,scale=0.4]{images/summary_nonas}
@@ -193,22 +212,66 @@ Por lo tanto la opción escogida para los valores perdidos es la siguiente:
 En el notebook se pueden ver los detalles de estos procesos en la figura \ref{fig:sum2} podemos ver la salida del comando \textit{summary} para este nuevo dataset.
 
 
+\subsection{Análisis de 0s}
+Vamos a analizar uno por uno los casos en los que existen valores 0 y a definir si son valores posibles de la variable o por el contrario se trata de valores vacíos indicados como 0. Las variables que contienen valores 0 son:
+
+
+ \begin{figure}[ht!]
+	\centering
+	\includegraphics[trim = 0mm 0mm 0mm 0mm, clip,scale=0.4]{images/summary_0s}
+	\caption{Summary atributos con 0s}
+	\label{fig:sum_0s}
+\end{figure}
+
+
+Para el caso de la educación del padre y la madre ya definimos que el valor 0 significa que no poseen ningún tipo de educación.
+
+Para el resto de casos vemos que el valor 0 también es posible ya que:
+
+\begin{itemize}
+	 
+
+\item Es posible no haber suspendido ninguna asignatura, de hecho más del 75\% de alumnos así lo han hecho.
+\item En las calificaciones es posible sacar un 0.
+\item En el caso de las ausencias también existen alumnos que no han faltado a ninguna clase. En el caso \item de las clases de portugués más del 25\%.
+\end{itemize}
+
 
 \subsection{Selección de variables/Reducción de dimensionalidad}
-Observando el dataset vemos que, aún tras la unión de los datasets, tenemos una gran cantidad de dimensiones, en concreto 33, lo que puede dificultar nuestro análisis. En esta primera fase vamos a hacer una primera aproximación para reducir la dimensionalidad. Posteriormente en los primeros apartados del análisis estadístico reduciremos aún más esta dimensionalidad.
+Observando el dataset vemos que, aún tras la unión de los datasets, tenemos una gran cantidad de dimensiones, en concreto 37, lo que puede dificultar nuestro análisis. En esta primera fase vamos a hacer una primera aproximación para reducir la dimensionalidad. Posteriormente en los primeros apartados del análisis estadístico reduciremos aún más esta dimensionalidad.
 
 En primer lugar existen variables que, a priori, tienen poca significancia para nuestro análisis como puede ser la escuela a la que asiste el alumno, por lo que podemos eliminar esta variable. 
 
 Por otro lado podemos agrupar las calificaciones en una única variable que nos indique la calificación media del alumno. 
 
-Con estos detalles que pueden observarse en el notebook vemos que hemos conseguido reducir a 30 la dimensionalidad.
+
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[trim = 0mm 0mm 0mm 0mm, clip,scale=0.5]{images/red_calif}
+	\caption{Unificación calificaciones}
+	\label{fig:redcal}
+\end{figure}
+
+
+También vamos a realizar el mismo paso para las audiencia, pero observando los datos parece que las ausencias son mayores en matemáticas. Como lo que nos interesa es saber los alumnos que han faltado más o menos veces y queremos evitar que tenga un mayor peso los alumnos de matemáticas, normalizaremos estos valores antes de realizar la media. 
+
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[trim = 0mm 0mm 0mm 0mm, clip,scale=0.5]{images/red_aus}
+	\caption{Unificación ausencias}
+	\label{fig:redaus}
+\end{figure}
+
+
+
+Con estos detalles que pueden observarse en el notebook vemos que hemos conseguido reducir a 30 la dimensionalidad con las variables que aparecen en la figura \ref{fig:sum_red}.
 
 
 \begin{figure}[ht!]
 \centering
 \includegraphics[trim = 0mm 0mm 0mm 0mm, clip,scale=0.4]{images/summary_nonas}
 \caption{Summary dataset reducido}
-\label{fig:sum3}
+\label{fig:sum_red}
 \end{figure}
 
 
@@ -225,7 +288,7 @@ Por lo tanto, al ser categorías, las tratamos como factores y no como numérica
 
 
 \subsection{Análisis de Outliers}
-Para las variables numéricas realizamos un estudio de outliers. En nuestro caso, las variables a estudiar son "age" y "G". El resto de variables numéricas en realidad no lo son, puesto que son categóricas. Por ejemplo: "studytime" va de 1 a 4, y no hace referencia a las horas que el alumno pasa estudiando, sino que son categorías equivalentes a por ejemplo: Nada, Poco, Normal, Mucho. Podría haber valores erróneos debido a la transcripción de los datos o similar, pero dichos errores ya los hubiéramos detectado en la creación del data set, ya que gracias a la función "summary" vemos los valores mínimos y máximos y para estas variables categóricas numéricas no hay valores erróneos (mínimo y máximo corresponden a las categorías mínimas y máximas).
+Para las variables numéricas realizamos un estudio de outliers. En nuestro caso, las variables a estudiar son ``age'' y ``G''. El resto de variables numéricas en realidad no lo son, puesto que son categóricas. Por ejemplo: "studytime" va de 1 a 4, y no hace referencia a las horas que el alumno pasa estudiando, sino que son categorías equivalentes a por ejemplo: Nada, Poco, Normal, Mucho. Podría haber valores erróneos debido a la transcripción de los datos o similar, pero dichos errores ya los hubiéramos detectado en la creación del data set, ya que gracias a la función ``summary'' vemos los valores mínimos y máximos y para estas variables categóricas numéricas no hay valores erróneos (mínimo y máximo corresponden a las categorías mínimas y máximas).
 
 Procedemos al estudio de age y G:
 

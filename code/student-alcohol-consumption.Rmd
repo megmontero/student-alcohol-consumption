@@ -130,7 +130,9 @@ mf <-missForest(students.nonas, maxiter = 10, ntree = 100, variablewise = FALSE,
 
 
 students.nonas <- mf$ximp
+
 summary(students.nonas)
+ncol(students.nonas)
 
 ```
 
@@ -151,7 +153,7 @@ Para el resto de casos vemos que el valor 0 también es posible ya que:
 
 - Es posible no haber suspendido ninguna asignatura, de hecho más del 75\% de alumnos así lo han hecho.
 - En las calificaciones es posible sacar un 0. 
-- En el caso de las ausencias también existen alumnos que no han faltado a ninguna clase. En el caso de las clases de portugues más del 25\%.
+- En el caso de las ausencias también existen alumnos que no han faltado a ninguna clase. En el caso de las clases de portugués más del 25\%.
 
 
 
@@ -177,7 +179,7 @@ summary(students.red)
 
 
 
-En el caso de las ausencia vamos a aplicar el mismo método, sin embargo antes de realizar la media vamos a normalizar para evitar que tengan más peso las ausencias en matemáticas:
+En el caso de las ausencias vamos a aplicar el mismo método, sin embargo antes de realizar la media vamos a normalizar para evitar que tengan más peso las ausencias en matemáticas:
 ```{r}
 normalized<-function(y) {
   x<-y[!is.na(y)]
