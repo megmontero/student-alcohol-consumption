@@ -30,7 +30,7 @@ library(knitr)
 library(statnet.common)
 ```
 
-**IntroducciÛn**
+**Introducci√≥n**
 
 [A COMPLETAR]
 
@@ -40,7 +40,7 @@ library(statnet.common)
 
 ## Lectura de datos 
 
-Leemos ambos ficheros mostramos resumen para matem·ticas:
+Leemos ambos ficheros mostramos resumen para matem√°ticas:
 
 ```{r}
 students.mat=read.table("../data/student-mat.csv",sep=",",header=TRUE)
@@ -51,7 +51,7 @@ summary(students.mat)
 ```
 
 
-Y para portuguÈs: 
+Y para portugu√©s: 
 
 ```{r}
 summary(students.por)
@@ -59,7 +59,7 @@ summary(students.por)
 
 ## Union de fuentes
 
-En el cÛdigo de ejemplo los unÌa a ver que ver si tiene sentido. ya que no son los mismos alumnos.
+En el c√≥digo de ejemplo los un√≠a a ver que ver si tiene sentido, ya que no son los mismos alumnos.
 
 ```{r}
 students=merge(students.mat,students.por,by=c("school","sex","age","address","famsize","Pstatus","Medu","Fedu","Mjob","Fjob","reason","nursery","internet"))
@@ -73,7 +73,7 @@ students.both=merge(students.mat,students.por,by=c("school","sex","age","address
 summary(students.both)
 ```
 
-Vemos cuales realmente serÌan del mismo conjunto
+Vemos cu√°les realmente ser√≠an del mismo conjunto
 ```{r}
 print(nrow(students.both[students$guardian.y!=students$guardian.x,c("guardian.x", "guardian.y")]))
 print(nrow(students.both[students$guardian.y!=students$guardian.x,c("famsup.x", "famsup.y")]))
@@ -118,7 +118,7 @@ students.nonas$G3 <- rowMeans(students.merge[c('G3.mat', 'G3.por')], na.rm=TRUE)
 summary(students.nonas)
 
 ```
-Por ˙ltimo lo aplicamos a las ausencias, antes de aplicar la media normalizamos los valores
+Por √∫ltimo lo aplicamos a las ausencias, antes de aplicar la media normalizamos los valores
 
 ```{r}
 normalized<-function(y) {
@@ -138,7 +138,7 @@ summary(students.nonas)
 
 
 
-## ReducciÛn dimensionalidad
+## Reducci√≥n dimensionalidad
 
 
 Como no vamos a centrar los estudios comparando estudiantes de distintos colegios, eliminamos la variable School, y calculamos la evaluacion como la media:
@@ -157,7 +157,7 @@ sapply( students.red, class)
 
 ```
 
-En los tipos mostrados hay algunos que no es correcto el tipo. En la educaciÛn tanto de la madre como del padre consideramos que aunque se use un n˙mero para la representaciÛn deberÌa ser un factor. Lo mismo ocurre para el tiempo de viaje o el tiempo de estudio. 
+En los tipos mostrados hay algunos que no es correcto el tipo. En la educaci√≥n tanto de la madre como del padre consideramos que aunque se use un n√∫mero para la representaci√≥n deber√≠a ser un factor. Lo mismo ocurre para el tiempo de viaje o el tiempo de estudio. 
 
 ```{r}
 students.red$Medu <-as.factor(students.red$Medu) 
@@ -167,9 +167,16 @@ students.red$studytime <-as.factor(students.red$studytime)
 
 ```
 
+La explicaci√≥n de considerar el tiempo de estudio y el tiempo de viaje es que, aunque pueden parecer num√©ricas, en realizar son factores. En la descripci√≥n del dataset aparece explicado:
+
+studytime: Weekly study time: (numeric: 1 - <2 hours, 2 - 2 to 5 hours, 3 - 5 to 10 hours, or 4 - >10 hours)
+traveltime: Home to school travel time (numeric: 1 - <15 min., 2 - 15 to 30 min., 3 - 30 min. to 1 hour, or 4 - >1 hour)
+
+Por lo tanto, al ser categor√≠as, las tratamos como factores y no como num√©ricas.
 
 
-# An√°lisis EstadÌstico
+
+# An√°lisis Estad√≠stico
 
 ## An√°lisis gr√°fico inicial
 
@@ -199,7 +206,7 @@ for(i in vars) {
 
 
 
-Viendo las gr·ficas vemos que hay variables que parece que sÌ tienen influencia a simple vista en el consumo de alcohol tanto a diario como los fines de semana como pueden ser el sexo o el estado de los padres. Sin embargo vemos otros que, a priori, no parece que tengan influencia, asÌ que en un primer momento vamos a dejar fuera del an·lisis si el alumno tiene internet, si tiene una relaciÛn, el tutor, la direcciÛn, si realiza actividades extraescolares, si recibe clases de pago, si ha ido a la guarderÌa, o si  recibe el apoyo de su familia en el estudio. 
+Viendo las gr√°ficas vemos que hay variables que parece que s√≠ tienen influencia a simple vista en el consumo de alcohol tanto a diario como los fines de semana como pueden ser el sexo o el estado de los padres. Sin embargo vemos otros que, a priori, no parece que tengan influencia, as√≠ que en un primer momento vamos a dejar fuera del an√°lisis si el alumno tiene internet, si tiene una relaci√≥n, el tutor, la direcci√≥n, si realiza actividades extraescolares, si recibe clases de pago, si ha ido a la guarder√≠a, o si  recibe el apoyo de su familia en el estudio. 
 
 El dataset resultante y con el que continuaremos trabajando es el siguiente: 
 
@@ -208,20 +215,46 @@ students <- students.red[,c("sex","age","famsize","Pstatus","Medu","Fedu","Mjob"
 summary(students)
 ```
 
+## An√°lisis de Outliers
 
+Para las variables num√©ricas realizamos un estudio de outliers. En nuestro caso, las variables a estudiar son "age" y "G". El resto de variables num√©ricas en realidad no lo son, puesto que son categ√≥ricas. Por ejemplo: "studytime" va de 1 a 4, y no hace referencia a las horas que el alumno pasa estudiando, sino que son categor√≠as equivalentes a por ejemplo: Nada, Poco, Normal, Mucho. Podr√≠a haber valores err√≥neos debido a la transcripci√≥n de los datos o similar, pero dichos errores ya los hubi√©ramos detectado en la creaci√≥n del data set, ya que gracias a la funci√≥n "summary" vemos los valores m√≠nimos y m√°ximos y para estas variables categ√≥ricas num√©ricas no hay valores err√≥neos (m√≠nimo y m√°ximo corresponden a las categor√≠as m√≠nimas y m√°ximas).
+
+Procedemos al estudio de "age" y "G":
+
+```{r}
+plot(students$age)
+
+plot(students$age, students$Walc, xlab="age", ylab="Walc", pch="*", col="red")
+abline(lm(students$Walc ~ students$age), col="blue", lwd=3, lty=2)
+
+age_no_outliers <- students$age[students$age <= 21]
+walc_no_outliers <- students$Walc[students$age <= 21]
+plot(age_no_outliers, walc_no_outliers, xlab="age", ylab="Walc", pch="*", col="red")
+abline(lm(walc_no_outliers ~ age_no_outliers), col="blue", lwd=3, lty=2)
+```
+Como podemos ver, para el campo edad los alumnos van de los 15 a los 22, siendo las franjas m√°s pobladas los 15, 16 y 17 a√±os. Al haber valores intermedios que en n√∫mero van disminuyendo gradualmente desde los 18 hasta los 22, no consideramos ning√∫n valor extremo (como el √∫nico estudiantes de 22 a√±os) como valor err√≥neo. Adem√°s, al ser tan pocos estudiantes, no los descartamos en nuestros estudios ya que pueden aportar informaci√≥n valiosa, y como podemos ver en la comparativa del conjunto con outliers y sin outliers, no cambia de forma cr√≠tica.
+
+
+```{r}
+plot(students$G)
+
+plot(students$G, students$Walc, xlab="G", ylab="Walc", pch="*", col="red")
+abline(lm(students$Walc ~ students$G), col="blue", lwd=3, lty=2)
+```
+En el caso de la media de la nota "G" es m√°s claro todav√≠a. Los datos no demuestran valores extremos que se puedan deber a errores, y aquellos m√°s alejados de la mayor concentraci√≥n de estudiantes son valores que aportan informaci√≥n para los estudios que vamos a realizar en cuanto al consumo de alcohol y de desempe√±o estudiantil.
 
 
 ## Estadistica Inferencial 
 
 En este apartado vamos a ver si hay diferencia significativas en el consumo de alcohol a diario o fines de semana entre:
   - Estudiantes de distinto sexo
-  - Estudiantes con diferente situaciÛn de convivencia de los padres.
+  - Estudiantes con diferente situaci√≥n de convivencia de los padres.
   - Estudiantes que aprueban (G >= 10) y estudiantes que suspenden (G < 10)  
   
 Se trata de un problema de diferencia de medias entre dos muestras.
 
 
-Para cada caso la hipÛtesis serÌa: 
+Para cada caso la hip√≥tesis ser√≠a: 
 
 
 $$
@@ -233,7 +266,7 @@ H_{1}: & \mu_{g1}-\mu_{g2}\ne0
 \right.
 $$
 
-Se trata de un problema de diferencia de medias en el que no conocemos la varianza poblacional. Tampoco sabemos a priori si los datos siguen una distribuciÛn normal, pero el tamaÒo de las muestras es lo suficientemente grande para tener en cuenta el teorema del lÌmite central.
+Se trata de un problema de diferencia de medias en el que no conocemos la varianza poblacional. Tampoco sabemos a priori si los datos siguen una distribuci√≥n normal, pero el tama√±o de las muestras es lo suficientemente grande para tener en cuenta el teorema del l√≠mite central.
 
 
 Para el alcohol en fines de semana por sexo: 
@@ -244,7 +277,7 @@ data_weekend_sex_f <- students$Walc[students$sex == 'F']
 
 t.test(data_weekend_sex_m, data_weekend_sex_f, var.equal = TRUE, conf.level = 0.95)
 ```
-Por el p-value vemos que no podemos aceptar la hipÛtesis nula, y concluimos que al 95% de nivel de confianza los estudiantes masculinos y femeninos no tienen el mismo consumo de alcohol los fines de semana.  
+Por el p-value vemos que no podemos aceptar la hip√≥tesis nula, y concluimos que al 95% de nivel de confianza los estudiantes masculinos y femeninos no tienen el mismo consumo de alcohol los fines de semana.  
 
 
 
@@ -256,17 +289,17 @@ data_weekday_sex_f <- students$Dalc[students$sex == 'F']
 
 t.test(data_weekday_sex_m, data_weekday_sex_f, var.equal = TRUE, conf.level = 0.95)
 ```
-Por el p-value vemos que ocurre lo mismo que en los fines de semana. No podemos acepta la hipotÈsis nula y al 95% afirmamos que hay diferencia en el consumo de alcohol entre estudiantes masculinos y femeninos para los dÌas entre semana.
+Por el p-value vemos que ocurre lo mismo que en los fines de semana. No podemos acepta la hip√≥tesis nula y al 95% afirmamos que hay diferencia en el consumo de alcohol entre estudiantes masculinos y femeninos para los d?as entre semana.
 
 
-Ahora realizamos el estudio para el consumo de alcohol seg˙n la situaciÛn de los padres de cada alumno:
+Ahora realizamos el estudio para el consumo de alcohol seg√∫n la situaci?n de los padres de cada alumno:
 ```{r}
 data_weekday_pstatus_t <- students$Dalc[students$Pstatus == 'T'] 
 data_weekday_pstatus_a <- students$Dalc[students$Pstatus == 'A'] 
 
 t.test(data_weekday_pstatus_t, data_weekday_pstatus_a, var.equal = TRUE, conf.level = 0.95)
 ```
-Con un p-value tan alto aceptamos la hipÛtesis nula, concluyendo que el consumo de alcohol entre semana es el mismo para estudiantes cuyos padres viven juntos y para estudiatnes cuyos padres viven separados
+Con un p-value tan alto aceptamos la hip√≥tesis nula, concluyendo que el consumo de alcohol entre semana es el mismo para estudiantes cuyos padres viven juntos y para estudiantes cuyos padres viven separados
 
 
 
@@ -276,18 +309,18 @@ data_weekend_pstatus_a <- students$Walc[students$Pstatus == 'A']
 
 t.test(data_weekend_pstatus_t, data_weekend_pstatus_a, var.equal = TRUE, conf.level = 0.95)
 ```
-En el caso del consumo en los fines de semana, ocurre lo mismo: no hay diferencias significativas en funciÛn del estado de convivencia de los padres
+En el caso del consumo en los fines de semana, ocurre lo mismo: no hay diferencias significativas en funci√≥n del estado de convivencia de los padres
 
 
 
-Por ˙ltimo, realizamos el estudio para el consumo de alcohol seg˙n las calificaciones que obtiene el alumno (si aprueba o suspende):
+Por √∫ltimo, realizamos el estudio para el consumo de alcohol seg√∫n las calificaciones que obtiene el alumno (si aprueba o suspende):
 ```{r}
 data_weekday_aprobados <- students$Dalc[students$G >= 10] 
 data_weekday_suspensos <- students$Dalc[students$G < 10] 
 
 t.test(data_weekday_aprobados, data_weekday_suspensos, var.equal = TRUE, conf.level = 0.95)
 ```
-Viendo el p-value, podemos decir al 95% que sÌ hay diferencias entre alumnos que aprueban y alumnos que suspenden en cuanto al consumo de alcohol entre semana.
+Viendo el p-value, podemos decir al 95% que s√≠ hay diferencias entre alumnos que aprueban y alumnos que suspenden en cuanto al consumo de alcohol entre semana.
 
 
 En el caso del consumo los fines de semana:
@@ -297,16 +330,16 @@ data_weekend_suspensos <- students$Walc[students$G < 10]
 
 t.test(data_weekend_aprobados, data_weekend_suspensos, var.equal = TRUE, conf.level = 0.95)
 ```
-Con un p-value menor que 0.05, al 95% de confianza afirmamos que tambiÈn hay diferencia en el consumo de alcohol los fines de semana en funciÛn de si el alumno aprueba o no.
+Con un p-value menor que 0.05, al 95% de confianza afirmamos que tambi√©n hay diferencia en el consumo de alcohol los fines de semana en funci√≥n de si el alumno aprueba o no.
 
 
 
-## RegresiÛn 
+## Regresi√≥n 
 
-En este apartado aplicaremos un modelo de regresiÛn lineal m˙ltiple que use como variables explicativas el sexo,
+En este apartado aplicaremos un modelo de regresi√≥n lineal m√∫ltiple que use como variables explicativas el sexo,
 la frecuencia con la que el estudiante sale con amigos, la edad y como variable dependiente el consumo de alcohol los fines de semana. 
 
-Al usar regresores cualitativos, es importante definir una categorÌa de referencia, para lo que usaremos la funciÛn de R *relevel* estableciendo la categorÌa "F" como referente para el sexo. El resultado lo almacenamos en una nueva variable.
+Al usar regresores cualitativos, es importante definir una categor√≠a de referencia, para lo que usaremos la funci√≥n de R *relevel* estableciendo la categor√≠a "F" como referente para el sexo. El resultado lo almacenamos en una nueva variable.
 
 
 ```{r}
@@ -318,11 +351,11 @@ summary(modelo)
 Los coeficientes obtenidos para cada variable son: 
 
 
-Observando el coeficiente de determinacion $R^{2}$ vemos que la proporci√≥n de variabilidad explicada por el modelo con respecto a la variabilidad total  es unicamente del 25%
+Observando el coeficiente de determinaci√≥n $R^{2}$ vemos que la proporci√≥n de variabilidad explicada por el modelo con respecto a la variabilidad total  es unicamente del 25%
 
 
 
-Otro modelo lineal que podemos estudiar es el consumo de alcohol los fines de semana en funciÛn de cu·nto sale el estudiante con amigos, cu·nto bebe entre semana, su sexo y su edad
+Otro modelo lineal que podemos estudiar es el consumo de alcohol los fines de semana en funci√≥n de cu√°nto sale el estudiante con amigos, cu√°nto bebe entre semana, su sexo y su edad
 ```{r}
 students$sexR <- relevel(students$sex, "F")
 modelo <- lm(Walc ~ goout + sexR + Dalc + age + studytime, data = students )
@@ -331,45 +364,45 @@ summary(modelo)
 Como podemos ver, aspectos que influyen mucho en el modelo son:
   - Que el alumno salga con amigos
   - Que el alumno sea de sexo masculino
-  - Si el alumno bebe entre semana tender· a beber m·s los fines de semana
-  - Cuanto m·s tiempo de estudio dedica el alumno, menos bebe
+  - Si el alumno bebe entre semana tender√° a beber m√°s los fines de semana
+  - Cuanto m√°s tiempo de estudio dedica el alumno, menos bebe
 
-La edad no influye de forma significativa para el consumo de alcohol seg˙n el modelo.
+La edad no influye de forma significativa para el consumo de alcohol seg√∫n el modelo.
 
 En este caso, el modelo explica un 48% de la variabilidad en los datos.
 
 
 
-# CorrelaciÛn
+# Correlaci√≥n
 
-Estudiamos el de nivel de significancia de la relaciÛn entre la calificaciÛn que obtienen los alumnos y otro tipo de factores:
+Estudiamos el de nivel de significancia de la relaci√≥n entre la calificaci√≥n que obtienen los alumnos y otro tipo de factores:
   - Sexo
   - Edad
   - Consumo de alcohol los fines de semana
   - Consumo de alcohol entre semana
-  - SituaciÛn de los padres (cohabitando o no)
+  - Situaci?n de los padres (cohabitando o no)
   
-Al estudiar el nivel de relaciÛn entre una variable contÌnua (la nota) y variables categÛricas (el resto), usamos el test ANOVA para obtener este nivel de significancia:
+Al estudiar el nivel de relaci√≥n entre una variable continua (la nota) y variables categ√≥ricas (el resto), usamos el test ANOVA para obtener este nivel de significancia:
 ```{r}
 # Sexo
-aov1 = aov(students.red$G ~ students.red$sex)
+aov1 = aov(students$G ~ students$sex)
 summary(aov1)
 # Edad
-aov1 = aov(students.red$G ~ students.red$age)
+aov1 = aov(students$G ~ students$age)
 summary(aov1)
 # Consumo de alcohol fines de semana
-aov1 = aov(students.red$G ~ students.red$Walc)
+aov1 = aov(students$G ~ students$Walc)
 summary(aov1)
 # Consumo de alcohol entre semana
-aov1 = aov(students.red$G ~ students.red$Dalc)
+aov1 = aov(students$G ~ students$Dalc)
 summary(aov1)
-# SituaciÛn de los padres
-aov1 = aov(students.red$G ~ students.red$Pstatus)
+# Situaci?n de los padres
+aov1 = aov(students$G ~ students$Pstatus)
 summary(aov1)
 
 
 ```
-Como podemos observar, no hay correlaciÛn entre la calificaciÛn del estudiante y el sexo o el estado de convivencia de los padres. Sin embargo, en el desempeÒo escolar de los estudiantes sÌ que influyen significativamente la edad y el consumo de alcohol tanto en fines de semana como entre semana.
+Como podemos observar, no hay correlaci√≥n entre la calificaci√≥n del estudiante y el sexo o el estado de convivencia de los padres. Sin embargo, en el desempe√±o escolar de los estudiantes s√≠ que influyen significativamente la edad y el consumo de alcohol tanto en fines de semana como entre semana.
 
 
 

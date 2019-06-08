@@ -212,12 +212,59 @@ Con estos detalles que pueden observarse en el notebook vemos que hemos consegui
 \end{figure}
 
 
-
-
-
-
 \subsection{Tipos de Variables}
 En los tipos mostrados hay algunos que no es correcto el tipo. En la educación tanto de la madre como del padre consideramos que aunque se use un número para la representación debería ser un factor. Lo mismo ocurre para el tiempo de viaje o el tiempo de estudio.  Podemos encontrar más detalles en el notebook. 
+
+
+La explicación de considerar el tiempo de estudio y el tiempo de viaje es que, aunque pueden parecer numéricas, en realizar son factores. En la descripción del dataset aparece explicado:
+
+studytime: Weekly study time: (numeric: 1 - <2 hours, 2 - 2 to 5 hours, 3 - 5 to 10 hours, or 4 - >10 hours)
+traveltime: Home to school travel time (numeric: 1 - <15 min., 2 - 15 to 30 min., 3 - 30 min. to 1 hour, or 4 - >1 hour)
+
+Por lo tanto, al ser categorías, las tratamos como factores y no como numéricas.
+
+
+\subsection{Análisis de Outliers}
+Para las variables numéricas realizamos un estudio de outliers. En nuestro caso, las variables a estudiar son "age" y "G". El resto de variables numéricas en realidad no lo son, puesto que son categóricas. Por ejemplo: "studytime" va de 1 a 4, y no hace referencia a las horas que el alumno pasa estudiando, sino que son categorías equivalentes a por ejemplo: Nada, Poco, Normal, Mucho. Podría haber valores erróneos debido a la transcripción de los datos o similar, pero dichos errores ya los hubiéramos detectado en la creación del data set, ya que gracias a la función "summary" vemos los valores mínimos y máximos y para estas variables categóricas numéricas no hay valores erróneos (mínimo y máximo corresponden a las categorías mínimas y máximas).
+
+Procedemos al estudio de age y G:
+
+\begin{figure}[h]
+  \centering
+  \begin{minipage}[b]{0.4\textwidth}
+    \includegraphics[trim = 0mm 0mm 0mm 0mm, clip,scale=0.4]{images/outliers_age_1}
+    \caption{Distribución de la variable Age}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.4\textwidth}
+    \includegraphics[trim = 0mm 0mm 0mm 0mm, clip,scale=0.4]{images/outliers_age_2}
+    \caption{Walc en función de Age con outliers. Modelo lineal en azul.}
+  \end{minipage}
+  \hfill  
+  \begin{minipage}[b]{0.4\textwidth}
+    \includegraphics[trim = 0mm 0mm 0mm 0mm, clip,scale=0.4]{images/outliers_age_3}
+    \caption{Walc en función de Age sin outliers. Modelo lineal en azul.}
+  \end{minipage}
+\end{figure}
+
+
+Como podemos ver, para el campo edad los alumnos van de los 15 a los 22, siendo las franjas más pobladas los 15, 16 y 17 años. Al haber valores intermedios que en número van disminuyendo gradualmente desde los 18 hasta los 22, no consideramos ningún valor extremo (como el único estudiantes de 22 años) como valor erróneo. Además, al ser tan pocos estudiantes, no los descartamos en nuestros estudios ya que pueden aportar información valiosa, y como podemos ver en la comparativa del conjunto con outliers y sin outliers, no cambia de forma crítica.
+
+\begin{figure}[h]
+  \centering
+  \begin{minipage}[b]{0.4\textwidth}
+    \includegraphics[trim = 0mm 0mm 0mm 0mm, clip,scale=0.4]{images/outliers_g_1}
+    \caption{Distribución de la variable G}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.4\textwidth}
+    \includegraphics[trim = 0mm 0mm 0mm 0mm, clip,scale=0.4]{images/outliers_g_2}
+    \caption{Walc en función de G. Modelo lineal en azul.}
+  \end{minipage}
+\end{figure}
+
+En el caso de la media de la nota G es más claro todavía. Los datos no demuestran valores extremos que se puedan deber a errores, y aquellos más alejados de la mayor concentración de estudiantes son valores que aportan información para los estudios que vamos a realizar en cuanto al consumo de alcohol y de desempeño estudiantil.
+
 
 \section{Análisis Estadístico}
 \subsection{Análisis gráfico inicial}
