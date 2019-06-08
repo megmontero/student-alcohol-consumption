@@ -1,6 +1,6 @@
 ---
 title: "Código Práctica 2: Limpieza dataset 'Student Alcohol Consumption '"
-author: "Gregorio Andrés García Menéndez (gagarcia) & Manuel Gomez Montero (megmontero)"
+author: "Gregorio Andrés García Menéndez (gagarcia) & Manuel Gómez Montero (megmontero)"
 date: "Junio, 2019"
 output:
   html_document:
@@ -19,8 +19,8 @@ lang: es
 
 ```{r setup, include=FALSE}
 # Change depending on your working directory
-working_directory <- "F:/Drive/M?ster Data Science/Tipolog?a y ciclo de la vida de los datos/PRAC2/student-alcohol-consumption"
-
+working_directory <- "F:/Drive/M?ster Data Science/Tipología y ciclo de la vida de los datos/PRAC2/student-alcohol-consumption"
+working_directory <- "./"
 knitr::opts_chunk$set(echo = TRUE)
 options(knitr.kable.NA = '', root.dir = working_directory)
 ```
@@ -59,7 +59,11 @@ summary(students.por)
 
 ## Union de fuentes
 
+<<<<<<< HEAD
 En el código de ejemplo los unía a ver que ver si tiene sentido, ya que no son los mismos alumnos.
+=======
+En el código de ejemplo los unía a ver que ver si tiene sentido. ya que no son los mismos alumnos.
+>>>>>>> 7ef5138ef769d8f38bb238bb81e80dedb3276ca3
 
 ```{r}
 students=merge(students.mat,students.por,by=c("school","sex","age","address","famsize","Pstatus","Medu","Fedu","Mjob","Fjob","reason","nursery","internet"))
@@ -73,7 +77,11 @@ students.both=merge(students.mat,students.por,by=c("school","sex","age","address
 summary(students.both)
 ```
 
+<<<<<<< HEAD
 Vemos cuáles realmente serían del mismo conjunto
+=======
+Vemos cuales realmente serían del mismo conjunto
+>>>>>>> 7ef5138ef769d8f38bb238bb81e80dedb3276ca3
 ```{r}
 print(nrow(students.both[students$guardian.y!=students$guardian.x,c("guardian.x", "guardian.y")]))
 print(nrow(students.both[students$guardian.y!=students$guardian.x,c("famsup.x", "famsup.y")]))
@@ -172,10 +180,13 @@ La explicación de considerar el tiempo de estudio y el tiempo de viaje es que, 
 studytime: Weekly study time: (numeric: 1 - <2 hours, 2 - 2 to 5 hours, 3 - 5 to 10 hours, or 4 - >10 hours)
 traveltime: Home to school travel time (numeric: 1 - <15 min., 2 - 15 to 30 min., 3 - 30 min. to 1 hour, or 4 - >1 hour)
 
+<<<<<<< HEAD
 Por lo tanto, al ser categorías, las tratamos como factores y no como numéricas.
 
 
 
+=======
+>>>>>>> 7ef5138ef769d8f38bb238bb81e80dedb3276ca3
 # Análisis Estadístico
 
 ## Análisis gráfico inicial
@@ -205,7 +216,11 @@ for(i in vars) {
 ```
 
 
+<<<<<<< HEAD
 
+=======
+ 
+>>>>>>> 7ef5138ef769d8f38bb238bb81e80dedb3276ca3
 Viendo las gráficas vemos que hay variables que parece que sí tienen influencia a simple vista en el consumo de alcohol tanto a diario como los fines de semana como pueden ser el sexo o el estado de los padres. Sin embargo vemos otros que, a priori, no parece que tengan influencia, así que en un primer momento vamos a dejar fuera del análisis si el alumno tiene internet, si tiene una relación, el tutor, la dirección, si realiza actividades extraescolares, si recibe clases de pago, si ha ido a la guardería, o si  recibe el apoyo de su familia en el estudio. 
 
 El dataset resultante y con el que continuaremos trabajando es el siguiente: 
@@ -289,17 +304,28 @@ data_weekday_sex_f <- students$Dalc[students$sex == 'F']
 
 t.test(data_weekday_sex_m, data_weekday_sex_f, var.equal = TRUE, conf.level = 0.95)
 ```
+<<<<<<< HEAD
 Por el p-value vemos que ocurre lo mismo que en los fines de semana. No podemos acepta la hipótesis nula y al 95% afirmamos que hay diferencia en el consumo de alcohol entre estudiantes masculinos y femeninos para los d?as entre semana.
 
 
 Ahora realizamos el estudio para el consumo de alcohol según la situaci?n de los padres de cada alumno:
+=======
+Por el p-value vemos que ocurre lo mismo que en los fines de semana. No podemos acepta la hipotésis nula y al 95% afirmamos que hay diferencia en el consumo de alcohol entre estudiantes masculinos y femeninos para los días entre semana.
+
+
+Ahora realizamos el estudio para el consumo de alcohol según la situación de los padres de cada alumno:
+>>>>>>> 7ef5138ef769d8f38bb238bb81e80dedb3276ca3
 ```{r}
 data_weekday_pstatus_t <- students$Dalc[students$Pstatus == 'T'] 
 data_weekday_pstatus_a <- students$Dalc[students$Pstatus == 'A'] 
 
 t.test(data_weekday_pstatus_t, data_weekday_pstatus_a, var.equal = TRUE, conf.level = 0.95)
 ```
+<<<<<<< HEAD
 Con un p-value tan alto aceptamos la hipótesis nula, concluyendo que el consumo de alcohol entre semana es el mismo para estudiantes cuyos padres viven juntos y para estudiantes cuyos padres viven separados
+=======
+Con un p-value tan alto aceptamos la hipótesis nula, concluyendo que el consumo de alcohol entre semana es el mismo para estudiantes cuyos padres viven juntos y para estudiatnes cuyos padres viven separados
+>>>>>>> 7ef5138ef769d8f38bb238bb81e80dedb3276ca3
 
 
 
@@ -380,9 +406,15 @@ Estudiamos el de nivel de significancia de la relación entre la calificación q
   - Edad
   - Consumo de alcohol los fines de semana
   - Consumo de alcohol entre semana
+<<<<<<< HEAD
   - Situaci?n de los padres (cohabitando o no)
   
 Al estudiar el nivel de relación entre una variable continua (la nota) y variables categóricas (el resto), usamos el test ANOVA para obtener este nivel de significancia:
+=======
+  - Situación de los padres (cohabitando o no)
+  
+Al estudiar el nivel de relación entre una variable contínua (la nota) y variables categóricas (el resto), usamos el test ANOVA para obtener este nivel de significancia:
+>>>>>>> 7ef5138ef769d8f38bb238bb81e80dedb3276ca3
 ```{r}
 # Sexo
 aov1 = aov(students$G ~ students$sex)
@@ -396,8 +428,13 @@ summary(aov1)
 # Consumo de alcohol entre semana
 aov1 = aov(students$G ~ students$Dalc)
 summary(aov1)
+<<<<<<< HEAD
 # Situaci?n de los padres
 aov1 = aov(students$G ~ students$Pstatus)
+=======
+# Situación de los padres
+aov1 = aov(students.red$G ~ students.red$Pstatus)
+>>>>>>> 7ef5138ef769d8f38bb238bb81e80dedb3276ca3
 summary(aov1)
 
 
