@@ -28,6 +28,10 @@ options(knitr.kable.NA = '', root.dir = working_directory)
 ```{r load_libraries, include=FALSE}
 library(knitr)
 library(statnet.common)
+library(missForest)
+library(dplyr)
+library(ggplot2)
+
 ```
 
 **Introducción**
@@ -66,7 +70,7 @@ students=merge(students.mat,students.por,by=c("school","sex","age","address","fa
 summary(students)
 ```
 
-
+No obstante, pensamos que existen otro conjunto de variables que son únicas para cada estudiante independientemente del curso como son el tiempo de camino al colegio, los suspensos anteriores si el alumno ha suspendido alguna asignatura anteriormente, si tiene soporte en el colegio, si realiza actividades extraescolares, si tiene pensado estudiar ... 
 ```{r}
 students.both=merge(students.mat,students.por,by=c("school","sex","age","address","famsize","Pstatus","Medu","Fedu","Mjob","Fjob","reason","nursery","internet", "traveltime", "failures", "schoolsup", "activities", "higher", "romantic", "famrel", "freetime", "goout", "Dalc", "Walc", "health"))
 
@@ -75,11 +79,11 @@ summary(students.both)
 
 Vemos cuales realmente serían del mismo conjunto
 ```{r}
-print(nrow(students.both[students$guardian.y!=students$guardian.x,c("guardian.x", "guardian.y")]))
-print(nrow(students.both[students$guardian.y!=students$guardian.x,c("famsup.x", "famsup.y")]))
-print(nrow(students.both[students$studytime.y!=students$studytime.x,c("studytime.x", "studytime.y")]))
-print(nrow(students.both[students$paid.y!=students$paid.x,c("paid.x", "paid.y")]))
-print(nrow(students.both[students$absences.y!=students$absences.x,c("absences.x", "absences.y")]))
+print(nrow(students.both[students.both$guardian.y!=students.both$guardian.x,c("guardian.x", "guardian.y")]))
+print(nrow(students.both[students.both$guardian.y!=students.both$guardian.x,c("famsup.x", "famsup.y")]))
+print(nrow(students.both[students.both$studytime.y!=students.both$studytime.x,c("studytime.x", "studytime.y")]))
+print(nrow(students.both[students.both$paid.y!=students.both$paid.x,c("paid.x", "paid.y")]))
+print(nrow(students.both[students.both$absences.y!=students.both$absences.x,c("absences.x", "absences.y")]))
 
 ```
 
@@ -89,7 +93,7 @@ students.merge=merge(students.mat,students.por,by=c("school","sex","age","addres
 summary(students.merge)
 
 # Save the dataset temporaly 
-write.table(students, "../data/students.csv", sep=",", col.names=TRUE, row.names=TRUE, quote=TRUE, na="NA")
+write.table(students, "../data/students_merge.csv", sep=",", col.names=TRUE, row.names=TRUE, quote=TRUE, na="NA")
 ```
 
 
@@ -97,9 +101,9 @@ write.table(students, "../data/students.csv", sep=",", col.names=TRUE, row.names
 ## Eliminamos NAs
 
 
-Primeros creamos un nuevo dataset y unificamos la variable paid. 
+Primeros creamos un nuevo dataset y unificamos la variable paid estableciendo el valor "yes" si el estudiante recibe clases de pago en alguna de las clases. 
 ```{r}
-students.nonas <- students.merge[, c("school","sex","age","address","famsize","Pstatus","Medu","Fedu","Mjob","Fjob","reason","nursery","internet", "traveltime", "failures", "schoolsup", "activities", "higher", "romantic", "famrel", "freetime", "goout", "Dalc", "Walc", "health", "guardian", "famsup", "studytime")]
+students.nonas <- students.merge[, c("school","sex","age","address","famsize","Pstatus","Medu","Fedu","Mjob","Fjob","reason","nursery","internet", "traveltime", "failures", "schoolsup", "activities", "higher", "romantic", "famrel", "freetime", "goout", "Dalc", "Walc", "health", "guardian", "famsup", "studytime", "G1.por", "G1.mat", "G2.por", "G2.mat", "G3.por", "G3.mat", "absences.mat", "absences.por")]
 students.nonas$paid <- "no"
 students.nonas$paid[NVL(students.merge$paid.mat == 'yes' | students.merge$paid.por == 'yes', FALSE)] <- "yes"
 students.nonas$paid <- as.factor(students.nonas$paid)
@@ -109,17 +113,68 @@ summary(students.nonas)
 ```
 
 
-Aplicamos un proceso similar para las calificaciones, utilizando la media en el caso que existan ambas:
+
+Para el resto de valores nulos utilizamos el método missForest que utiliza árboles de decisión para imputar los valores perdidos en variables tanto numéricas como categóricas. 
 
 ```{r}
-students.nonas$G1 <- rowMeans(students.merge[c('G1.mat', 'G1.por')], na.rm=TRUE)
-students.nonas$G2 <- rowMeans(students.merge[c('G2.mat', 'G2.por')], na.rm=TRUE)
-students.nonas$G3 <- rowMeans(students.merge[c('G3.mat', 'G3.por')], na.rm=TRUE)
+
+mf <-missForest(students.nonas, maxiter = 10, ntree = 100, variablewise = FALSE,
+                       decreasing = FALSE, verbose = FALSE,
+                       mtry = floor(sqrt(ncol(students.nonas))), replace = TRUE,
+                       classwt = NULL, cutoff = NULL, strata = NULL,
+                       sampsize = NULL, nodesize = NULL, maxnodes = NULL,
+                       xtrue = NA, parallelize = c('no', 'variables', 'forests'))
+
+
+students.nonas <- mf$ximp
 summary(students.nonas)
 
 ```
-Por último lo aplicamos a las ausencias, antes de aplicar la media normalizamos los valores
 
+## Análisis de  0s
+Vamos a analizar uno por uno los casos en los que existen valores 0 y a definir si son valores posibles de la variable o por el contrario se trata de valores vacíos indicados como 0. Las variables que contienen valores 0 son: 
+
+```{r}
+
+students.numeric = select_if(students.nonas, is.numeric)
+students.zerocolumns <- students.numeric[sapply(students.numeric, function(x) min(abs(x)))==0]
+summary(students.zerocolumns)
+
+```
+
+Para el caso de la educación del padre y la madre ya definimos que el valor 0 significa que no poseen ningún tipo de educación.
+
+Para el resto de casos vemos que el valor 0 también es posible ya que: 
+
+- Es posible no haber suspendido ninguna asignatura, de hecho más del 75\% de alumnos así lo han hecho.
+- En las calificaciones es posible sacar un 0. 
+- En el caso de las ausencias también existen alumnos que no han faltado a ninguna clase. En el caso de las clases de portugues más del 25\%.
+
+
+
+
+## Reducción dimensionalidad
+
+ vamos a unificar las calificaciones y las ausencias de ambas clases. En el caso de las calificaciones tiene sentido realizar la media entre ambas, 
+
+
+En primer lugar como no vamos a centrar los estudios comparando estudiantes de distintos colegios, en primer lugar, eliminamos la variable School
+```{r}
+students.red <- students.nonas[, c("sex","age","address","famsize","Pstatus","Medu","Fedu","Mjob","Fjob","reason","nursery","internet", "traveltime", "failures", "schoolsup", "activities", "higher", "romantic", "famrel", "freetime", "goout", "Dalc", "Walc", "health", "guardian", "famsup", "studytime", "paid")]
+```
+
+
+Para las calificaciones vamos a crear un único campo que contenga la media de todas las calificaciones obtenidas por el estudiante. 
+
+```{r}
+
+students.red$G <- rowMeans(students.nonas[c('G1.mat', 'G1.por','G2.mat', 'G2.por','G3.mat', 'G3.por' )])
+summary(students.red)
+```
+
+
+
+En el caso de las ausencia vamos a aplicar el mismo método, sin embargo antes de realizar la media vamos a normalizar para evitar que tengan más peso las ausencias en matemáticas:
 ```{r}
 normalized<-function(y) {
   x<-y[!is.na(y)]
@@ -129,26 +184,14 @@ normalized<-function(y) {
 }
 
 
-students.nonas$absences <- rowMeans(sapply(students.merge[c('absences.mat', 'absences.por')], normalized), na.rm=TRUE)
+students.red$absences <- rowMeans(sapply(students.nonas[c('absences.mat', 'absences.por')], normalized), na.rm=TRUE)
 
-summary(students.nonas)  
-
-```
-
-
-
-
-## Reducción dimensionalidad
-
-
-Como no vamos a centrar los estudios comparando estudiantes de distintos colegios, eliminamos la variable School, y calculamos la evaluacion como la media:
-```{r}
-students.red <- students.nonas[,c("sex","age","address","famsize","Pstatus","Medu","Fedu","Mjob","Fjob","reason","nursery","internet", "traveltime", "failures", "schoolsup", "activities", "higher", "romantic", "famrel", "freetime", "goout", "Dalc", "Walc", "health", "guardian", "famsup", "studytime", "absences", "paid")]
-students.red$G <-  rowMeans(students.nonas[c('G1', 'G2', 'G3')])
-
-summary(students.red)
+summary(students.red)  
 
 ```
+
+
+
 
 ## Tipo de variables
 
@@ -174,12 +217,11 @@ students.red$studytime <-as.factor(students.red$studytime)
 ## Análisis gráfico inicial
 
 ```{r}
+
 vars = c("sex","age","address","famsize","Pstatus","Medu","Fedu","Mjob","Fjob","reason","nursery","internet", "traveltime", "failures", "schoolsup", "activities", "higher", "romantic", "famrel", "freetime", "goout", "health", "guardian", "famsup", "studytime", "absences", "paid", "G")
-objs = c("Dalc", "Wcalc")
 
 
 
-library(ggplot2)
 
 for(i in vars) {
   if(is.factor(students.red[,i])){

@@ -1,6 +1,6 @@
 ---
 title: "Código Práctica 2: Limpieza dataset 'Student Alcohol Consumption '"
-author: "Gregorio AndrÃ©s García Menéndez (gagarcia) & Manuel Gómez Montero (megmontero)"
+author: "Gregorio Andrés García Menéndez (gagarcia) & Manuel Gómez Montero (megmontero)"
 date: "Junio, 2019"
 output:
   html_document:
@@ -249,7 +249,7 @@ summary(students)
 ##  Max.   :19.00
 ```
 
-
+No obstante, pensamos que existen otro conjunto de variables que son únicas para cada estudiante independientemente del curso como son el tiempo de camino al colegio, los suspensos anteriores si el alumno ha suspendido alguna asignatura anteriormente, si tiene soporte en el colegio, si realiza actividades extraescolares, si tiene pensado estudiar ... 
 
 ```r
 students.both=merge(students.mat,students.por,by=c("school","sex","age","address","famsize","Pstatus","Medu","Fedu","Mjob","Fjob","reason","nursery","internet", "traveltime", "failures", "schoolsup", "activities", "higher", "romantic", "famrel", "freetime", "goout", "Dalc", "Walc", "health"))
@@ -326,43 +326,43 @@ summary(students.both)
 Vemos cuales realmente serían del mismo conjunto
 
 ```r
-print(nrow(students.both[students$guardian.y!=students$guardian.x,c("guardian.x", "guardian.y")]))
+print(nrow(students.both[students.both$guardian.y!=students.both$guardian.x,c("guardian.x", "guardian.y")]))
 ```
 
 ```
-## [1] 6
-```
-
-```r
-print(nrow(students.both[students$guardian.y!=students$guardian.x,c("famsup.x", "famsup.y")]))
-```
-
-```
-## [1] 6
+## [1] 0
 ```
 
 ```r
-print(nrow(students.both[students$studytime.y!=students$studytime.x,c("studytime.x", "studytime.y")]))
+print(nrow(students.both[students.both$guardian.y!=students.both$guardian.x,c("famsup.x", "famsup.y")]))
 ```
 
 ```
-## [1] 9
-```
-
-```r
-print(nrow(students.both[students$paid.y!=students$paid.x,c("paid.x", "paid.y")]))
-```
-
-```
-## [1] 171
+## [1] 0
 ```
 
 ```r
-print(nrow(students.both[students$absences.y!=students$absences.x,c("absences.x", "absences.y")]))
+print(nrow(students.both[students.both$studytime.y!=students.both$studytime.x,c("studytime.x", "studytime.y")]))
 ```
 
 ```
-## [1] 280
+## [1] 0
+```
+
+```r
+print(nrow(students.both[students.both$paid.y!=students.both$paid.x,c("paid.x", "paid.y")]))
+```
+
+```
+## [1] 158
+```
+
+```r
+print(nrow(students.both[students.both$absences.y!=students.both$absences.x,c("absences.x", "absences.y")]))
+```
+
+```
+## [1] 235
 ```
 
 Por lo que creamos el dataset final
@@ -441,7 +441,7 @@ summary(students.merge)
 
 ```r
 # Save the dataset temporaly 
-write.table(students, "../data/students.csv", sep=",", col.names=TRUE, row.names=TRUE, quote=TRUE, na="NA")
+write.table(students, "../data/students_merge.csv", sep=",", col.names=TRUE, row.names=TRUE, quote=TRUE, na="NA")
 ```
 
 
@@ -449,10 +449,10 @@ write.table(students, "../data/students.csv", sep=",", col.names=TRUE, row.names
 ## Eliminamos NAs
 
 
-Primeros creamos un nuevo dataset y unificamos la variable paid. 
+Primeros creamos un nuevo dataset y unificamos la variable paid estableciendo el valor "yes" si el estudiante recibe clases de pago en alguna de las clases. 
 
 ```r
-students.nonas <- students.merge[, c("school","sex","age","address","famsize","Pstatus","Medu","Fedu","Mjob","Fjob","reason","nursery","internet", "traveltime", "failures", "schoolsup", "activities", "higher", "romantic", "famrel", "freetime", "goout", "Dalc", "Walc", "health", "guardian", "famsup", "studytime")]
+students.nonas <- students.merge[, c("school","sex","age","address","famsize","Pstatus","Medu","Fedu","Mjob","Fjob","reason","nursery","internet", "traveltime", "failures", "schoolsup", "activities", "higher", "romantic", "famrel", "freetime", "goout", "Dalc", "Walc", "health", "guardian", "famsup", "studytime", "G1.por", "G1.mat", "G2.por", "G2.mat", "G3.por", "G3.mat", "absences.mat", "absences.por")]
 students.nonas$paid <- "no"
 students.nonas$paid[NVL(students.merge$paid.mat == 'yes' | students.merge$paid.por == 'yes', FALSE)] <- "yes"
 students.nonas$paid <- as.factor(students.nonas$paid)
@@ -468,6 +468,7 @@ summary(students.nonas)
 ##                   Mean   :16.81                            
 ##                   3rd Qu.:18.00                            
 ##                   Max.   :22.00                            
+##                                                            
 ##       Medu            Fedu             Mjob           Fjob    
 ##  Min.   :0.000   Min.   :0.000   at_home :150   at_home : 48  
 ##  1st Qu.:2.000   1st Qu.:1.000   health  : 52   health  : 26  
@@ -475,6 +476,7 @@ summary(students.nonas)
 ##  Mean   :2.485   Mean   :2.285   services:164   services:205  
 ##  3rd Qu.:4.000   3rd Qu.:3.000   teacher : 75   teacher : 38  
 ##  Max.   :4.000   Max.   :4.000                                
+##                                                               
 ##         reason    nursery   internet    traveltime       failures     
 ##  course    :312   no :150   no :169   Min.   :1.000   Min.   :0.0000  
 ##  home      :171   yes:574   yes:555   1st Qu.:1.000   1st Qu.:0.0000  
@@ -482,6 +484,7 @@ summary(students.nonas)
 ##  reputation:163                       Mean   :1.565   Mean   :0.3453  
 ##                                       3rd Qu.:2.000   3rd Qu.:0.0000  
 ##                                       Max.   :4.000   Max.   :3.0000  
+##                                                                       
 ##  schoolsup activities higher    romantic      famrel         freetime  
 ##  no :648   no :378    no : 82   no :452   Min.   :1.000   Min.   :1.0  
 ##  yes: 76   yes:346    yes:642   yes:272   1st Qu.:4.000   1st Qu.:3.0  
@@ -489,6 +492,7 @@ summary(students.nonas)
 ##                                           Mean   :3.913   Mean   :3.2  
 ##                                           3rd Qu.:5.000   3rd Qu.:4.0  
 ##                                           Max.   :5.000   Max.   :5.0  
+##                                                                        
 ##      goout            Dalc            Walc           health     
 ##  Min.   :1.000   Min.   :1.000   Min.   :1.000   Min.   :1.000  
 ##  1st Qu.:2.000   1st Qu.:1.000   1st Qu.:1.000   1st Qu.:2.000  
@@ -496,23 +500,57 @@ summary(students.nonas)
 ##  Mean   :3.195   Mean   :1.519   Mean   :2.311   Mean   :3.552  
 ##  3rd Qu.:4.000   3rd Qu.:2.000   3rd Qu.:3.000   3rd Qu.:5.000  
 ##  Max.   :5.000   Max.   :5.000   Max.   :5.000   Max.   :5.000  
-##    guardian   famsup      studytime     paid    
-##  father:169   no :287   Min.   :1.00   no :515  
-##  mother:491   yes:437   1st Qu.:1.00   yes:209  
-##  other : 64             Median :2.00            
-##                         Mean   :1.92            
-##                         3rd Qu.:2.00            
-##                         Max.   :4.00
+##                                                                 
+##    guardian   famsup      studytime        G1.por         G1.mat     
+##  father:169   no :287   Min.   :1.00   Min.   : 0.0   Min.   : 3.00  
+##  mother:491   yes:437   1st Qu.:1.00   1st Qu.:10.0   1st Qu.: 8.00  
+##  other : 64             Median :2.00   Median :11.0   Median :11.00  
+##                         Mean   :1.92   Mean   :11.4   Mean   :10.91  
+##                         3rd Qu.:2.00   3rd Qu.:13.0   3rd Qu.:13.00  
+##                         Max.   :4.00   Max.   :19.0   Max.   :19.00  
+##                                        NA's   :75     NA's   :329    
+##      G2.por          G2.mat          G3.por          G3.mat     
+##  Min.   : 0.00   Min.   : 0.00   Min.   : 0.00   Min.   : 0.00  
+##  1st Qu.:10.00   1st Qu.: 9.00   1st Qu.:10.00   1st Qu.: 8.00  
+##  Median :11.00   Median :11.00   Median :12.00   Median :11.00  
+##  Mean   :11.57   Mean   :10.71   Mean   :11.91   Mean   :10.42  
+##  3rd Qu.:13.00   3rd Qu.:13.00   3rd Qu.:14.00   3rd Qu.:14.00  
+##  Max.   :19.00   Max.   :19.00   Max.   :19.00   Max.   :20.00  
+##  NA's   :75      NA's   :329     NA's   :75      NA's   :329    
+##   absences.mat     absences.por     paid    
+##  Min.   : 0.000   Min.   : 0.000   no :515  
+##  1st Qu.: 0.000   1st Qu.: 0.000   yes:209  
+##  Median : 4.000   Median : 2.000            
+##  Mean   : 5.709   Mean   : 3.659            
+##  3rd Qu.: 8.000   3rd Qu.: 6.000            
+##  Max.   :75.000   Max.   :32.000            
+##  NA's   :329      NA's   :75
 ```
 
 
-Aplicamos un proceso similar para las calificaciones, utilizando la media en el caso que existan ambas:
+
+Para el resto de valores nulos utilizamos el método missForest que utiliza árboles de decisión para imputar los valores perdidos en variables tanto numéricas como categóricas. 
 
 
 ```r
-students.nonas$G1 <- rowMeans(students.merge[c('G1.mat', 'G1.por')], na.rm=TRUE)
-students.nonas$G2 <- rowMeans(students.merge[c('G2.mat', 'G2.por')], na.rm=TRUE)
-students.nonas$G3 <- rowMeans(students.merge[c('G3.mat', 'G3.por')], na.rm=TRUE)
+mf <-missForest(students.nonas, maxiter = 10, ntree = 100, variablewise = FALSE,
+                       decreasing = FALSE, verbose = FALSE,
+                       mtry = floor(sqrt(ncol(students.nonas))), replace = TRUE,
+                       classwt = NULL, cutoff = NULL, strata = NULL,
+                       sampsize = NULL, nodesize = NULL, maxnodes = NULL,
+                       xtrue = NA, parallelize = c('no', 'variables', 'forests'))
+```
+
+```
+##   missForest iteration 1 in progress...done!
+##   missForest iteration 2 in progress...done!
+##   missForest iteration 3 in progress...done!
+##   missForest iteration 4 in progress...done!
+##   missForest iteration 5 in progress...done!
+```
+
+```r
+students.nonas <- mf$ximp
 summary(students.nonas)
 ```
 
@@ -552,102 +590,91 @@ summary(students.nonas)
 ##  Mean   :3.195   Mean   :1.519   Mean   :2.311   Mean   :3.552  
 ##  3rd Qu.:4.000   3rd Qu.:2.000   3rd Qu.:3.000   3rd Qu.:5.000  
 ##  Max.   :5.000   Max.   :5.000   Max.   :5.000   Max.   :5.000  
-##    guardian   famsup      studytime     paid           G1       
-##  father:169   no :287   Min.   :1.00   no :515   Min.   : 2.50  
-##  mother:491   yes:437   1st Qu.:1.00   yes:209   1st Qu.: 9.00  
-##  other : 64             Median :2.00             Median :11.00  
-##                         Mean   :1.92             Mean   :10.94  
-##                         3rd Qu.:2.00             3rd Qu.:13.00  
-##                         Max.   :4.00             Max.   :18.50  
-##        G2              G3       
-##  Min.   : 0.00   Min.   : 0.00  
-##  1st Qu.: 9.00   1st Qu.: 9.50  
-##  Median :11.00   Median :11.00  
-##  Mean   :10.97   Mean   :11.07  
-##  3rd Qu.:13.00   3rd Qu.:13.00  
-##  Max.   :18.50   Max.   :18.50
+##    guardian   famsup      studytime        G1.por          G1.mat     
+##  father:169   no :287   Min.   :1.00   Min.   : 0.00   Min.   : 3.00  
+##  mother:491   yes:437   1st Qu.:1.00   1st Qu.: 9.41   1st Qu.: 8.00  
+##  other : 64             Median :2.00   Median :11.00   Median : 9.21  
+##                         Mean   :1.92   Mean   :11.29   Mean   :10.03  
+##                         3rd Qu.:2.00   3rd Qu.:13.00   3rd Qu.:12.00  
+##                         Max.   :4.00   Max.   :19.00   Max.   :19.00  
+##      G2.por          G2.mat           G3.por          G3.mat      
+##  Min.   : 0.00   Min.   : 0.000   Min.   : 0.00   Min.   : 0.000  
+##  1st Qu.:10.00   1st Qu.: 7.901   1st Qu.:10.00   1st Qu.: 7.718  
+##  Median :11.00   Median : 9.000   Median :12.00   Median : 9.390  
+##  Mean   :11.45   Mean   : 9.807   Mean   :11.78   Mean   : 9.613  
+##  3rd Qu.:13.00   3rd Qu.:12.000   3rd Qu.:14.00   3rd Qu.:12.000  
+##  Max.   :19.00   Max.   :19.000   Max.   :19.00   Max.   :20.000  
+##   absences.mat     absences.por     paid    
+##  Min.   : 0.000   Min.   : 0.000   no :515  
+##  1st Qu.: 2.000   1st Qu.: 0.000   yes:209  
+##  Median : 5.150   Median : 2.000            
+##  Mean   : 6.315   Mean   : 3.808            
+##  3rd Qu.: 8.040   3rd Qu.: 6.000            
+##  Max.   :75.000   Max.   :32.000
 ```
-Por último lo aplicamos a las ausencias, antes de aplicar la media normalizamos los valores
+
+## Análisis de  0s
+Vamos a analizar uno por uno los casos en los que existen valores 0 y a definir si son valores posibles de la variable o por el contrario se trata de valores vacíos indicados como 0. Las variables que contienen valores 0 son: 
 
 
 ```r
-normalized<-function(y) {
-  x<-y[!is.na(y)]
-  x<-(x - min(x)) / (max(x) - min(x))
-  y[!is.na(y)]<-x
-  return(y)
-}
-
-
-students.nonas$absences <- rowMeans(sapply(students.merge[c('absences.mat', 'absences.por')], normalized), na.rm=TRUE)
-
-summary(students.nonas)  
+students.numeric = select_if(students.nonas, is.numeric)
+students.zerocolumns <- students.numeric[sapply(students.numeric, function(x) min(abs(x)))==0]
+summary(students.zerocolumns)
 ```
 
 ```
-##  school   sex          age        address famsize   Pstatus
-##  GP:485   F:417   Min.   :15.00   R:218   GT3:508   A: 90  
-##  MS:239   M:307   1st Qu.:16.00   U:506   LE3:216   T:634  
-##                   Median :17.00                            
-##                   Mean   :16.81                            
-##                   3rd Qu.:18.00                            
-##                   Max.   :22.00                            
-##       Medu            Fedu             Mjob           Fjob    
-##  Min.   :0.000   Min.   :0.000   at_home :150   at_home : 48  
-##  1st Qu.:2.000   1st Qu.:1.000   health  : 52   health  : 26  
-##  Median :2.000   Median :2.000   other   :283   other   :407  
-##  Mean   :2.485   Mean   :2.285   services:164   services:205  
-##  3rd Qu.:4.000   3rd Qu.:3.000   teacher : 75   teacher : 38  
-##  Max.   :4.000   Max.   :4.000                                
-##         reason    nursery   internet    traveltime       failures     
-##  course    :312   no :150   no :169   Min.   :1.000   Min.   :0.0000  
-##  home      :171   yes:574   yes:555   1st Qu.:1.000   1st Qu.:0.0000  
-##  other     : 78                       Median :1.000   Median :0.0000  
-##  reputation:163                       Mean   :1.565   Mean   :0.3453  
-##                                       3rd Qu.:2.000   3rd Qu.:0.0000  
-##                                       Max.   :4.000   Max.   :3.0000  
-##  schoolsup activities higher    romantic      famrel         freetime  
-##  no :648   no :378    no : 82   no :452   Min.   :1.000   Min.   :1.0  
-##  yes: 76   yes:346    yes:642   yes:272   1st Qu.:4.000   1st Qu.:3.0  
-##                                           Median :4.000   Median :3.0  
-##                                           Mean   :3.913   Mean   :3.2  
-##                                           3rd Qu.:5.000   3rd Qu.:4.0  
-##                                           Max.   :5.000   Max.   :5.0  
-##      goout            Dalc            Walc           health     
-##  Min.   :1.000   Min.   :1.000   Min.   :1.000   Min.   :1.000  
-##  1st Qu.:2.000   1st Qu.:1.000   1st Qu.:1.000   1st Qu.:2.000  
-##  Median :3.000   Median :1.000   Median :2.000   Median :4.000  
-##  Mean   :3.195   Mean   :1.519   Mean   :2.311   Mean   :3.552  
-##  3rd Qu.:4.000   3rd Qu.:2.000   3rd Qu.:3.000   3rd Qu.:5.000  
-##  Max.   :5.000   Max.   :5.000   Max.   :5.000   Max.   :5.000  
-##    guardian   famsup      studytime     paid           G1       
-##  father:169   no :287   Min.   :1.00   no :515   Min.   : 2.50  
-##  mother:491   yes:437   1st Qu.:1.00   yes:209   1st Qu.: 9.00  
-##  other : 64             Median :2.00             Median :11.00  
-##                         Mean   :1.92             Mean   :10.94  
-##                         3rd Qu.:2.00             3rd Qu.:13.00  
-##                         Max.   :4.00             Max.   :18.50  
-##        G2              G3           absences     
-##  Min.   : 0.00   Min.   : 0.00   Min.   :0.0000  
-##  1st Qu.: 9.00   1st Qu.: 9.50   1st Qu.:0.0000  
-##  Median :11.00   Median :11.00   Median :0.0625  
-##  Mean   :10.97   Mean   :11.07   Mean   :0.1057  
-##  3rd Qu.:13.00   3rd Qu.:13.00   3rd Qu.:0.1527  
-##  Max.   :18.50   Max.   :18.50   Max.   :0.8733
+##       Medu            Fedu          failures          G1.por     
+##  Min.   :0.000   Min.   :0.000   Min.   :0.0000   Min.   : 0.00  
+##  1st Qu.:2.000   1st Qu.:1.000   1st Qu.:0.0000   1st Qu.: 9.41  
+##  Median :2.000   Median :2.000   Median :0.0000   Median :11.00  
+##  Mean   :2.485   Mean   :2.285   Mean   :0.3453   Mean   :11.29  
+##  3rd Qu.:4.000   3rd Qu.:3.000   3rd Qu.:0.0000   3rd Qu.:13.00  
+##  Max.   :4.000   Max.   :4.000   Max.   :3.0000   Max.   :19.00  
+##      G2.por          G2.mat           G3.por          G3.mat      
+##  Min.   : 0.00   Min.   : 0.000   Min.   : 0.00   Min.   : 0.000  
+##  1st Qu.:10.00   1st Qu.: 7.901   1st Qu.:10.00   1st Qu.: 7.718  
+##  Median :11.00   Median : 9.000   Median :12.00   Median : 9.390  
+##  Mean   :11.45   Mean   : 9.807   Mean   :11.78   Mean   : 9.613  
+##  3rd Qu.:13.00   3rd Qu.:12.000   3rd Qu.:14.00   3rd Qu.:12.000  
+##  Max.   :19.00   Max.   :19.000   Max.   :19.00   Max.   :20.000  
+##   absences.mat     absences.por   
+##  Min.   : 0.000   Min.   : 0.000  
+##  1st Qu.: 2.000   1st Qu.: 0.000  
+##  Median : 5.150   Median : 2.000  
+##  Mean   : 6.315   Mean   : 3.808  
+##  3rd Qu.: 8.040   3rd Qu.: 6.000  
+##  Max.   :75.000   Max.   :32.000
 ```
+
+Para el caso de la educación del padre y la madre ya definimos que el valor 0 significa que no poseen ningún tipo de educación.
+
+Para el resto de casos vemos que el valor 0 también es posible ya que: 
+
+- Es posible no haber suspendido ninguna asignatura, de hecho más del 75\% de alumnos así lo han hecho.
+- En las calificaciones es posible sacar un 0. 
+- En el caso de las ausencias también existen alumnos que no han faltado a ninguna clase. En el caso de las clases de portugues más del 25\%.
 
 
 
 
 ## Reducción dimensionalidad
 
+ vamos a unificar las calificaciones y las ausencias de ambas clases. En el caso de las calificaciones tiene sentido realizar la media entre ambas, 
 
-Como no vamos a centrar los estudios comparando estudiantes de distintos colegios, eliminamos la variable School, y calculamos la evaluacion como la media:
+
+En primer lugar como no vamos a centrar los estudios comparando estudiantes de distintos colegios, en primer lugar, eliminamos la variable School
 
 ```r
-students.red <- students.nonas[,c("sex","age","address","famsize","Pstatus","Medu","Fedu","Mjob","Fjob","reason","nursery","internet", "traveltime", "failures", "schoolsup", "activities", "higher", "romantic", "famrel", "freetime", "goout", "Dalc", "Walc", "health", "guardian", "famsup", "studytime", "absences", "paid")]
-students.red$G <-  rowMeans(students.nonas[c('G1', 'G2', 'G3')])
+students.red <- students.nonas[, c("sex","age","address","famsize","Pstatus","Medu","Fedu","Mjob","Fjob","reason","nursery","internet", "traveltime", "failures", "schoolsup", "activities", "higher", "romantic", "famrel", "freetime", "goout", "Dalc", "Walc", "health", "guardian", "famsup", "studytime", "paid")]
+```
 
+
+Para las calificaciones vamos a crear un único campo que contenga la media de todas las calificaciones obtenidas por el estudiante. 
+
+
+```r
+students.red$G <- rowMeans(students.nonas[c('G1.mat', 'G1.por','G2.mat', 'G2.por','G3.mat', 'G3.por' )])
 summary(students.red)
 ```
 
@@ -687,14 +714,80 @@ summary(students.red)
 ##  Mean   :2.311   Mean   :3.552                          Mean   :1.92  
 ##  3rd Qu.:3.000   3rd Qu.:5.000                          3rd Qu.:2.00  
 ##  Max.   :5.000   Max.   :5.000                          Max.   :4.00  
-##     absences       paid           G         
-##  Min.   :0.0000   no :515   Min.   : 1.333  
-##  1st Qu.:0.0000   yes:209   1st Qu.: 9.167  
-##  Median :0.0625             Median :11.000  
-##  Mean   :0.1057             Mean   :10.991  
-##  3rd Qu.:0.1527             3rd Qu.:13.000  
-##  Max.   :0.8733             Max.   :18.333
+##   paid           G         
+##  no :515   Min.   : 3.889  
+##  yes:209   1st Qu.: 8.774  
+##            Median :10.333  
+##            Mean   :10.661  
+##            3rd Qu.:12.333  
+##            Max.   :18.333
 ```
+
+
+
+En el caso de las ausencia vamos a aplicar el mismo método, sin embargo antes de realizar la media vamos a normalizar para evitar que tengan más peso las ausencias en matemáticas:
+
+```r
+normalized<-function(y) {
+  x<-y[!is.na(y)]
+  x<-(x - min(x)) / (max(x) - min(x))
+  y[!is.na(y)]<-x
+  return(y)
+}
+
+
+students.red$absences <- rowMeans(sapply(students.nonas[c('absences.mat', 'absences.por')], normalized), na.rm=TRUE)
+
+summary(students.red)  
+```
+
+```
+##  sex          age        address famsize   Pstatus      Medu      
+##  F:417   Min.   :15.00   R:218   GT3:508   A: 90   Min.   :0.000  
+##  M:307   1st Qu.:16.00   U:506   LE3:216   T:634   1st Qu.:2.000  
+##          Median :17.00                             Median :2.000  
+##          Mean   :16.81                             Mean   :2.485  
+##          3rd Qu.:18.00                             3rd Qu.:4.000  
+##          Max.   :22.00                             Max.   :4.000  
+##       Fedu             Mjob           Fjob            reason    nursery  
+##  Min.   :0.000   at_home :150   at_home : 48   course    :312   no :150  
+##  1st Qu.:1.000   health  : 52   health  : 26   home      :171   yes:574  
+##  Median :2.000   other   :283   other   :407   other     : 78            
+##  Mean   :2.285   services:164   services:205   reputation:163            
+##  3rd Qu.:3.000   teacher : 75   teacher : 38                             
+##  Max.   :4.000                                                           
+##  internet    traveltime       failures      schoolsup activities higher   
+##  no :169   Min.   :1.000   Min.   :0.0000   no :648   no :378    no : 82  
+##  yes:555   1st Qu.:1.000   1st Qu.:0.0000   yes: 76   yes:346    yes:642  
+##            Median :1.000   Median :0.0000                                 
+##            Mean   :1.565   Mean   :0.3453                                 
+##            3rd Qu.:2.000   3rd Qu.:0.0000                                 
+##            Max.   :4.000   Max.   :3.0000                                 
+##  romantic      famrel         freetime       goout            Dalc      
+##  no :452   Min.   :1.000   Min.   :1.0   Min.   :1.000   Min.   :1.000  
+##  yes:272   1st Qu.:4.000   1st Qu.:3.0   1st Qu.:2.000   1st Qu.:1.000  
+##            Median :4.000   Median :3.0   Median :3.000   Median :1.000  
+##            Mean   :3.913   Mean   :3.2   Mean   :3.195   Mean   :1.519  
+##            3rd Qu.:5.000   3rd Qu.:4.0   3rd Qu.:4.000   3rd Qu.:2.000  
+##            Max.   :5.000   Max.   :5.0   Max.   :5.000   Max.   :5.000  
+##       Walc           health        guardian   famsup      studytime   
+##  Min.   :1.000   Min.   :1.000   father:169   no :287   Min.   :1.00  
+##  1st Qu.:1.000   1st Qu.:2.000   mother:491   yes:437   1st Qu.:1.00  
+##  Median :2.000   Median :4.000   other : 64             Median :2.00  
+##  Mean   :2.311   Mean   :3.552                          Mean   :1.92  
+##  3rd Qu.:3.000   3rd Qu.:5.000                          3rd Qu.:2.00  
+##  Max.   :5.000   Max.   :5.000                          Max.   :4.00  
+##   paid           G             absences      
+##  no :515   Min.   : 3.889   Min.   :0.00000  
+##  yes:209   1st Qu.: 8.774   1st Qu.:0.03136  
+##            Median :10.333   Median :0.06933  
+##            Mean   :10.661   Mean   :0.10161  
+##            3rd Qu.:12.333   3rd Qu.:0.13375  
+##            Max.   :18.333   Max.   :0.87333
+```
+
+
+
 
 ## Tipo de variables
 
@@ -712,8 +805,8 @@ sapply( students.red, class)
 ##  "integer"  "integer"   "factor"   "factor"   "factor"   "factor" 
 ##     famrel   freetime      goout       Dalc       Walc     health 
 ##  "integer"  "integer"  "integer"  "integer"  "integer"  "integer" 
-##   guardian     famsup  studytime   absences       paid          G 
-##   "factor"   "factor"  "integer"  "numeric"   "factor"  "numeric"
+##   guardian     famsup  studytime       paid          G   absences 
+##   "factor"   "factor"  "integer"   "factor"  "numeric"  "numeric"
 ```
 
 En los tipos mostrados hay algunos que no es correcto el tipo. En la educación tanto de la madre como del padre consideramos que aunque se use un número para la representación debería ser un factor. Lo mismo ocurre para el tiempo de viaje o el tiempo de estudio. 
@@ -735,22 +828,10 @@ students.red$studytime <-as.factor(students.red$studytime)
 
 ```r
 vars = c("sex","age","address","famsize","Pstatus","Medu","Fedu","Mjob","Fjob","reason","nursery","internet", "traveltime", "failures", "schoolsup", "activities", "higher", "romantic", "famrel", "freetime", "goout", "health", "guardian", "famsup", "studytime", "absences", "paid", "G")
-objs = c("Dalc", "Wcalc")
 
 
 
-library(ggplot2)
-```
 
-```
-## Registered S3 methods overwritten by 'ggplot2':
-##   method         from 
-##   [.quosures     rlang
-##   c.quosures     rlang
-##   print.quosures rlang
-```
-
-```r
 for(i in vars) {
   if(is.factor(students.red[,i])){
     f1 = students.red[,i]
@@ -766,7 +847,7 @@ for(i in vars) {
 }
 ```
 
-![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-1.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-2.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-3.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-4.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-5.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-6.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-7.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-8.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-9.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-10.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-11.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-12.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-13.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-14.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-15.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-16.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-17.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-18.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-19.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-20.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-21.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-22.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-23.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-24.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-25.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-26.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-27.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-28.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-29.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-30.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-31.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-32.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-33.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-34.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-35.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-36.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-37.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-38.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-39.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-40.png)<!-- -->
+![](student-alcohol-consumption_files/figure-html/unnamed-chunk-15-1.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-15-2.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-15-3.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-15-4.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-15-5.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-15-6.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-15-7.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-15-8.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-15-9.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-15-10.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-15-11.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-15-12.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-15-13.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-15-14.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-15-15.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-15-16.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-15-17.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-15-18.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-15-19.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-15-20.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-15-21.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-15-22.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-15-23.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-15-24.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-15-25.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-15-26.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-15-27.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-15-28.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-15-29.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-15-30.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-15-31.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-15-32.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-15-33.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-15-34.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-15-35.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-15-36.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-15-37.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-15-38.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-15-39.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-15-40.png)<!-- -->
 
 
  
@@ -802,19 +883,19 @@ summary(students)
 ##            Mean   :3.913   Mean   :3.2   Mean   :3.195   Mean   :1.519  
 ##            3rd Qu.:5.000   3rd Qu.:4.0   3rd Qu.:4.000   3rd Qu.:2.000  
 ##            Max.   :5.000   Max.   :5.0   Max.   :5.000   Max.   :5.000  
-##       Walc           health      studytime    absences     
-##  Min.   :1.000   Min.   :1.000   1:236     Min.   :0.0000  
-##  1st Qu.:1.000   1st Qu.:2.000   2:346     1st Qu.:0.0000  
-##  Median :2.000   Median :4.000   3:106     Median :0.0625  
-##  Mean   :2.311   Mean   :3.552   4: 36     Mean   :0.1057  
-##  3rd Qu.:3.000   3rd Qu.:5.000             3rd Qu.:0.1527  
-##  Max.   :5.000   Max.   :5.000             Max.   :0.8733  
+##       Walc           health      studytime    absences      
+##  Min.   :1.000   Min.   :1.000   1:236     Min.   :0.00000  
+##  1st Qu.:1.000   1st Qu.:2.000   2:346     1st Qu.:0.03136  
+##  Median :2.000   Median :4.000   3:106     Median :0.06933  
+##  Mean   :2.311   Mean   :3.552   4: 36     Mean   :0.10161  
+##  3rd Qu.:3.000   3rd Qu.:5.000             3rd Qu.:0.13375  
+##  Max.   :5.000   Max.   :5.000             Max.   :0.87333  
 ##        G         
-##  Min.   : 1.333  
-##  1st Qu.: 9.167  
-##  Median :11.000  
-##  Mean   :10.991  
-##  3rd Qu.:13.000  
+##  Min.   : 3.889  
+##  1st Qu.: 8.774  
+##  Median :10.333  
+##  Mean   :10.661  
+##  3rd Qu.:12.333  
 ##  Max.   :18.333
 ```
 
@@ -964,13 +1045,13 @@ t.test(data_weekday_aprobados, data_weekday_suspensos, var.equal = TRUE, conf.le
 ## 	Two Sample t-test
 ## 
 ## data:  data_weekday_aprobados and data_weekday_suspensos
-## t = -2.7561, df = 722, p-value = 0.005996
+## t = -3.4513, df = 722, p-value = 0.0005904
 ## alternative hypothesis: true difference in means is not equal to 0
 ## 95 percent confidence interval:
-##  -0.34170360 -0.05740842
+##  -0.3721662 -0.1022794
 ## sample estimates:
 ## mean of x mean of y 
-##  1.452083  1.651639
+##  1.414815  1.652038
 ```
 Viendo el p-value, podemos decir al 95% que sí hay diferencias entre alumnos que aprueban y alumnos que suspenden en cuanto al consumo de alcohol entre semana.
 
@@ -989,13 +1070,13 @@ t.test(data_weekend_aprobados, data_weekend_suspensos, var.equal = TRUE, conf.le
 ## 	Two Sample t-test
 ## 
 ## data:  data_weekend_aprobados and data_weekend_suspensos
-## t = -2.8183, df = 722, p-value = 0.00496
+## t = -2.6639, df = 722, p-value = 0.007896
 ## alternative hypothesis: true difference in means is not equal to 0
 ## 95 percent confidence interval:
-##  -0.4842420 -0.0865913
+##  -0.44643047 -0.06759871
 ## sample estimates:
 ## mean of x mean of y 
-##  2.214583  2.500000
+##  2.197531  2.454545
 ```
 Con un p-value menor que 0.05, al 95% de confianza afirmamos que también hay diferencia en el consumo de alcohol los fines de semana en función de si el alumno aprueba o no.
 
@@ -1111,8 +1192,8 @@ summary(aov1)
 
 ```
 ##                   Df Sum Sq Mean Sq F value Pr(>F)
-## students.red$sex   1     24   24.46   2.688  0.102
-## Residuals        722   6570    9.10
+## students.red$sex   1      1   0.999   0.132  0.716
+## Residuals        722   5453   7.552
 ```
 
 ```r
@@ -1123,8 +1204,8 @@ summary(aov1)
 
 ```
 ##                   Df Sum Sq Mean Sq F value   Pr(>F)    
-## students.red$age   1    109  109.37   12.18 0.000513 ***
-## Residuals        722   6485    8.98                     
+## students.red$age   1    125  124.75    16.9 4.39e-05 ***
+## Residuals        722   5329    7.38                     
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -1137,8 +1218,8 @@ summary(aov1)
 
 ```
 ##                    Df Sum Sq Mean Sq F value   Pr(>F)    
-## students.red$Walc   1    150  150.35   16.84 4.52e-05 ***
-## Residuals         722   6444    8.93                     
+## students.red$Walc   1    105  104.82   14.15 0.000183 ***
+## Residuals         722   5349    7.41                     
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -1151,8 +1232,8 @@ summary(aov1)
 
 ```
 ##                    Df Sum Sq Mean Sq F value   Pr(>F)    
-## students.red$Dalc   1    139  139.34   15.58 8.66e-05 ***
-## Residuals         722   6455    8.94                     
+## students.red$Dalc   1    121  120.80   16.35 5.82e-05 ***
+## Residuals         722   5333    7.39                     
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -1165,8 +1246,8 @@ summary(aov1)
 
 ```
 ##                       Df Sum Sq Mean Sq F value Pr(>F)
-## students.red$Pstatus   1      1   1.231   0.135  0.714
-## Residuals            722   6594   9.132
+## students.red$Pstatus   1      0   0.021   0.003  0.958
+## Residuals            722   5454   7.554
 ```
 Como podemos observar, no hay correlación entre la calificación del estudiante y el sexo o el estado de convivencia de los padres. Sin embargo, en el desempeño escolar de los estudiantes sí que influyen significativamente la edad y el consumo de alcohol tanto en fines de semana como entre semana.
 
