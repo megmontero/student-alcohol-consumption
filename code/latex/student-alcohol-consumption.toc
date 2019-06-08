@@ -7,12 +7,13 @@
 \contentsline {subsection}{\numberline {2.2}Tratamiento de NAs}{6}{subsection.2.2}% 
 \contentsline {subsection}{\numberline {2.3}Selecci\IeC {\'o}n de variables/Reducci\IeC {\'o}n de dimensionalidad}{7}{subsection.2.3}% 
 \contentsline {subsection}{\numberline {2.4}Tipos de Variables}{8}{subsection.2.4}% 
-\contentsline {section}{\numberline {3}An\IeC {\'a}lisis Estad\IeC {\'\i }stico}{8}{section.3}% 
-\contentsline {subsection}{\numberline {3.1}An\IeC {\'a}lisis gr\IeC {\'a}fico inicial}{8}{subsection.3.1}% 
-\contentsline {subsection}{\numberline {3.2} Estad\IeC {\'\i }stica Inferencial}{9}{subsection.3.2}% 
-\contentsline {subsubsection}{\numberline {3.2.1}Estudiantes de distinto sexo}{10}{subsubsection.3.2.1}% 
-\contentsline {subsubsection}{\numberline {3.2.2}Estudiantes con diferente situaci\IeC {\'o}n de convivencia de los padres}{11}{subsubsection.3.2.2}% 
-\contentsline {subsubsection}{\numberline {3.2.3}Estudiantes que aprueban ($G >= 10$) y estudiantes que suspenden ($G < 10$)}{13}{subsubsection.3.2.3}% 
-\contentsline {subsection}{\numberline {3.3}Modelo de regresi\IeC {\'o}n lineal}{14}{subsection.3.3}% 
-\contentsline {section}{\numberline {4}Estudio de correlaci\IeC {\'o}n}{15}{section.4}% 
-\contentsline {section}{\numberline {5}Conclusiones}{17}{section.5}% 
+\contentsline {subsection}{\numberline {2.5}An\IeC {\'a}lisis de Outliers}{9}{subsection.2.5}% 
+\contentsline {section}{\numberline {3}An\IeC {\'a}lisis Estad\IeC {\'\i }stico}{9}{section.3}% 
+\contentsline {subsection}{\numberline {3.1}An\IeC {\'a}lisis gr\IeC {\'a}fico inicial}{9}{subsection.3.1}% 
+\contentsline {subsection}{\numberline {3.2} Estad\IeC {\'\i }stica Inferencial}{11}{subsection.3.2}% 
+\contentsline {subsubsection}{\numberline {3.2.1}Estudiantes de distinto sexo}{12}{subsubsection.3.2.1}% 
+\contentsline {subsubsection}{\numberline {3.2.2}Estudiantes con diferente situaci\IeC {\'o}n de convivencia de los padres}{13}{subsubsection.3.2.2}% 
+\contentsline {subsubsection}{\numberline {3.2.3}Estudiantes que aprueban ($G >= 10$) y estudiantes que suspenden ($G < 10$)}{15}{subsubsection.3.2.3}% 
+\contentsline {subsection}{\numberline {3.3}Modelo de regresi\IeC {\'o}n lineal}{16}{subsection.3.3}% 
+\contentsline {section}{\numberline {4}Estudio de correlaci\IeC {\'o}n}{17}{section.4}% 
+\contentsline {section}{\numberline {5}Conclusiones}{19}{section.5}% 
