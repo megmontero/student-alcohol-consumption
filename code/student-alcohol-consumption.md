@@ -1,6 +1,6 @@
 ---
 title: "Código Práctica 2: Limpieza dataset 'Student Alcohol Consumption '"
-author: "Gregorio AndrÃ©s García Menéndez (gagarcia) & Manuel Gómez Montero (megmontero)"
+author: "Gregorio Andrés García Menéndez (gagarcia) & Manuel Gómez Montero (megmontero)"
 date: "Junio, 2019"
 output:
   html_document:
@@ -152,9 +152,11 @@ summary(students.por)
 ##  Max.   :32.000   Max.   :19.0   Max.   :19.00   Max.   :19.00
 ```
 
-## Union de fuentes
+## Unión de fuentes
 
-En el código de ejemplo los unía a ver que ver si tiene sentido. ya que no son los mismos alumnos.
+
+En el código de ejemplo los unía a ver que ver si tiene sentido, ya que no son los mismos alumnos.
+
 
 
 ```r
@@ -323,7 +325,8 @@ summary(students.both)
 ##  Max.   :19.00   Max.   :19.00
 ```
 
-Vemos cuales realmente serían del mismo conjunto
+Vemos cuáles realmente serían del mismo conjunto
+
 
 ```r
 print(nrow(students.both[students$guardian.y!=students$guardian.x,c("guardian.x", "guardian.y")]))
@@ -726,6 +729,12 @@ students.red$traveltime <-as.factor(students.red$traveltime)
 students.red$studytime <-as.factor(students.red$studytime) 
 ```
 
+La explicación de considerar el tiempo de estudio y el tiempo de viaje es que, aunque pueden parecer numéricas, en realizar son factores. En la descripción del dataset aparece explicado:
+
+studytime: Weekly study time: (numeric: 1 - <2 hours, 2 - 2 to 5 hours, 3 - 5 to 10 hours, or 4 - >10 hours)
+traveltime: Home to school travel time (numeric: 1 - <15 min., 2 - 15 to 30 min., 3 - 30 min. to 1 hour, or 4 - >1 hour)
+
+Por lo tanto, al ser categorías, las tratamos como factores y no como numéricas.
 
 
 # Análisis Estadístico
@@ -769,7 +778,6 @@ for(i in vars) {
 ![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-1.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-2.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-3.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-4.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-5.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-6.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-7.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-8.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-9.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-10.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-11.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-12.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-13.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-14.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-15.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-16.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-17.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-18.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-19.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-20.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-21.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-22.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-23.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-24.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-25.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-26.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-27.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-28.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-29.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-30.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-31.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-32.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-33.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-34.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-35.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-36.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-37.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-38.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-39.png)<!-- -->![](student-alcohol-consumption_files/figure-html/unnamed-chunk-13-40.png)<!-- -->
 
 
- 
 Viendo las gráficas vemos que hay variables que parece que sí tienen influencia a simple vista en el consumo de alcohol tanto a diario como los fines de semana como pueden ser el sexo o el estado de los padres. Sin embargo vemos otros que, a priori, no parece que tengan influencia, así que en un primer momento vamos a dejar fuera del análisis si el alumno tiene internet, si tiene una relación, el tutor, la dirección, si realiza actividades extraescolares, si recibe clases de pago, si ha ido a la guardería, o si  recibe el apoyo de su familia en el estudio. 
 
 El dataset resultante y con el que continuaremos trabajando es el siguiente: 
@@ -818,7 +826,51 @@ summary(students)
 ##  Max.   :18.333
 ```
 
+## Análisis de Outliers
 
+Para las variables numéricas realizamos un estudio de outliers. En nuestro caso, las variables a estudiar son "age" y "G". El resto de variables numéricas en realidad no lo son, puesto que son categóricas. Por ejemplo: "studytime" va de 1 a 4, y no hace referencia a las horas que el alumno pasa estudiando, sino que son categorías equivalentes a por ejemplo: Nada, Poco, Normal, Mucho. Podría haber valores erróneos debido a la transcripción de los datos o similar, pero dichos errores ya los hubiéramos detectado en la creación del data set, ya que gracias a la función "summary" vemos los valores mínimos y máximos y para estas variables categóricas numéricas no hay valores erróneos (mínimo y máximo corresponden a las categorías mínimas y máximas).
+
+Procedemos al estudio de "age" y "G":
+
+
+```r
+plot(students$age)
+```
+
+![](student-alcohol-consumption_files/figure-html/unnamed-chunk-15-1.png)<!-- -->
+
+```r
+plot(students$age, students$Walc, xlab="age", ylab="Walc", pch="*", col="red")
+abline(lm(students$Walc ~ students$age), col="blue", lwd=3, lty=2)
+```
+
+![](student-alcohol-consumption_files/figure-html/unnamed-chunk-15-2.png)<!-- -->
+
+```r
+age_no_outliers <- students$age[students$age <= 21]
+walc_no_outliers <- students$Walc[students$age <= 21]
+plot(age_no_outliers, walc_no_outliers, xlab="age", ylab="Walc", pch="*", col="red")
+abline(lm(walc_no_outliers ~ age_no_outliers), col="blue", lwd=3, lty=2)
+```
+
+![](student-alcohol-consumption_files/figure-html/unnamed-chunk-15-3.png)<!-- -->
+Como podemos ver, para el campo edad los alumnos van de los 15 a los 22, siendo las franjas más pobladas los 15, 16 y 17 años. Al haber valores intermedios que en número van disminuyendo gradualmente desde los 18 hasta los 22, no consideramos ningún valor extremo (como el único estudiantes de 22 años) como valor erróneo. Además, al ser tan pocos estudiantes, no los descartamos en nuestros estudios ya que pueden aportar información valiosa, y como podemos ver en la comparativa del conjunto con outliers y sin outliers, no cambia de forma crítica.
+
+
+
+```r
+plot(students$G)
+```
+
+![](student-alcohol-consumption_files/figure-html/unnamed-chunk-16-1.png)<!-- -->
+
+```r
+plot(students$G, students$Walc, xlab="G", ylab="Walc", pch="*", col="red")
+abline(lm(students$Walc ~ students$G), col="blue", lwd=3, lty=2)
+```
+
+![](student-alcohol-consumption_files/figure-html/unnamed-chunk-16-2.png)<!-- -->
+En el caso de la media de la nota "G" es más claro todavía. Los datos no demuestran valores extremos que se puedan deber a errores, y aquellos más alejados de la mayor concentración de estudiantes son valores que aportan información para los estudios que vamos a realizar en cuanto al consumo de alcohol y de desempeño estudiantil.
 
 
 ## Estadistica Inferencial 
@@ -896,6 +948,7 @@ t.test(data_weekday_sex_m, data_weekday_sex_f, var.equal = TRUE, conf.level = 0.
 ## mean of x mean of y 
 ##  1.837134  1.285372
 ```
+
 Por el p-value vemos que ocurre lo mismo que en los fines de semana. No podemos acepta la hipotésis nula y al 95% afirmamos que hay diferencia en el consumo de alcohol entre estudiantes masculinos y femeninos para los días entre semana.
 
 
@@ -921,8 +974,7 @@ t.test(data_weekday_pstatus_t, data_weekday_pstatus_a, var.equal = TRUE, conf.le
 ## mean of x mean of y 
 ##  1.528391  1.455556
 ```
-Con un p-value tan alto aceptamos la hipótesis nula, concluyendo que el consumo de alcohol entre semana es el mismo para estudiantes cuyos padres viven juntos y para estudiatnes cuyos padres viven separados
-
+Con un p-value tan alto aceptamos la hipótesis nula, concluyendo que el consumo de alcohol entre semana es el mismo para estudiantes cuyos padres viven juntos y para estudiantes cuyos padres viven separados
 
 
 
@@ -1042,7 +1094,7 @@ summary(modelo)
 Los coeficientes obtenidos para cada variable son: 
 
 
-Observando el coeficiente de determinacion $R^{2}$ vemos que la proporción de variabilidad explicada por el modelo con respecto a la variabilidad total  es unicamente del 25%
+Observando el coeficiente de determinación $R^{2}$ vemos que la proporción de variabilidad explicada por el modelo con respecto a la variabilidad total  es unicamente del 25%
 
 
 
@@ -1105,54 +1157,54 @@ Al estudiar el nivel de relación entre una variable contínua (la nota) y varia
 
 ```r
 # Sexo
-aov1 = aov(students.red$G ~ students.red$sex)
+aov1 = aov(students$G ~ students$sex)
 summary(aov1)
 ```
 
 ```
-##                   Df Sum Sq Mean Sq F value Pr(>F)
-## students.red$sex   1     24   24.46   2.688  0.102
-## Residuals        722   6570    9.10
+##               Df Sum Sq Mean Sq F value Pr(>F)
+## students$sex   1     24   24.46   2.688  0.102
+## Residuals    722   6570    9.10
 ```
 
 ```r
 # Edad
-aov1 = aov(students.red$G ~ students.red$age)
+aov1 = aov(students$G ~ students$age)
 summary(aov1)
 ```
 
 ```
-##                   Df Sum Sq Mean Sq F value   Pr(>F)    
-## students.red$age   1    109  109.37   12.18 0.000513 ***
-## Residuals        722   6485    8.98                     
+##               Df Sum Sq Mean Sq F value   Pr(>F)    
+## students$age   1    109  109.37   12.18 0.000513 ***
+## Residuals    722   6485    8.98                     
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
 ```r
 # Consumo de alcohol fines de semana
-aov1 = aov(students.red$G ~ students.red$Walc)
+aov1 = aov(students$G ~ students$Walc)
 summary(aov1)
 ```
 
 ```
-##                    Df Sum Sq Mean Sq F value   Pr(>F)    
-## students.red$Walc   1    150  150.35   16.84 4.52e-05 ***
-## Residuals         722   6444    8.93                     
+##                Df Sum Sq Mean Sq F value   Pr(>F)    
+## students$Walc   1    150  150.35   16.84 4.52e-05 ***
+## Residuals     722   6444    8.93                     
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
 ```r
 # Consumo de alcohol entre semana
-aov1 = aov(students.red$G ~ students.red$Dalc)
+aov1 = aov(students$G ~ students$Dalc)
 summary(aov1)
 ```
 
 ```
-##                    Df Sum Sq Mean Sq F value   Pr(>F)    
-## students.red$Dalc   1    139  139.34   15.58 8.66e-05 ***
-## Residuals         722   6455    8.94                     
+##                Df Sum Sq Mean Sq F value   Pr(>F)    
+## students$Dalc   1    139  139.34   15.58 8.66e-05 ***
+## Residuals     722   6455    8.94                     
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -1171,4 +1223,110 @@ summary(aov1)
 Como podemos observar, no hay correlación entre la calificación del estudiante y el sexo o el estado de convivencia de los padres. Sin embargo, en el desempeño escolar de los estudiantes sí que influyen significativamente la edad y el consumo de alcohol tanto en fines de semana como entre semana.
 
 
+Procedemos a realizar otro estudio interesante como es la correlación entre la nota y otras variables numéricas: edad del alumno, número de ausencias del alumno y número de veces que ha suspendido anteriormente. Estudiamos la distribución de las variables y la normalidad de las mismas.
+
+
+```r
+plot(students$age, students$G)
+```
+
+![](student-alcohol-consumption_files/figure-html/unnamed-chunk-26-1.png)<!-- -->
+
+```r
+plot(students$absences, students$G)
+```
+
+![](student-alcohol-consumption_files/figure-html/unnamed-chunk-26-2.png)<!-- -->
+
+```r
+plot(students$failures, students$G)
+```
+
+![](student-alcohol-consumption_files/figure-html/unnamed-chunk-26-3.png)<!-- -->
+
+```r
+qqnorm(students$G)
+qqline(students$G)
+```
+
+![](student-alcohol-consumption_files/figure-html/unnamed-chunk-26-4.png)<!-- -->
+
+```r
+qqnorm(students$age)
+qqline(students$age)
+```
+
+![](student-alcohol-consumption_files/figure-html/unnamed-chunk-26-5.png)<!-- -->
+
+```r
+qqnorm(students$absences)
+qqline(students$absences)
+```
+
+![](student-alcohol-consumption_files/figure-html/unnamed-chunk-26-6.png)<!-- -->
+
+```r
+qqnorm(students$failures)
+qqline(students$failures)
+```
+
+![](student-alcohol-consumption_files/figure-html/unnamed-chunk-26-7.png)<!-- -->
+
+La única que podemos asumir una distribución normal es la G. Para ver la correlación entre la G y el resto de variables podemos usar el test de Pearson, que no requiere asumir normalidad de las variables. Procedemos a ver la correlación, fijando nuestro nivel de confianza en un 95%:
+
+
+```r
+cor.test(students$G, students$age, method = "pearson", conf.level = 0.95)
+```
+
+```
+## 
+## 	Pearson's product-moment correlation
+## 
+## data:  students$G and students$age
+## t = -3.4894, df = 722, p-value = 0.0005135
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  -0.19976954 -0.05644669
+## sample estimates:
+##        cor 
+## -0.1287805
+```
+
+```r
+cor.test(students$G, students$absences, method = "pearson", conf.level = 0.95)
+```
+
+```
+## 
+## 	Pearson's product-moment correlation
+## 
+## data:  students$G and students$absences
+## t = -2.1015, df = 722, p-value = 0.03594
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  -0.149982929 -0.005137181
+## sample estimates:
+##         cor 
+## -0.07797151
+```
+
+```r
+cor.test(students$G, students$failures, method = "pearson", conf.level = 0.95)
+```
+
+```
+## 
+## 	Pearson's product-moment correlation
+## 
+## data:  students$G and students$failures
+## t = -13.997, df = 722, p-value < 2.2e-16
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  -0.5174457 -0.4026933
+## sample estimates:
+##       cor 
+## -0.462001
+```
+Al ser todos los p-value menores que nuestro nivel alpha (0.05), podemos concluir que hay una fuerte relación entre la edad del alumno y su desempeño académico. Ocurre lo mismo con la ausencias y el número de veces que el alumno ha fallado en el pasado.
 
