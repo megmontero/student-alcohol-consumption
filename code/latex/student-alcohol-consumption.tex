@@ -14,9 +14,10 @@
 \usepackage{multicol} 
 \usepackage{appendix}
 \usepackage{tikz}
-\usepackage{subfig}
+%\usepackage{subfig}
 \usepackage{alltt}
 \usepackage{spverbatim}
+\usepackage{subfigure}
 \usetikzlibrary{positioning}
 \usepackage{listings,xcolor}
 \usetikzlibrary {positioning}
@@ -193,7 +194,7 @@ Por lo tanto la opción escogida para los valores perdidos es la siguiente:
 
  \begin{figure}[ht!]
 	\centering
-	\includegraphics[trim = 0mm 0mm 0mm 0mm, clip,scale=05]{images/nonas_cal}
+	\includegraphics[trim = 0mm 0mm 0mm 0mm, clip,scale=0.5]{images/nonas_cal}
 	\caption{Imputación valores perdidos con missForest}
 	\label{fig:nonas_cal}
 \end{figure}
@@ -281,8 +282,8 @@ En los tipos mostrados hay algunos que no es correcto el tipo. En la educación 
 
 La explicación de considerar el tiempo de estudio y el tiempo de viaje es que, aunque pueden parecer numéricas, en realizar son factores. En la descripción del dataset aparece explicado:
 
-studytime: Weekly study time: (numeric: 1 - <2 hours, 2 - 2 to 5 hours, 3 - 5 to 10 hours, or 4 - >10 hours)
-traveltime: Home to school travel time (numeric: 1 - <15 min., 2 - 15 to 30 min., 3 - 30 min. to 1 hour, or 4 - >1 hour)
+studytime: Weekly study time: (numeric: 1 - $<$2 hours, 2 - 2 to 5 hours, 3 - 5 to 10 hours, or 4 - $>$10 hours)
+traveltime: Home to school travel time (numeric: 1 - $<$15 min., 2 - 15 to 30 min., 3 - 30 min. to 1 hour, or 4 - $>$1 hour)
 
 Por lo tanto, al ser categorías, las tratamos como factores y no como numéricas.
 
@@ -331,21 +332,58 @@ En el caso de la media de la nota G es más claro todavía. Los datos no demuest
 
 \section{Análisis Estadístico}
 \subsection{Análisis gráfico inicial}
-Observando las gráficas vemos que hay variables que parece que sí tienen influencia a simple vista en el consumo de alcohol tanto a diario como los fines de semana, como pueden ser el sexo y el estado de los padres. Sin embargo vemos otros que, a priori, no parece que tengan influencia así que en un primer momento vamos a dejar fuera del análisis si el alumno tiene internet, si tiene una relación, el tutor, la dirección, si realiza actividades extraescolares, si recibe clases de pago o si  recibe el apoyo de su familia en el estudio. 
+Observando las gráficas vemos que hay variables que parece que sí tienen influencia a simple vista en el consumo de alcohol tanto a diario como los fines de semana, como pueden ser el sexo y el estado de los padres. Sin embargo vemos otros que, a priori, no parece que tengan influencia así que en un primer momento vamos a dejar fuera del análisis la dirección, si el alumno tiene internet, si tiene una relación, el tutor, si realiza actividades extraescolares o si recibe clases de pago. 
+
+
+En este apartado vamos a mostrar únicamente las gráficas de las variables que hemos descartado en el estudio inicial, para ver que, efectivamente, a priori no tienen influencia en el consumo de alcohol. Las gráficas completas se muestran en el \textit{notebook}. 
+
+
+\begin{figure}[ht!]
+	\subfigure[Fin de semana]{\includegraphics[trim = 0mm 0mm 20mm 0mm, clip,scale=0.27]{images/bp_address_weekend.png}}\hfill
+	\subfigure[Diario]{\includegraphics[trim = 0mm 0mm 20mm 0mm, clip,scale=0.27]{images/bp_address_week.png}}
+	 \caption{Boxplot dirección - consumo alcohol}
+	 \label{fig:bpaddress}
+\end{figure}
+
+ \begin{figure}[hbp!]
+ 	\subfigure[Fin de semana]{\includegraphics[trim = 0mm 0mm 23mm 0mm, clip,scale=0.27]{images/bp_inet_weekend.png}}\hfill
+ 	\subfigure[Diario]{\includegraphics[trim = 0mm 0mm 0mm 0mm, clip,scale=0.27]{images/bp_inet_week.png}}
+ 	\caption{Boxplot Internet - consumo alcohol}
+ 	\label{fig:bpinet}
+ \end{figure}
+
+
+\begin{figure}[ht!]
+	\subfigure[Fin de semana]{\includegraphics[trim = 0mm 0mm 0mm 0mm, clip,scale=0.27]{images/bp_rom_weekend.png}}\hfill
+	\subfigure[Diario]{\includegraphics[trim = 0mm 0mm 0mm 0mm, clip,scale=0.27]{images/bp_rom_week.png}}
+	\caption{Boxplot relación romántica - consumo alcohol}
+	\label{fig:bprom}
+\end{figure}
+
+
+\begin{figure}[ht!]
+	\subfigure[Fin de semana]{\includegraphics[trim = 0mm 0mm 0mm 0mm, clip,scale=0.27]{images/bp_tutor_weekend.png}}\hfill
+	\subfigure[Diario]{\includegraphics[trim = 0mm 0mm 0mm 0mm, clip,scale=0.27]{images/bp_tutor_week.png}}
+	\caption{Boxplot tutor - consumo alcohol}
+	\label{fig:bptutor}
+\end{figure}
 
 
 
 \begin{figure}[ht!]
-  \centering
-  \begin{minipage}[b]{0.4\textwidth}
-    \includegraphics[trim = 0mm 0mm 0mm 0mm, clip,scale=0.4]{images/boxplot_walc_sex}
-    \caption{Consumo en fines de semana por sexo}
-  \end{minipage}
-  \hfill
-  \begin{minipage}[b]{0.4\textwidth}
-    \includegraphics[trim = 0mm 0mm 0mm 0mm, clip,scale=0.4]{images/boxplot_dalc_sex}
-    \caption{Consumo entre semana por sexo}
-  \end{minipage}
+	\subfigure[Fin de semana]{\includegraphics[trim = 0mm 0mm 0mm 0mm, clip,scale=0.27]{images/bp_act_weekend.png}}\hfill
+	\subfigure[Diario]{\includegraphics[trim = 0mm 0mm 0mm 0mm, clip,scale=0.27]{images/bp_act_week.png}}
+	\caption{Boxplot actividades extraescolares - consumo alcohol}
+	\label{fig:bpact}
+\end{figure}
+
+
+
+\begin{figure}[ht!]
+	\subfigure[Fin de semana]{\includegraphics[trim = 0mm 0mm 0mm 0mm, clip,scale=0.27]{images/bp_paid_weekend.png}}\hfill
+	\subfigure[Diario]{\includegraphics[trim = 0mm 0mm 0mm 0mm, clip,scale=0.27]{images/bp_paid_week.png}}
+	\caption{Boxplot clases pago - consumo alcohol}
+	\label{fig:bppaid}
 \end{figure}
 
 
@@ -357,9 +395,15 @@ Observando las gráficas vemos que hay variables que parece que sí tienen influ
 \end{figure}
 
 
+
+
+
+
+
 En la figura \ref{fig:sum4} podemos ver el resumen del dataset. Tras la fase de limpieza y este pequeño análisis hemos pasado de tener dos datasets con 33 dimensiones a \textbf{un único dataset con 21 dimensiones} pasando por un dataset conjunto de 41 dimensiones.  
 
 
+\clearpage
 
 \subsection{ Estadística Inferencial}
 En este apartado vamos a ver si hay diferencia significativas en el consumo de alcohol a diario y fines de semana entre estudiantes en función del sexo y de situación de los padres. También veremos si el consumo de alcohol es distinto entre estudiantes que aprueban y que suspenden:

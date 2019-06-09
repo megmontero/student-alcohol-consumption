@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018/Arch Linux) (preloaded format=pdflatex 2019.6.4)  8 JUN 2019 20:17
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018/Arch Linux) (preloaded format=pdflatex 2019.6.4)  8 JUN 2019 21:20
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -821,68 +821,53 @@ Package: appendix 2009/09/02 v1.2b extra appendix facilities
 \c@@ppsavesec=\count303
 \c@@ppsaveapp=\count304
 )
-(/usr/share/texmf-dist/tex/latex/subfig/subfig.sty
-Package: subfig 2005/06/28 ver: 1.3 subfig package
-
-(/usr/share/texmf-dist/tex/latex/caption/caption.sty
-Package: caption 2018/10/06 v3.3-154 Customizing captions (AR)
-
-(/usr/share/texmf-dist/tex/latex/caption/caption3.sty
-Package: caption3 2018/09/12 v1.8c caption3 kernel (AR)
-Package caption3 Info: TeX engine: e-TeX on input line 64.
-\captionmargin=\dimen267
-\captionmargin@=\dimen268
-\captionwidth=\dimen269
-\caption@tempdima=\dimen270
-\caption@indent=\dimen271
-\caption@parindent=\dimen272
-\caption@hangindent=\dimen273
-)
-\c@caption@flags=\count305
-\c@ContinuedFloat=\count306
-Package caption Info: hyperref package is loaded.
-)
-\c@KVtest=\count307
-\sf@farskip=\skip60
-\sf@captopadj=\dimen274
-\sf@capskip=\skip61
-\sf@nearskip=\skip62
-\c@subfigure=\count308
-\c@subfigure@save=\count309
-\c@lofdepth=\count310
-\c@subtable=\count311
-\c@subtable@save=\count312
-\c@lotdepth=\count313
-\sf@top=\skip63
-\sf@bottom=\skip64
-)
 (/usr/share/texmf-dist/tex/latex/base/alltt.sty
 Package: alltt 1997/06/16 v2.0g defines alltt environment
 )
 (/usr/share/texmf-dist/tex/latex/spverbatim/spverbatim.sty
 Package: spverbatim 2009/08/10 v1.0 Verbatim with breakable spaces
 )
+(/usr/share/texmf-dist/tex/latex/subfigure/subfigure.sty
+Package: subfigure 2002/03/15 v2.1.5 subfigure package
+\subfigtopskip=\skip60
+\subfigcapskip=\skip61
+\subfigcaptopadj=\dimen267
+\subfigbottomskip=\skip62
+\subfigcapmargin=\dimen268
+\subfiglabelskip=\skip63
+\c@subfigure=\count305
+\c@lofdepth=\count306
+\c@subtable=\count307
+\c@lotdepth=\count308
+
+****************************************
+* Local config file subfigure.cfg used *
+****************************************
+(/usr/share/texmf-dist/tex/latex/subfigure/subfigure.cfg)
+\subfig@top=\skip64
+\subfig@bottom=\skip65
+)
 (/usr/share/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrary
 positioning.code.tex
 File: tikzlibrarypositioning.code.tex 2019/02/02 v3.1.1 (3.1.1)
 ) (/usr/share/texmf-dist/tex/latex/listings/listings.sty
-\lst@mode=\count314
+\lst@mode=\count309
 \lst@gtempboxa=\box89
 \lst@token=\toks36
-\lst@length=\count315
-\lst@currlwidth=\dimen275
-\lst@column=\count316
-\lst@pos=\count317
-\lst@lostspace=\dimen276
-\lst@width=\dimen277
-\lst@newlines=\count318
-\lst@lineno=\count319
-\lst@maxwidth=\dimen278
+\lst@length=\count310
+\lst@currlwidth=\dimen269
+\lst@column=\count311
+\lst@pos=\count312
+\lst@lostspace=\dimen270
+\lst@width=\dimen271
+\lst@newlines=\count313
+\lst@lineno=\count314
+\lst@maxwidth=\dimen272
 
 (/usr/share/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2018/09/02 1.7 (Carsten Heinz)
-\c@lstnumber=\count320
-\lst@skipnumbers=\count321
+\c@lstnumber=\count315
+\lst@skipnumbers=\count316
 \lst@framebox=\box90
 )
 (/usr/share/texmf-dist/tex/latex/listings/listings.cfg
@@ -900,33 +885,33 @@ LaTeX Info: Redefining \% on input line 24.
 )
 \openout1 = `student-alcohol-consumption.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 86.
-LaTeX Font Info:    ... okay on input line 86.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 86.
-LaTeX Font Info:    ... okay on input line 86.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 86.
-LaTeX Font Info:    ... okay on input line 86.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 86.
-LaTeX Font Info:    ... okay on input line 86.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 86.
-LaTeX Font Info:    ... okay on input line 86.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 86.
-LaTeX Font Info:    ... okay on input line 86.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 86.
-LaTeX Font Info:    ... okay on input line 86.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 87.
+LaTeX Font Info:    ... okay on input line 87.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 87.
+LaTeX Font Info:    ... okay on input line 87.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 87.
+LaTeX Font Info:    ... okay on input line 87.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 87.
+LaTeX Font Info:    ... okay on input line 87.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 87.
+LaTeX Font Info:    ... okay on input line 87.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 87.
+LaTeX Font Info:    ... okay on input line 87.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 87.
+LaTeX Font Info:    ... okay on input line 87.
 
 (/usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count322
-\scratchdimen=\dimen279
+\scratchcounter=\count317
+\scratchdimen=\dimen273
 \scratchbox=\box91
-\nofMPsegments=\count323
-\nofMParguments=\count324
+\nofMPsegments=\count318
+\nofMParguments=\count319
 \everyMPshowfont=\toks37
-\MPscratchCnt=\count325
-\MPscratchDim=\dimen280
-\MPnumerator=\count326
-\makeMPintoPDFobject=\count327
+\MPscratchCnt=\count320
+\MPscratchDim=\dimen274
+\MPnumerator=\count321
+\makeMPintoPDFobject=\count322
 \everyMPtoPDFconversion=\toks38
 ) (/usr/share/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
@@ -945,8 +930,8 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-LaTeX Info: Redefining \. on input line 86.
-LaTeX Info: Redefining \% on input line 86.
+LaTeX Info: Redefining \. on input line 87.
+LaTeX Info: Redefining \% on input line 87.
 
 babelbib: Set bibliography fall-back language to spanish
 (/usr/share/texmf-dist/tex/latex/babelbib/spanish.bdf
@@ -957,18 +942,18 @@ babelbib extension \btxifchangecaseoff added to \extrasspanish
 babelbib: Load BibTeX extensions \bibsspanish for spanish
 babelbib: Set language for keywords in the bibliography fixed to spanish
 \AtBeginShipoutBox=\box92
-Package hyperref Info: Link coloring OFF on input line 86.
+Package hyperref Info: Link coloring OFF on input line 87.
 (/usr/share/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
 
 (/usr/share/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
-\c@section@level=\count328
+\c@section@level=\count323
 )
-LaTeX Info: Redefining \ref on input line 86.
-LaTeX Info: Redefining \pageref on input line 86.
-LaTeX Info: Redefining \nameref on input line 86.
+LaTeX Info: Redefining \ref on input line 87.
+LaTeX Info: Redefining \pageref on input line 87.
+LaTeX Info: Redefining \nameref on input line 87.
 
 (./student-alcohol-consumption.out) (./student-alcohol-consumption.out)
 \@outlinefile=\write5
@@ -976,18 +961,14 @@ LaTeX Info: Redefining \nameref on input line 86.
 
 
 ABD: EveryShipout initializing macros
-Package caption Info: Begin \AtBeginDocument code.
-Package caption Info: subfig package v1.3 is loaded.
-Package caption Info: listings package is loaded.
-Package caption Info: End \AtBeginDocument code.
-\c@lstlisting=\count329
+\c@lstlisting=\count324
 
 babelbib: Set language for keywords in the bibliography fixed to spanish
-LaTeX Font Info:    Try loading font information for U+msa on input line 88.
+LaTeX Font Info:    Try loading font information for U+msa on input line 89.
 (/usr/share/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 88.
+LaTeX Font Info:    Try loading font information for U+msb on input line 89.
 
 (/usr/share/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -995,7 +976,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 <images/uoc.png, id=110, 313.17pt x 162.6075pt>
 File: images/uoc.png Graphic file (type png)
 <use images/uoc.png>
-Package pdftex.def Info: images/uoc.png  used on input line 88.
+Package pdftex.def Info: images/uoc.png  used on input line 89.
 (pdftex.def)             Requested size: 93.95172pt x 48.78262pt.
 
 (./student-alcohol-consumption.toc
@@ -1008,55 +989,55 @@ LaTeX Info: Redefining \% on input line 1.
 \openout6 = `student-alcohol-consumption.toc'.
 
  [2]
-Overfull \hbox (35.08447pt too wide) in paragraph at lines 98--99
+Overfull \hbox (35.08447pt too wide) in paragraph at lines 99--100
 []\OT1/cmr/m/n/12 Saber iden-ti-fi-car los da-tos re-le-van-tes y los tra-ta-mi
 en-tos ne-ce-sa-rios (in-te-gra-ci^^Son,
  []
 
 
-Overfull \hbox (9.62224pt too wide) in paragraph at lines 99--100
+Overfull \hbox (9.62224pt too wide) in paragraph at lines 100--101
 []\OT1/cmr/m/n/12 Aprender a ana-li-zar los da-tos ade-cua-da-men-te pa-ra abor
 -dar la in-for-ma-ci^^Son
  []
 
 
-Overfull \hbox (27.83455pt too wide) in paragraph at lines 100--101
+Overfull \hbox (27.83455pt too wide) in paragraph at lines 101--102
 []\OT1/cmr/m/n/12 Identificar la me-jor re-pre-sen-ta-ci^^Son de los re-sul-ta-
 dos pa-ra apor-tar con-clu-sio-nes
  []
 
 
-Overfull \hbox (8.51253pt too wide) in paragraph at lines 101--102
+Overfull \hbox (8.51253pt too wide) in paragraph at lines 102--103
 []\OT1/cmr/m/n/12 Actuar con los prin-ci-pios ^^Seti-cos y le-ga-les re-la-cio-
 na-dos con la ma-ni-pu-la-ci^^Son
  []
 
 
-Overfull \hbox (7.17644pt too wide) in paragraph at lines 108--109
+Overfull \hbox (7.17644pt too wide) in paragraph at lines 109--110
 []\OT1/cmr/m/n/12 El da-ta-set es-co-gi-do ha si-do ob-te-ni-do a trav^^Ses de 
 una en-cues-ta de es-tu-dian-tes
  []
 
 
-Overfull \hbox (7.67172pt too wide) in paragraph at lines 108--109
+Overfull \hbox (7.67172pt too wide) in paragraph at lines 109--110
 \OT1/cmr/m/n/12 de da-tos con-tie-ne bas-tan-te in-for-ma-ci^^Son de in-ter^^Se
 s so-bre los es-tu-dian-tes. Aun-que
  []
 
 
-Overfull \hbox (7.73468pt too wide) in paragraph at lines 108--109
+Overfull \hbox (7.73468pt too wide) in paragraph at lines 109--110
 \OT1/cmr/m/n/12 es-tu-dian-tes seg^^Sun va-ria-bles so-cio-de-mogr^^Safi-cas, d
 i-cho da-ta-set con-tie-ne su-fi-cien-te
  []
 
 
-Overfull \hbox (2.18613pt too wide) in paragraph at lines 108--109
+Overfull \hbox (2.18613pt too wide) in paragraph at lines 109--110
 \OT1/cmr/m/n/12 in-for-ma-ci^^Son pa-ra otro ti-po de es-tu-dios, cen-tra-dos p
 or ejem-plo en la ca-li-fi-ca-ci^^Son
  []
 
 
-Overfull \hbox (7.42915pt too wide) in paragraph at lines 113--114
+Overfull \hbox (7.42915pt too wide) in paragraph at lines 114--115
 []\OT1/cmr/m/it/12 school\OT1/cmr/m/n/12 : De-fi-ne la es-cue-la del es-tu-dian
 -te. Pue-de ser ``GP'' (Ga-briel Pe-rei-ra)
  []
@@ -1064,7 +1045,7 @@ Overfull \hbox (7.42915pt too wide) in paragraph at lines 113--114
 [3
 
 ]
-Overfull \hbox (19.84752pt too wide) in paragraph at lines 133--134
+Overfull \hbox (19.84752pt too wide) in paragraph at lines 134--135
 []\OT1/cmr/m/it/12 higher\OT1/cmr/m/n/12 : De-fi-ne si el es-tu-dian-te tie-ne 
 in-ten-ci^^Son de rea-li-zar es-tu-dios su-pe-rio-res. 
  []
@@ -1073,20 +1054,20 @@ in-ten-ci^^Son de rea-li-zar es-tu-dios su-pe-rio-res.
 <images/summary_inicial.png, id=196, 1119.18124pt x 526.96875pt>
 File: images/summary_inicial.png Graphic file (type png)
 <use images/summary_inicial.png>
-Package pdftex.def Info: images/summary_inicial.png  used on input line 164.
+Package pdftex.def Info: images/summary_inicial.png  used on input line 165.
 (pdftex.def)             Requested size: 447.66457pt x 210.78375pt.
 
-Overfull \hbox (57.66457pt too wide) in paragraph at lines 164--165
+Overfull \hbox (57.66457pt too wide) in paragraph at lines 165--166
  [][] 
  []
 
 <images/nonas_paid.png, id=198, 838.13126pt x 228.855pt>
 File: images/nonas_paid.png Graphic file (type png)
 <use images/nonas_paid.png>
-Package pdftex.def Info: images/nonas_paid.png  used on input line 182.
+Package pdftex.def Info: images/nonas_paid.png  used on input line 183.
 (pdftex.def)             Requested size: 419.0646pt x 114.42722pt.
 
-Overfull \hbox (29.0646pt too wide) in paragraph at lines 182--183
+Overfull \hbox (29.0646pt too wide) in paragraph at lines 183--184
  [][] 
  []
 
@@ -1094,107 +1075,106 @@ Overfull \hbox (29.0646pt too wide) in paragraph at lines 182--183
 <images/nonas_cal.png, id=206, 808.01875pt x 119.44624pt>
 File: images/nonas_cal.png Graphic file (type png)
 <use images/nonas_cal.png>
-Package pdftex.def Info: images/nonas_cal.png  used on input line 196.
-(pdftex.def)             Requested size: 4040.08392pt x 597.22969pt.
+Package pdftex.def Info: images/nonas_cal.png  used on input line 197.
+(pdftex.def)             Requested size: 404.00839pt x 59.72296pt.
 
-Overfull \hbox (3650.08392pt too wide) in paragraph at lines 196--197
+Overfull \hbox (14.00839pt too wide) in paragraph at lines 197--198
  [][] 
  []
-
-
-LaTeX Warning: Float too large for page by 29.72968pt on input line 199.
 
 <images/summary_nonas.png, id=208, 1096.095pt x 458.71375pt>
 File: images/summary_nonas.png Graphic file (type png)
 <use images/summary_nonas.png>
-Package pdftex.def Info: images/summary_nonas.png  used on input line 205.
+Package pdftex.def Info: images/summary_nonas.png  used on input line 206.
 (pdftex.def)             Requested size: 438.43024pt x 183.48224pt.
 
-Overfull \hbox (48.43024pt too wide) in paragraph at lines 205--206
+Overfull \hbox (48.43024pt too wide) in paragraph at lines 206--207
  [][] 
  []
 
-<images/summary_0s.png, id=211, 812.03375pt x 248.93pt>
+[7 <./images/nonas_paid.png> <./images/nonas_cal.png> <./images/summary_nonas.p
+ng>]
+<images/summary_0s.png, id=222, 812.03375pt x 248.93pt>
 File: images/summary_0s.png Graphic file (type png)
 <use images/summary_0s.png>
-Package pdftex.def Info: images/summary_0s.png  used on input line 221.
+Package pdftex.def Info: images/summary_0s.png  used on input line 222.
 (pdftex.def)             Requested size: 324.80774pt x 99.57022pt.
 
-Overfull \hbox (20.37115pt too wide) in paragraph at lines 240--240
+Overfull \hbox (20.37115pt too wide) in paragraph at lines 241--241
 |[]\OT1/cmr/bx/n/14.4 Selecci^^Son de va-ria-ble-s/-Re-duc-ci^^Son de di-men-si
 o-na-li-dad| 
  []
 
 
-Overfull \hbox (0.78708pt too wide) in paragraph at lines 241--242
+Overfull \hbox (0.78708pt too wide) in paragraph at lines 242--243
 \OT1/cmr/m/n/12 apro-xi-ma-ci^^Son pa-ra re-du-cir la di-men-sio-na-li-dad. Pos
 -te-rior-men-te en los pri-me-ros
  []
 
-[7 <./images/nonas_paid.png>]
-<images/red_calif.png, id=221, 809.0225pt x 52.195pt>
+[8 <./images/summary_0s.png>]
+<images/red_calif.png, id=230, 809.0225pt x 52.195pt>
 File: images/red_calif.png Graphic file (type png)
 <use images/red_calif.png>
-Package pdftex.def Info: images/red_calif.png  used on input line 250.
+Package pdftex.def Info: images/red_calif.png  used on input line 251.
 (pdftex.def)             Requested size: 404.51027pt x 26.09743pt.
 
-Overfull \hbox (14.51027pt too wide) in paragraph at lines 250--251
+Overfull \hbox (14.51027pt too wide) in paragraph at lines 251--252
  [][] 
  []
 
 
-Overfull \hbox (8.84439pt too wide) in paragraph at lines 256--257
+Overfull \hbox (8.84439pt too wide) in paragraph at lines 257--258
 []\OT1/cmr/m/n/12 Tambi^^Sen va-mos a rea-li-zar el mis-mo pa-so pa-ra las au-d
 ien-cia, pe-ro ob-ser-van-do
  []
 
-<images/red_aus.png, id=223, 844.15375pt x 249.93375pt>
+<images/red_aus.png, id=232, 844.15375pt x 249.93375pt>
 File: images/red_aus.png Graphic file (type png)
 <use images/red_aus.png>
-Package pdftex.def Info: images/red_aus.png  used on input line 260.
+Package pdftex.def Info: images/red_aus.png  used on input line 261.
 (pdftex.def)             Requested size: 422.07584pt x 124.96657pt.
 
-Overfull \hbox (32.07584pt too wide) in paragraph at lines 260--261
+Overfull \hbox (32.07584pt too wide) in paragraph at lines 261--262
  [][] 
  []
 
 File: images/summary_nonas.png Graphic file (type png)
 <use images/summary_nonas.png>
-Package pdftex.def Info: images/summary_nonas.png  used on input line 272.
+Package pdftex.def Info: images/summary_nonas.png  used on input line 273.
 (pdftex.def)             Requested size: 438.43024pt x 183.48224pt.
 
-Overfull \hbox (48.43024pt too wide) in paragraph at lines 272--273
+Overfull \hbox (48.43024pt too wide) in paragraph at lines 273--274
  [][] 
  []
 
-[8]
-<images/outliers_age_1.png, id=232, 526.96875pt x 325.215pt>
+[9 <./images/red_calif.png> <./images/red_aus.png>]
+<images/outliers_age_1.png, id=245, 526.96875pt x 325.215pt>
 File: images/outliers_age_1.png Graphic file (type png)
 <use images/outliers_age_1.png>
-Package pdftex.def Info: images/outliers_age_1.png  used on input line 298.
+Package pdftex.def Info: images/outliers_age_1.png  used on input line 299.
 (pdftex.def)             Requested size: 210.78375pt x 130.0837pt.
 
-Overfull \hbox (54.78613pt too wide) in paragraph at lines 298--299
+Overfull \hbox (54.78613pt too wide) in paragraph at lines 299--300
 [][] 
  []
 
-<images/outliers_age_2.png, id=234, 526.96875pt x 325.215pt>
+<images/outliers_age_2.png, id=247, 526.96875pt x 325.215pt>
 File: images/outliers_age_2.png Graphic file (type png)
 <use images/outliers_age_2.png>
-Package pdftex.def Info: images/outliers_age_2.png  used on input line 303.
+Package pdftex.def Info: images/outliers_age_2.png  used on input line 304.
 (pdftex.def)             Requested size: 210.78375pt x 130.0837pt.
 
-Overfull \hbox (54.78613pt too wide) in paragraph at lines 303--304
+Overfull \hbox (54.78613pt too wide) in paragraph at lines 304--305
 [][] 
  []
 
-<images/outliers_age_3.png, id=236, 526.96875pt x 325.215pt>
+<images/outliers_age_3.png, id=249, 526.96875pt x 325.215pt>
 File: images/outliers_age_3.png Graphic file (type png)
 <use images/outliers_age_3.png>
-Package pdftex.def Info: images/outliers_age_3.png  used on input line 308.
+Package pdftex.def Info: images/outliers_age_3.png  used on input line 309.
 (pdftex.def)             Requested size: 210.78375pt x 130.0837pt.
 
-Overfull \hbox (54.78613pt too wide) in paragraph at lines 308--309
+Overfull \hbox (54.78613pt too wide) in paragraph at lines 309--310
 [][] 
  []
 
@@ -1202,239 +1182,279 @@ Overfull \hbox (54.78613pt too wide) in paragraph at lines 308--309
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 
-Overfull \hbox (16.55072pt too wide) in paragraph at lines 314--315
+Overfull \hbox (16.55072pt too wide) in paragraph at lines 315--316
 \OT1/cmr/m/n/12 es-tu-dian-tes de 22 a~nos) co-mo va-lor err^^Soneo. Adem^^Sas,
  al ser tan po-cos es-tu-dian-tes,
  []
 
-<images/outliers_g_1.png, id=238, 526.96875pt x 325.215pt>
+[10]
+<images/outliers_g_1.png, id=256, 526.96875pt x 325.215pt>
 File: images/outliers_g_1.png Graphic file (type png)
 <use images/outliers_g_1.png>
-Package pdftex.def Info: images/outliers_g_1.png  used on input line 319.
+Package pdftex.def Info: images/outliers_g_1.png  used on input line 320.
 (pdftex.def)             Requested size: 210.78375pt x 130.0837pt.
 
-Overfull \hbox (54.78613pt too wide) in paragraph at lines 319--320
+Overfull \hbox (54.78613pt too wide) in paragraph at lines 320--321
 [][] 
  []
 
-<images/outliers_g_2.png, id=240, 526.96875pt x 325.215pt>
+<images/outliers_g_2.png, id=258, 526.96875pt x 325.215pt>
 File: images/outliers_g_2.png Graphic file (type png)
 <use images/outliers_g_2.png>
-Package pdftex.def Info: images/outliers_g_2.png  used on input line 324.
+Package pdftex.def Info: images/outliers_g_2.png  used on input line 325.
 (pdftex.def)             Requested size: 210.78375pt x 130.0837pt.
 
-Overfull \hbox (54.78613pt too wide) in paragraph at lines 324--325
+Overfull \hbox (54.78613pt too wide) in paragraph at lines 325--326
 [][] 
  []
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<images/boxplot_walc_sex.png, id=242, 526.96875pt x 325.215pt>
-File: images/boxplot_walc_sex.png Graphic file (type png)
-<use images/boxplot_walc_sex.png>
-Package pdftex.def Info: images/boxplot_walc_sex.png  used on input line 341.
-(pdftex.def)             Requested size: 210.78375pt x 130.0837pt.
+[11 <./images/outliers_age_1.png> <./images/outliers_age_2.png> <./images/outli
+ers_age_3.png>]
+<images/bp_address_weekend.png, id=270, 688.5725pt x 487.8225pt>
+File: images/bp_address_weekend.png Graphic file (type png)
+<use images/bp_address_weekend.png>
+Package pdftex.def Info: images/bp_address_weekend.png  used on input line 342.
 
-Overfull \hbox (54.78613pt too wide) in paragraph at lines 341--342
-[][] 
- []
-
-<images/boxplot_dalc_sex.png, id=244, 526.96875pt x 325.215pt>
-File: images/boxplot_dalc_sex.png Graphic file (type png)
-<use images/boxplot_dalc_sex.png>
-Package pdftex.def Info: images/boxplot_dalc_sex.png  used on input line 346.
-(pdftex.def)             Requested size: 210.78375pt x 130.0837pt.
-
-Overfull \hbox (54.78613pt too wide) in paragraph at lines 346--347
-[][] 
- []
-
-
-Underfull \hbox (badness 5189) in paragraph at lines 347--347
-[]\OT1/cmr/m/n/12 Figura 15: |Con-su-mo en-tre
- []
-
-[9]
-<images/summary_final.png, id=250, 850.17625pt x 348.30125pt>
+(pdftex.def)             Requested size: 170.55237pt x 131.71382pt.
+<images/bp_address_week.png, id=272, 669.50125pt x 480.79625pt>
+File: images/bp_address_week.png Graphic file (type png)
+<use images/bp_address_week.png>
+Package pdftex.def Info: images/bp_address_week.png  used on input line 343.
+(pdftex.def)             Requested size: 165.40306pt x 129.81671pt.
+<images/bp_inet_weekend.png, id=274, 682.55pt x 486.81876pt>
+File: images/bp_inet_weekend.png Graphic file (type png)
+<use images/bp_inet_weekend.png>
+Package pdftex.def Info: images/bp_inet_weekend.png  used on input line 349.
+(pdftex.def)             Requested size: 166.62157pt x 131.44281pt.
+<images/bp_inet_week.png, id=276, 616.3025pt x 481.8pt>
+File: images/bp_inet_week.png Graphic file (type png)
+<use images/bp_inet_week.png>
+Package pdftex.def Info: images/bp_inet_week.png  used on input line 350.
+(pdftex.def)             Requested size: 166.4039pt x 130.08772pt.
+<images/bp_rom_weekend.png, id=278, 597.23125pt x 480.79625pt>
+File: images/bp_rom_weekend.png Graphic file (type png)
+<use images/bp_rom_weekend.png>
+Package pdftex.def Info: images/bp_rom_weekend.png  used on input line 357.
+(pdftex.def)             Requested size: 161.25458pt x 129.81671pt.
+<images/bp_rom_week.png, id=280, 618.31pt x 480.79625pt>
+File: images/bp_rom_week.png Graphic file (type png)
+<use images/bp_rom_week.png>
+Package pdftex.def Info: images/bp_rom_week.png  used on input line 358.
+(pdftex.def)             Requested size: 166.94592pt x 129.81671pt.
+<images/bp_tutor_weekend.png, id=282, 576.1525pt x 476.78125pt>
+File: images/bp_tutor_weekend.png Graphic file (type png)
+<use images/bp_tutor_weekend.png>
+Package pdftex.def Info: images/bp_tutor_weekend.png  used on input line 365.
+(pdftex.def)             Requested size: 155.56325pt x 128.73265pt.
+<images/bp_tutor_week.png, id=284, 589.20125pt x 481.8pt>
+File: images/bp_tutor_week.png Graphic file (type png)
+<use images/bp_tutor_week.png>
+Package pdftex.def Info: images/bp_tutor_week.png  used on input line 366.
+(pdftex.def)             Requested size: 159.08646pt x 130.08772pt.
+<images/bp_act_weekend.png, id=286, 610.28pt x 485.815pt>
+File: images/bp_act_weekend.png Graphic file (type png)
+<use images/bp_act_weekend.png>
+Package pdftex.def Info: images/bp_act_weekend.png  used on input line 374.
+(pdftex.def)             Requested size: 164.7778pt x 131.1718pt.
+<images/bp_act_week.png, id=288, 598.235pt x 489.83pt>
+File: images/bp_act_week.png Graphic file (type png)
+<use images/bp_act_week.png>
+Package pdftex.def Info: images/bp_act_week.png  used on input line 375.
+(pdftex.def)             Requested size: 161.5256pt x 132.25586pt.
+<images/bp_paid_weekend.png, id=290, 600.2425pt x 476.78125pt>
+File: images/bp_paid_weekend.png Graphic file (type png)
+<use images/bp_paid_weekend.png>
+Package pdftex.def Info: images/bp_paid_weekend.png  used on input line 383.
+(pdftex.def)             Requested size: 162.06763pt x 128.73265pt.
+<images/bp_paid_week.png, id=292, 612.2875pt x 488.82625pt>
+File: images/bp_paid_week.png Graphic file (type png)
+<use images/bp_paid_week.png>
+Package pdftex.def Info: images/bp_paid_week.png  used on input line 384.
+(pdftex.def)             Requested size: 165.31982pt x 131.98485pt.
+<images/summary_final.png, id=294, 940.51375pt x 351.3125pt>
 File: images/summary_final.png Graphic file (type png)
 <use images/summary_final.png>
-Package pdftex.def Info: images/summary_final.png  used on input line 354.
-(pdftex.def)             Requested size: 340.06447pt x 139.31802pt.
-
-Overfull \hbox (5.2002pt too wide) in paragraph at lines 402--402
+Package pdftex.def Info: images/summary_final.png  used on input line 392.
+(pdftex.def)             Requested size: 376.19884pt x 140.5225pt.
+ [12 <./images/outliers_g_1.png> <./images/outliers_g_2.png>]
+[13 <./images/bp_address_weekend.png> <./images/bp_address_week.png> <./images/
+bp_inet_weekend.png> <./images/bp_inet_week.png> <./images/bp_rom_weekend.png> 
+<./images/bp_rom_week.png>] [14 <./images/bp_tutor_weekend.png> <./images/bp_tu
+tor_week.png> <./images/bp_act_weekend.png> <./images/bp_act_week.png> <./image
+s/bp_paid_weekend.png> <./images/bp_paid_week.png>] [15 <./images/summary_final
+.png>]
+Overfull \hbox (5.2002pt too wide) in paragraph at lines 446--446
 []\OT1/cmtt/m/n/12 t.test(data_weekend_sex_m,[] data_weekend_sex_f,[] var.equal
 [] =[] TRUE,[]
  []
 
 
-Overfull \hbox (5.2002pt too wide) in paragraph at lines 402--402
+Overfull \hbox (5.2002pt too wide) in paragraph at lines 446--446
 []\OT1/cmtt/m/n/12 alternative[] hypothesis:[] true[] difference[] in[] means[]
  is[] not[] equal[] to[]
  []
 
-[10]
-Overfull \hbox (8.35274pt too wide) in paragraph at lines 404--405
+
+Overfull \hbox (8.35274pt too wide) in paragraph at lines 448--449
 []\OT1/cmr/m/n/12 Por el p-value ve-mos que no po-de-mos acep-tar la hip^^Sote-
 sis nu-la, y con-clui-mos
  []
 
+[16
 
-Overfull \hbox (5.2002pt too wide) in paragraph at lines 426--426
+]
+Overfull \hbox (5.2002pt too wide) in paragraph at lines 470--470
 []\OT1/cmtt/m/n/12 t.test(data_weekday_sex_m,[] data_weekday_sex_f,[] var.equal
 [] =[] TRUE,[]
  []
 
 
-Overfull \hbox (5.2002pt too wide) in paragraph at lines 426--426
+Overfull \hbox (5.2002pt too wide) in paragraph at lines 470--470
 []\OT1/cmtt/m/n/12 alternative[] hypothesis:[] true[] difference[] in[] means[]
  is[] not[] equal[] to[]
  []
 
-[11]
-Overfull \hbox (5.2002pt too wide) in paragraph at lines 453--453
+
+Overfull \hbox (5.2002pt too wide) in paragraph at lines 497--497
 []\OT1/cmtt/m/n/12 data_weekend_pstatus_t[] <-[] students$Walc[students$Pstatus
 [] ==[] 'T'][] 
  []
 
 
-Overfull \hbox (5.2002pt too wide) in paragraph at lines 453--453
+Overfull \hbox (5.2002pt too wide) in paragraph at lines 497--497
 []\OT1/cmtt/m/n/12 data_weekend_pstatus_a[] <-[] students$Walc[students$Pstatus
 [] ==[] 'A'][] 
  []
 
 
-Overfull \hbox (5.2002pt too wide) in paragraph at lines 453--453
+Overfull \hbox (5.2002pt too wide) in paragraph at lines 497--497
 []\OT1/cmtt/m/n/12 t.test(data_weekend_pstatus_t,[] data_weekend_pstatus_a,[] v
 ar.equal[]
  []
 
-
-Overfull \hbox (5.2002pt too wide) in paragraph at lines 453--453
+[17]
+Overfull \hbox (5.2002pt too wide) in paragraph at lines 497--497
 []\OT1/cmtt/m/n/12 alternative[] hypothesis:[] true[] difference[] in[] means[]
  is[] not[] equal[] to[]
  []
 
 
-Overfull \hbox (16.7082pt too wide) in paragraph at lines 454--455
+Overfull \hbox (16.7082pt too wide) in paragraph at lines 498--499
 []\OT1/cmr/m/n/12 En el ca-so del con-su-mo en los fi-nes de se-ma-na, no hay d
 i-fe-ren-cias sig-ni-fi-ca-ti-vas
  []
 
 
-Overfull \hbox (5.2002pt too wide) in paragraph at lines 475--475
+Overfull \hbox (5.2002pt too wide) in paragraph at lines 519--519
 []\OT1/cmtt/m/n/12 data_weekday_pstatus_t[] <-[] students$Dalc[students$Pstatus
 [] ==[] 'T'][] 
  []
 
 
-Overfull \hbox (5.2002pt too wide) in paragraph at lines 475--475
+Overfull \hbox (5.2002pt too wide) in paragraph at lines 519--519
 []\OT1/cmtt/m/n/12 data_weekday_pstatus_a[] <-[] students$Dalc[students$Pstatus
 [] ==[] 'A'][] 
  []
 
 
-Overfull \hbox (5.2002pt too wide) in paragraph at lines 475--475
+Overfull \hbox (5.2002pt too wide) in paragraph at lines 519--519
 []\OT1/cmtt/m/n/12 t.test(data_weekday_pstatus_t,[] data_weekday_pstatus_a,[] v
 ar.equal[]
  []
 
 
-Overfull \hbox (5.2002pt too wide) in paragraph at lines 475--475
+Overfull \hbox (5.2002pt too wide) in paragraph at lines 519--519
 []\OT1/cmtt/m/n/12 alternative[] hypothesis:[] true[] difference[] in[] means[]
  is[] not[] equal[] to[]
  []
 
-[12]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 479.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 479.
+(hyperref)                removing `math shift' on input line 523.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 479.
+(hyperref)                removing `math shift' on input line 523.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 479.
+(hyperref)                removing `math shift' on input line 523.
 
 
-Overfull \hbox (5.2002pt too wide) in paragraph at lines 501--501
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 523.
+
+[18]
+Overfull \hbox (5.2002pt too wide) in paragraph at lines 545--545
 []\OT1/cmtt/m/n/12 t.test(data_weekend_aprobados,[] data_weekend_suspensos,[] v
 ar.equal[]
  []
 
 
-Overfull \hbox (5.2002pt too wide) in paragraph at lines 501--501
+Overfull \hbox (5.2002pt too wide) in paragraph at lines 545--545
 []\OT1/cmtt/m/n/12 alternative[] hypothesis:[] true[] difference[] in[] means[]
  is[] not[] equal[] to[]
  []
 
 
-Overfull \hbox (5.2002pt too wide) in paragraph at lines 521--521
+Overfull \hbox (5.2002pt too wide) in paragraph at lines 565--565
 []\OT1/cmtt/m/n/12 t.test(data_weekday_aprobados,[] data_weekday_suspensos,[] v
 ar.equal[]
  []
 
-[13]
-Overfull \hbox (5.2002pt too wide) in paragraph at lines 521--521
+
+Overfull \hbox (5.2002pt too wide) in paragraph at lines 565--565
 []\OT1/cmtt/m/n/12 alternative[] hypothesis:[] true[] difference[] in[] means[]
  is[] not[] equal[] to[]
  []
 
-
-Overfull \hbox (11.3752pt too wide) in paragraph at lines 559--559
+[19]
+Overfull \hbox (11.3752pt too wide) in paragraph at lines 603--603
 []\OT1/cmtt/m/n/12 modelo[] <-[] lm(Walc[] ~[] goout[] +[] sexR[] +[] Dalc[] +[
 ] age[] +[] studytime,[] data[] =[]
  []
 
 
-Overfull \hbox (60.77522pt too wide) in paragraph at lines 559--559
+Overfull \hbox (60.77522pt too wide) in paragraph at lines 603--603
 []\OT1/cmtt/m/n/12 lm(formula[] =[] Walc[] ~[] G[] +[] sexR[] +[] Dalc[] +[] st
 udytime[] +[] goout,[] data[] =[] students)[] 
  []
 
-[14] [15] [16]
-Overfull \hbox (19.81094pt too wide) in paragraph at lines 632--633
+[20] [21]
+Overfull \hbox (19.81094pt too wide) in paragraph at lines 676--677
 []\OT1/cmr/m/n/12 Como po-de-mos ob-ser-var, no hay co-rre-la-ci^^Son en-tre la
  ca-li-fi-ca-ci^^Son del es-tu-dian-te
  []
 
 
-Overfull \hbox (4.60918pt too wide) in paragraph at lines 632--633
+Overfull \hbox (4.60918pt too wide) in paragraph at lines 676--677
 \OT1/cmr/m/n/12 y el se-xo o el es-ta-do de con-vi-ven-cia de los pa-dres. Sin 
 em-bar-go, en el desem-pe~no
  []
 
-[17] (./student-alcohol-consumption.bbl) [18]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 647.
- [19 <./images/nonas_cal.png>]
-[20 <./images/summary_nonas.png> <./images/summary_0s.png> <./images/red_calif.
-png> <./images/red_aus.png>] [21 <./images/outliers_age_1.png> <./images/outlie
-rs_age_2.png> <./images/outliers_age_3.png>] [22 <./images/outliers_g_1.png> <.
-/images/outliers_g_2.png> <./images/boxplot_walc_sex.png> <./images/boxplot_dal
-c_sex.png> <./images/summary_final.png>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 647.
- (./student-alcohol-consumption.aux
+[22] [23] (./student-alcohol-consumption.bbl) [24]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 691.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 691.
+
+(./student-alcohol-consumption.aux
 LaTeX Info: Redefining \. on input line 24.
 LaTeX Info: Redefining \% on input line 24.
 )
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 647.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 647.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 691.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 691.
 Package rerunfilecheck Info: File `student-alcohol-consumption.out' has not cha
 nged.
 (rerunfilecheck)             Checksum: BCD9EDF39A413CC27DBAA211E0A4AA85;1440.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 647.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 691.
  ) 
 Here is how much of TeX's memory you used:
- 31643 strings out of 492616
- 592925 string characters out of 6135178
- 682393 words of memory out of 5000000
- 35034 multiletter control sequences out of 15000+600000
+ 30648 strings out of 492616
+ 574783 string characters out of 6135178
+ 657641 words of memory out of 5000000
+ 34011 multiletter control sequences out of 15000+600000
  542526 words of font info for 63 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  62i,11n,74p,953b,681s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1442,15 +1462,16 @@ Here is how much of TeX's memory you used:
 texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texmf-dist/fo
 nts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-dist/fonts/type1/publ
 ic/amsfonts/cm/cmmi12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmmi8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></us
-r/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1
-/public/amsfonts/cm/cmti12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmtt12.pfb>
-Output written on student-alcohol-consumption.pdf (22 pages, 552158 bytes).
+/cmmi8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></us
+r/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmti12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pf
+b>
+Output written on student-alcohol-consumption.pdf (24 pages, 678133 bytes).
 PDF statistics:
- 394 PDF objects out of 1000 (max. 8388607)
- 304 compressed objects within 4 object streams
- 90 named destinations out of 1000 (max. 500000)
- 455 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 461 PDF objects out of 1000 (max. 8388607)
+ 348 compressed objects within 4 object streams
+ 112 named destinations out of 1000 (max. 500000)
+ 565 words of extra memory for PDF output out of 10000 (max. 10000000)
 

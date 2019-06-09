@@ -549,10 +549,14 @@ mf <-missForest(students.nonas, maxiter = 10, ntree = 100, variablewise = FALSE,
 ##   missForest iteration 2 in progress...done!
 ##   missForest iteration 3 in progress...done!
 ##   missForest iteration 4 in progress...done!
+##   missForest iteration 5 in progress...done!
+##   missForest iteration 6 in progress...done!
+##   missForest iteration 7 in progress...done!
 ```
 
 ```r
 students.nonas <- mf$ximp
+
 summary(students.nonas)
 ```
 
@@ -594,25 +598,33 @@ summary(students.nonas)
 ##  Max.   :5.000   Max.   :5.000   Max.   :5.000   Max.   :5.000  
 ##    guardian   famsup      studytime        G1.por          G1.mat      
 ##  father:169   no :287   Min.   :1.00   Min.   : 0.00   Min.   : 3.000  
-##  mother:491   yes:437   1st Qu.:1.00   1st Qu.: 9.64   1st Qu.: 8.000  
-##  other : 64             Median :2.00   Median :11.00   Median : 9.285  
-##                         Mean   :1.92   Mean   :11.27   Mean   :10.054  
+##  mother:491   yes:437   1st Qu.:1.00   1st Qu.: 9.28   1st Qu.: 8.000  
+##  other : 64             Median :2.00   Median :11.00   Median : 9.116  
+##                         Mean   :1.92   Mean   :11.28   Mean   :10.017  
 ##                         3rd Qu.:2.00   3rd Qu.:13.00   3rd Qu.:12.000  
 ##                         Max.   :4.00   Max.   :19.00   Max.   :19.000  
-##      G2.por          G2.mat          G3.por          G3.mat      
-##  Min.   : 0.00   Min.   : 0.00   Min.   : 0.00   Min.   : 0.000  
-##  1st Qu.:10.00   1st Qu.: 8.00   1st Qu.:10.00   1st Qu.: 7.954  
-##  Median :11.00   Median : 9.18   Median :12.00   Median : 9.488  
-##  Mean   :11.45   Mean   : 9.87   Mean   :11.75   Mean   : 9.667  
-##  3rd Qu.:13.00   3rd Qu.:12.00   3rd Qu.:14.00   3rd Qu.:12.000  
-##  Max.   :19.00   Max.   :19.00   Max.   :19.00   Max.   :20.000  
+##      G2.por          G2.mat           G3.por          G3.mat      
+##  Min.   : 0.00   Min.   : 0.000   Min.   : 0.00   Min.   : 0.000  
+##  1st Qu.:10.00   1st Qu.: 7.779   1st Qu.:10.00   1st Qu.: 7.622  
+##  Median :11.00   Median : 9.035   Median :12.00   Median : 9.055  
+##  Mean   :11.45   Mean   : 9.773   Mean   :11.78   Mean   : 9.535  
+##  3rd Qu.:13.00   3rd Qu.:12.000   3rd Qu.:14.00   3rd Qu.:12.000  
+##  Max.   :19.00   Max.   :19.000   Max.   :19.00   Max.   :20.000  
 ##   absences.mat     absences.por     paid    
 ##  Min.   : 0.000   Min.   : 0.000   no :515  
 ##  1st Qu.: 2.000   1st Qu.: 0.000   yes:209  
-##  Median : 5.000   Median : 2.000            
-##  Mean   : 6.368   Mean   : 3.811            
-##  3rd Qu.: 8.023   3rd Qu.: 6.000            
+##  Median : 5.157   Median : 2.000            
+##  Mean   : 6.350   Mean   : 3.821            
+##  3rd Qu.: 8.047   3rd Qu.: 6.000            
 ##  Max.   :75.000   Max.   :32.000
+```
+
+```r
+ncol(students.nonas)
+```
+
+```
+## [1] 37
 ```
 
 ## Análisis de  0s
@@ -628,24 +640,24 @@ summary(students.zerocolumns)
 ```
 ##       Medu            Fedu          failures          G1.por     
 ##  Min.   :0.000   Min.   :0.000   Min.   :0.0000   Min.   : 0.00  
-##  1st Qu.:2.000   1st Qu.:1.000   1st Qu.:0.0000   1st Qu.: 9.64  
+##  1st Qu.:2.000   1st Qu.:1.000   1st Qu.:0.0000   1st Qu.: 9.28  
 ##  Median :2.000   Median :2.000   Median :0.0000   Median :11.00  
-##  Mean   :2.485   Mean   :2.285   Mean   :0.3453   Mean   :11.27  
+##  Mean   :2.485   Mean   :2.285   Mean   :0.3453   Mean   :11.28  
 ##  3rd Qu.:4.000   3rd Qu.:3.000   3rd Qu.:0.0000   3rd Qu.:13.00  
 ##  Max.   :4.000   Max.   :4.000   Max.   :3.0000   Max.   :19.00  
-##      G2.por          G2.mat          G3.por          G3.mat      
-##  Min.   : 0.00   Min.   : 0.00   Min.   : 0.00   Min.   : 0.000  
-##  1st Qu.:10.00   1st Qu.: 8.00   1st Qu.:10.00   1st Qu.: 7.954  
-##  Median :11.00   Median : 9.18   Median :12.00   Median : 9.488  
-##  Mean   :11.45   Mean   : 9.87   Mean   :11.75   Mean   : 9.667  
-##  3rd Qu.:13.00   3rd Qu.:12.00   3rd Qu.:14.00   3rd Qu.:12.000  
-##  Max.   :19.00   Max.   :19.00   Max.   :19.00   Max.   :20.000  
+##      G2.por          G2.mat           G3.por          G3.mat      
+##  Min.   : 0.00   Min.   : 0.000   Min.   : 0.00   Min.   : 0.000  
+##  1st Qu.:10.00   1st Qu.: 7.779   1st Qu.:10.00   1st Qu.: 7.622  
+##  Median :11.00   Median : 9.035   Median :12.00   Median : 9.055  
+##  Mean   :11.45   Mean   : 9.773   Mean   :11.78   Mean   : 9.535  
+##  3rd Qu.:13.00   3rd Qu.:12.000   3rd Qu.:14.00   3rd Qu.:12.000  
+##  Max.   :19.00   Max.   :19.000   Max.   :19.00   Max.   :20.000  
 ##   absences.mat     absences.por   
 ##  Min.   : 0.000   Min.   : 0.000  
 ##  1st Qu.: 2.000   1st Qu.: 0.000  
-##  Median : 5.000   Median : 2.000  
-##  Mean   : 6.368   Mean   : 3.811  
-##  3rd Qu.: 8.023   3rd Qu.: 6.000  
+##  Median : 5.157   Median : 2.000  
+##  Mean   : 6.350   Mean   : 3.821  
+##  3rd Qu.: 8.047   3rd Qu.: 6.000  
 ##  Max.   :75.000   Max.   :32.000
 ```
 
@@ -655,7 +667,7 @@ Para el resto de casos vemos que el valor 0 también es posible ya que:
 
 - Es posible no haber suspendido ninguna asignatura, de hecho más del 75\% de alumnos así lo han hecho.
 - En las calificaciones es posible sacar un 0. 
-- En el caso de las ausencias también existen alumnos que no han faltado a ninguna clase. En el caso de las clases de portugues más del 25\%.
+- En el caso de las ausencias también existen alumnos que no han faltado a ninguna clase. En el caso de las clases de portugués más del 25\%.
 
 
 
@@ -717,17 +729,17 @@ summary(students.red)
 ##  3rd Qu.:3.000   3rd Qu.:5.000                          3rd Qu.:2.00  
 ##  Max.   :5.000   Max.   :5.000                          Max.   :4.00  
 ##   paid           G         
-##  no :515   Min.   : 3.922  
+##  no :515   Min.   : 3.678  
 ##  yes:209   1st Qu.: 8.833  
-##            Median :10.413  
-##            Mean   :10.677  
+##            Median :10.333  
+##            Mean   :10.638  
 ##            3rd Qu.:12.333  
 ##            Max.   :18.333
 ```
 
 
 
-En el caso de las ausencia vamos a aplicar el mismo método, sin embargo antes de realizar la media vamos a normalizar para evitar que tengan más peso las ausencias en matemáticas:
+En el caso de las ausencias vamos a aplicar el mismo método, sin embargo antes de realizar la media vamos a normalizar para evitar que tengan más peso las ausencias en matemáticas:
 
 ```r
 normalized<-function(y) {
@@ -780,10 +792,10 @@ summary(students.red)
 ##  3rd Qu.:3.000   3rd Qu.:5.000                          3rd Qu.:2.00  
 ##  Max.   :5.000   Max.   :5.000                          Max.   :4.00  
 ##   paid           G             absences      
-##  no :515   Min.   : 3.922   Min.   :0.00000  
-##  yes:209   1st Qu.: 8.833   1st Qu.:0.03125  
-##            Median :10.413   Median :0.06924  
-##            Mean   :10.677   Mean   :0.10199  
+##  no :515   Min.   : 3.678   Min.   :0.00000  
+##  yes:209   1st Qu.: 8.833   1st Qu.:0.03140  
+##            Median :10.333   Median :0.07074  
+##            Mean   :10.638   Mean   :0.10204  
 ##            3rd Qu.:12.333   3rd Qu.:0.13375  
 ##            Max.   :18.333   Max.   :0.87333
 ```
@@ -842,13 +854,13 @@ vars = c("sex","age","address","famsize","Pstatus","Medu","Fedu","Mjob","Fjob","
 
 for(i in vars) {
   if(is.factor(students.red[,i])){
-    f1 = students.red[,i]
-    plot <- ggplot(data = students.red, aes(x = f1, y = students.red[,"Walc"])) + 
-            geom_boxplot(aes(fill = f1), width = 0.8) + theme_bw()  +
+    var = students.red[,i]
+    plot <- ggplot(data = students.red, aes(x = var, y = students.red[,"Walc"])) + 
+            geom_boxplot(aes(fill = var), width = 0.8) + theme_bw()  +
             xlab(i) + ylab("Weekend Consumption")
     print(plot)
-    plot <- ggplot(data = students.red, aes(x = f1, y = students.red[,"Dalc"])) + 
-            geom_boxplot(aes(fill = f1), width = 0.8) + theme_bw()  +
+    plot <- ggplot(data = students.red, aes(x = var, y = students.red[,"Dalc"])) + 
+            geom_boxplot(aes(fill = var), width = 0.8) + theme_bw()  +
             xlab(i) + ylab("Weekday Consumption")
     print(plot)
   }
@@ -864,7 +876,7 @@ El dataset resultante y con el que continuaremos trabajando es el siguiente:
 
 
 ```r
-students <- students.red[,c("sex","age","famsize","Pstatus","Medu","Fedu","Mjob","Fjob","reason", "traveltime", "failures", "schoolsup", "higher",  "famrel", "freetime", "goout", "Dalc", "Walc", "health", "studytime", "absences", "G")]
+students <- students.red[,c("sex","age","famsize","Pstatus","Medu","Fedu","Mjob","Fjob","reason", "traveltime", "failures", "schoolsup", "higher", "famsup", "famrel", "freetime", "goout", "Dalc", "Walc", "health", "studytime", "absences", "G")]
 summary(students)
 ```
 
@@ -883,27 +895,27 @@ summary(students)
 ##  services:205   reputation:163   4: 18      Mean   :0.3453            
 ##  teacher : 38                               3rd Qu.:0.0000            
 ##                                             Max.   :3.0000            
-##  higher        famrel         freetime       goout            Dalc      
-##  no : 82   Min.   :1.000   Min.   :1.0   Min.   :1.000   Min.   :1.000  
-##  yes:642   1st Qu.:4.000   1st Qu.:3.0   1st Qu.:2.000   1st Qu.:1.000  
-##            Median :4.000   Median :3.0   Median :3.000   Median :1.000  
-##            Mean   :3.913   Mean   :3.2   Mean   :3.195   Mean   :1.519  
-##            3rd Qu.:5.000   3rd Qu.:4.0   3rd Qu.:4.000   3rd Qu.:2.000  
-##            Max.   :5.000   Max.   :5.0   Max.   :5.000   Max.   :5.000  
-##       Walc           health      studytime    absences      
-##  Min.   :1.000   Min.   :1.000   1:236     Min.   :0.00000  
-##  1st Qu.:1.000   1st Qu.:2.000   2:346     1st Qu.:0.03125  
-##  Median :2.000   Median :4.000   3:106     Median :0.06924  
-##  Mean   :2.311   Mean   :3.552   4: 36     Mean   :0.10199  
-##  3rd Qu.:3.000   3rd Qu.:5.000             3rd Qu.:0.13375  
-##  Max.   :5.000   Max.   :5.000             Max.   :0.87333  
-##        G         
-##  Min.   : 3.922  
-##  1st Qu.: 8.833  
-##  Median :10.413  
-##  Mean   :10.677  
-##  3rd Qu.:12.333  
-##  Max.   :18.333
+##  higher    famsup        famrel         freetime       goout      
+##  no : 82   no :287   Min.   :1.000   Min.   :1.0   Min.   :1.000  
+##  yes:642   yes:437   1st Qu.:4.000   1st Qu.:3.0   1st Qu.:2.000  
+##                      Median :4.000   Median :3.0   Median :3.000  
+##                      Mean   :3.913   Mean   :3.2   Mean   :3.195  
+##                      3rd Qu.:5.000   3rd Qu.:4.0   3rd Qu.:4.000  
+##                      Max.   :5.000   Max.   :5.0   Max.   :5.000  
+##       Dalc            Walc           health      studytime
+##  Min.   :1.000   Min.   :1.000   Min.   :1.000   1:236    
+##  1st Qu.:1.000   1st Qu.:1.000   1st Qu.:2.000   2:346    
+##  Median :1.000   Median :2.000   Median :4.000   3:106    
+##  Mean   :1.519   Mean   :2.311   Mean   :3.552   4: 36    
+##  3rd Qu.:2.000   3rd Qu.:3.000   3rd Qu.:5.000            
+##  Max.   :5.000   Max.   :5.000   Max.   :5.000            
+##     absences             G         
+##  Min.   :0.00000   Min.   : 3.678  
+##  1st Qu.:0.03140   1st Qu.: 8.833  
+##  Median :0.07074   Median :10.333  
+##  Mean   :0.10204   Mean   :10.638  
+##  3rd Qu.:0.13375   3rd Qu.:12.333  
+##  Max.   :0.87333   Max.   :18.333
 ```
 
 ## Análisis de Outliers
@@ -963,6 +975,9 @@ En este apartado vamos a ver si hay diferencia significativas en el consumo de a
 Se trata de un problema de diferencia de medias entre dos muestras.
 
 
+
+### Hipótesis
+
 Para cada caso la hipótesis sería: 
 
 
@@ -978,6 +993,93 @@ $$
 Se trata de un problema de diferencia de medias en el que no conocemos la varianza poblacional. Tampoco sabemos a priori si los datos siguen una distribución normal, pero el tamaño de las muestras es lo suficientemente grande para tener en cuenta el teorema del límite central.
 
 
+### Comprobación de homocedasticidad
+En cuanto a la varianza, podemos usar el test de Levene para comprobar si estas son iguales:
+
+
+```r
+aprobado <- as.factor(students$G >= 10)
+LeveneTest(students$Dalc ~ students$sex)
+```
+
+```
+## Levene's Test for Homogeneity of Variance (center = median)
+##        Df F value    Pr(>F)    
+## group   1  68.803 5.321e-16 ***
+##       722                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+```r
+LeveneTest(students$Walc ~ students$sex)
+```
+
+```
+## Levene's Test for Homogeneity of Variance (center = median)
+##        Df F value    Pr(>F)    
+## group   1  46.682 1.776e-11 ***
+##       722                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+```r
+LeveneTest(students$Dalc ~ students$Pstatus)
+```
+
+```
+## Levene's Test for Homogeneity of Variance (center = median)
+##        Df F value Pr(>F)
+## group   1  0.4882 0.4849
+##       722
+```
+
+```r
+LeveneTest(students$Walc ~ students$Pstatus)
+```
+
+```
+## Levene's Test for Homogeneity of Variance (center = median)
+##        Df F value Pr(>F)
+## group   1   2e-04 0.9893
+##       722
+```
+
+```r
+LeveneTest(students$Dalc ~ aprobado)
+```
+
+```
+## Levene's Test for Homogeneity of Variance (center = median)
+##        Df F value    Pr(>F)    
+## group   1  15.514 8.983e-05 ***
+##       722                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+```r
+LeveneTest(students$Walc ~ aprobado)
+```
+
+```
+## Levene's Test for Homogeneity of Variance (center = median)
+##        Df F value   Pr(>F)   
+## group   1  9.2516 0.002438 **
+##       722                    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+Consideramos igualdad de varianza unicamente para el estado de los padres. Para el resto de casos se asumirá heterocedasticidad.
+
+
+
+
+### Realización tests
+
+
 Para el alcohol en fines de semana por sexo: 
 
 
@@ -985,18 +1087,18 @@ Para el alcohol en fines de semana por sexo:
 data_weekend_sex_m <- students$Walc[students$sex == 'M'] 
 data_weekend_sex_f <- students$Walc[students$sex == 'F'] 
 
-t.test(data_weekend_sex_m, data_weekend_sex_f, var.equal = TRUE, conf.level = 0.95)
+t.test(data_weekend_sex_m, data_weekend_sex_f,  conf.level = 0.95)
 ```
 
 ```
 ## 
-## 	Two Sample t-test
+## 	Welch Two Sample t-test
 ## 
 ## data:  data_weekend_sex_m and data_weekend_sex_f
-## t = 9.7324, df = 722, p-value < 2.2e-16
+## t = 9.3267, df = 543.51, p-value < 2.2e-16
 ## alternative hypothesis: true difference in means is not equal to 0
 ## 95 percent confidence interval:
-##  0.7114636 1.0710375
+##  0.7035395 1.0789615
 ## sample estimates:
 ## mean of x mean of y 
 ##  2.824104  1.932854
@@ -1012,18 +1114,18 @@ Por sexo entre semana:
 data_weekday_sex_m <- students$Dalc[students$sex == 'M'] 
 data_weekday_sex_f <- students$Dalc[students$sex == 'F'] 
 
-t.test(data_weekday_sex_m, data_weekday_sex_f, var.equal = TRUE, conf.level = 0.95)
+t.test(data_weekday_sex_m, data_weekday_sex_f,  conf.level = 0.95)
 ```
 
 ```
 ## 
-## 	Two Sample t-test
+## 	Welch Two Sample t-test
 ## 
 ## data:  data_weekday_sex_m and data_weekday_sex_f
-## t = 8.2948, df = 722, p-value = 5.321e-16
+## t = 7.6819, df = 453.19, p-value = 9.769e-14
 ## alternative hypothesis: true difference in means is not equal to 0
 ## 95 percent confidence interval:
-##  0.4211673 0.6823564
+##  0.4106079 0.6929158
 ## sample estimates:
 ## mean of x mean of y 
 ##  1.837134  1.285372
@@ -1088,21 +1190,21 @@ Por último, realizamos el estudio para el consumo de alcohol según las calific
 data_weekday_aprobados <- students$Dalc[students$G >= 10] 
 data_weekday_suspensos <- students$Dalc[students$G < 10] 
 
-t.test(data_weekday_aprobados, data_weekday_suspensos, var.equal = TRUE, conf.level = 0.95)
+t.test(data_weekday_aprobados, data_weekday_suspensos,  conf.level = 0.95)
 ```
 
 ```
 ## 
-## 	Two Sample t-test
+## 	Welch Two Sample t-test
 ## 
 ## data:  data_weekday_aprobados and data_weekday_suspensos
-## t = -2.8348, df = 722, p-value = 0.004713
+## t = -3.8359, df = 598.34, p-value = 0.0001384
 ## alternative hypothesis: true difference in means is not equal to 0
 ## 95 percent confidence interval:
-##  -0.33077994 -0.06008662
+##  -0.4078250 -0.1316313
 ## sample estimates:
 ## mean of x mean of y 
-##  1.433498  1.628931
+##  1.399002  1.668731
 ```
 Viendo el p-value, podemos decir al 95% que sí hay diferencias entre alumnos que aprueban y alumnos que suspenden en cuanto al consumo de alcohol entre semana.
 
@@ -1113,21 +1215,21 @@ En el caso del consumo los fines de semana:
 data_weekend_aprobados <- students$Walc[students$G >= 10] 
 data_weekend_suspensos <- students$Walc[students$G < 10] 
 
-t.test(data_weekend_aprobados, data_weekend_suspensos, var.equal = TRUE, conf.level = 0.95)
+t.test(data_weekend_aprobados, data_weekend_suspensos,  conf.level = 0.95)
 ```
 
 ```
 ## 
-## 	Two Sample t-test
+## 	Welch Two Sample t-test
 ## 
 ## data:  data_weekend_aprobados and data_weekend_suspensos
-## t = -2.3316, df = 722, p-value = 0.02
+## t = -2.9634, df = 653.48, p-value = 0.003153
 ## alternative hypothesis: true difference in means is not equal to 0
 ## 95 percent confidence interval:
-##  -0.41498003 -0.03558848
+##  -0.47973565 -0.09735104
 ## sample estimates:
 ## mean of x mean of y 
-##  2.211823  2.437107
+##  2.182045  2.470588
 ```
 Con un p-value menor que 0.05, al 95% de confianza afirmamos que también hay diferencia en el consumo de alcohol los fines de semana en función de si el alumno aprueba o no.
 
@@ -1228,12 +1330,16 @@ En este caso, el modelo explica un 48% de la variabilidad en los datos.
 
 Estudiamos el de nivel de significancia de la relación entre la calificación que obtienen los alumnos y otro tipo de factores:
   - Sexo
-  - Edad
   - Consumo de alcohol los fines de semana
   - Consumo de alcohol entre semana
   - Situación de los padres (cohabitando o no)
   
-Al estudiar el nivel de relación entre una variable contínua (la nota) y variables categóricas (el resto), usamos el test ANOVA para obtener este nivel de significancia:
+Al estudiar el nivel de relación entre una variable contínua (la nota) y variables categóricas (el resto), usamos el test ANOVA para obtener este nivel de significancia. Una vez realizado comprobaremos la adecuación del modelo  analizando la normalidad y homoscedasticidad de los residuos. 
+
+
+## ANOVA 
+
+
 
 ```r
 # Sexo
@@ -1243,64 +1349,205 @@ summary(aov1)
 
 ```
 ##               Df Sum Sq Mean Sq F value Pr(>F)
-## students$sex   1      1   0.994   0.135  0.714
-## Residuals    722   5335   7.390
-```
-
-```r
-# Edad
-aov1 = aov(students$G ~ students$age)
-summary(aov1)
-```
-
-```
-##               Df Sum Sq Mean Sq F value   Pr(>F)    
-## students$age   1    124  123.91   17.16 3.83e-05 ***
-## Residuals    722   5212    7.22                     
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## students$sex   1      1   1.223   0.156  0.693
+## Residuals    722   5657   7.835
 ```
 
 ```r
 # Consumo de alcohol fines de semana
-aov1 = aov(students$G ~ students$Walc)
-summary(aov1)
+aov2 = aov(students$G ~ students$Walc)
+summary(aov2)
 ```
 
 ```
 ##                Df Sum Sq Mean Sq F value   Pr(>F)    
-## students$Walc   1    106  106.06   14.64 0.000141 ***
-## Residuals     722   5230    7.24                     
+## students$Walc   1    109  109.08   14.19 0.000178 ***
+## Residuals     722   5549    7.69                     
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
 ```r
 # Consumo de alcohol entre semana
-aov1 = aov(students$G ~ students$Dalc)
-summary(aov1)
+aov3 = aov(students$G ~ students$Dalc)
+summary(aov3)
 ```
 
 ```
 ##                Df Sum Sq Mean Sq F value   Pr(>F)    
-## students$Dalc   1    117  116.86   16.16 6.42e-05 ***
-## Residuals     722   5219    7.23                     
+## students$Dalc   1    123  122.62   15.99 7.01e-05 ***
+## Residuals     722   5535    7.67                     
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
 ```r
 # Situación de los padres
-aov1 = aov(students.red$G ~ students.red$Pstatus)
-summary(aov1)
+aov4 = aov(students.red$G ~ students.red$Pstatus)
+summary(aov4)
 ```
 
 ```
 ##                       Df Sum Sq Mean Sq F value Pr(>F)
-## students.red$Pstatus   1      0   0.040   0.005  0.941
-## Residuals            722   5336   7.391
+## students.red$Pstatus   1      0   0.000       0  0.994
+## Residuals            722   5658   7.837
 ```
-Como podemos observar, no hay correlación entre la calificación del estudiante y el sexo o el estado de convivencia de los padres. Sin embargo, en el desempeño escolar de los estudiantes sí que influyen significativamente la edad y el consumo de alcohol tanto en fines de semana como entre semana.
+
+
+
+
+## Estudio de normalidad
+
+Para comprobar la normalidad usaremos el test de Shapiro–Wilk utilizando un nivel de confianza del 95\% por lo que consideraremos la normalidad en aquellos casos en los que el p-value se encuentre por debajor de 0.05. 
+
+
+
+```r
+shapiro.test(aov1$residuals)
+```
+
+```
+## 
+## 	Shapiro-Wilk normality test
+## 
+## data:  aov1$residuals
+## W = 0.98869, p-value = 2.218e-05
+```
+
+```r
+shapiro.test(aov2$residuals)
+```
+
+```
+## 
+## 	Shapiro-Wilk normality test
+## 
+## data:  aov2$residuals
+## W = 0.99119, p-value = 0.0002573
+```
+
+```r
+shapiro.test(aov3$residuals)
+```
+
+```
+## 
+## 	Shapiro-Wilk normality test
+## 
+## data:  aov3$residuals
+## W = 0.99194, p-value = 0.0005653
+```
+
+```r
+shapiro.test(aov4$residuals)
+```
+
+```
+## 
+## 	Shapiro-Wilk normality test
+## 
+## data:  aov4$residuals
+## W = 0.98876, p-value = 2.366e-05
+```
+
+Con los resultados obtenidos vemos que podemos asumir la normalidad en todos los casos.
+
+
+## Estudio de homoscedasticidad
+
+Para comprobar la homocedasticidad usaremos el test de Levene, considerando que se produce siempre que el p-value se encuentre por encima de 0.05.  
+
+
+```r
+LeveneTest(aov1$residuals ~ students$sex)
+```
+
+```
+## Levene's Test for Homogeneity of Variance (center = median)
+##        Df F value Pr(>F)
+## group   1  1.1311 0.2879
+##       722
+```
+
+```r
+LeveneTest(aov2$residuals ~ as.factor(students$Walc))
+```
+
+```
+## Levene's Test for Homogeneity of Variance (center = median)
+##        Df F value   Pr(>F)   
+## group   4  3.3527 0.009874 **
+##       719                    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+```r
+LeveneTest(aov3$residuals ~ as.factor(students$Dalc))
+```
+
+```
+## Levene's Test for Homogeneity of Variance (center = median)
+##        Df F value   Pr(>F)   
+## group   4  4.4331 0.001516 **
+##       719                    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+```r
+LeveneTest(aov4$residuals ~ students$Pstatus)
+```
+
+```
+## Levene's Test for Homogeneity of Variance (center = median)
+##        Df F value Pr(>F)
+## group   1  0.1591 0.6901
+##       722
+```
+
+En este caso, solo podemos asumir homocedasticidad para el sexo y el estado de los padres, por lo que para el resto de casos ante el incumplimiento de la condición de homoscedasticidad, se podría aplicar una transformación de los datos (logaritmo, función inversa,…), o, por ejemplo el método Anova con corrección de Welch, como haremos a continuación, que no asume igualdad de varianzas.
+
+
+
+```r
+#Consumo entre semana
+oneway.test(G~Walc,
+            data=students,
+            var.equal=FALSE)
+```
+
+```
+## 
+## 	One-way analysis of means (not assuming equal variances)
+## 
+## data:  G and Walc
+## F = 5.0444, num df = 4.0, denom df = 241.5, p-value = 0.0006386
+```
+
+```r
+#Consumo fin de semana
+oneway.test(G~Dalc,
+            data=students,
+            var.equal=FALSE)
+```
+
+```
+## 
+## 	One-way analysis of means (not assuming equal variances)
+## 
+## data:  G and Dalc
+## F = 5.7895, num df = 4.000, denom df = 63.329, p-value = 0.0004909
+```
+
+
+Vemos que en ambos casos el p-value está por debajo del 0.05 por lo que podemos concluir que en ambos casos si hay una influencia significativa.
+
+## Conclusiones
+
+Como podemos observar, no hay correlación entre la calificación del estudiante y el sexo o el estado de convivencia de los padres. Sin embargo, en el desempeño escolar de los estudiantes sí que influye significativamente el consumo de alcohol tanto en fines de semana como entre semana.
+
+
 
 
 

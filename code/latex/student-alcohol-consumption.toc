@@ -5,16 +5,16 @@
 \contentsline {section}{\numberline {2}Limpieza de datos}{5}{section.2}% 
 \contentsline {subsection}{\numberline {2.1}Uni\IeC {\'o}n de conjuntos}{5}{subsection.2.1}% 
 \contentsline {subsection}{\numberline {2.2}Tratamiento de NAs}{6}{subsection.2.2}% 
-\contentsline {subsection}{\numberline {2.3}An\IeC {\'a}lisis de 0s}{7}{subsection.2.3}% 
+\contentsline {subsection}{\numberline {2.3}An\IeC {\'a}lisis de 0s}{8}{subsection.2.3}% 
 \contentsline {subsection}{\numberline {2.4}Selecci\IeC {\'o}n de variables/Reducci\IeC {\'o}n de dimensionalidad}{8}{subsection.2.4}% 
-\contentsline {subsection}{\numberline {2.5}Tipos de Variables}{8}{subsection.2.5}% 
-\contentsline {subsection}{\numberline {2.6}An\IeC {\'a}lisis de Outliers}{9}{subsection.2.6}% 
-\contentsline {section}{\numberline {3}An\IeC {\'a}lisis Estad\IeC {\'\i }stico}{9}{section.3}% 
-\contentsline {subsection}{\numberline {3.1}An\IeC {\'a}lisis gr\IeC {\'a}fico inicial}{9}{subsection.3.1}% 
-\contentsline {subsection}{\numberline {3.2} Estad\IeC {\'\i }stica Inferencial}{10}{subsection.3.2}% 
-\contentsline {subsubsection}{\numberline {3.2.1}Estudiantes de distinto sexo}{10}{subsubsection.3.2.1}% 
-\contentsline {subsubsection}{\numberline {3.2.2}Estudiantes con diferente situaci\IeC {\'o}n de convivencia de los padres}{11}{subsubsection.3.2.2}% 
-\contentsline {subsubsection}{\numberline {3.2.3}Estudiantes que aprueban ($G >= 10$) y estudiantes que suspenden ($G < 10$)}{13}{subsubsection.3.2.3}% 
-\contentsline {subsection}{\numberline {3.3}Modelo de regresi\IeC {\'o}n lineal}{14}{subsection.3.3}% 
-\contentsline {section}{\numberline {4}Estudio de correlaci\IeC {\'o}n}{15}{section.4}% 
-\contentsline {section}{\numberline {5}Conclusiones}{17}{section.5}% 
+\contentsline {subsection}{\numberline {2.5}Tipos de Variables}{9}{subsection.2.5}% 
+\contentsline {subsection}{\numberline {2.6}An\IeC {\'a}lisis de Outliers}{10}{subsection.2.6}% 
+\contentsline {section}{\numberline {3}An\IeC {\'a}lisis Estad\IeC {\'\i }stico}{12}{section.3}% 
+\contentsline {subsection}{\numberline {3.1}An\IeC {\'a}lisis gr\IeC {\'a}fico inicial}{12}{subsection.3.1}% 
+\contentsline {subsection}{\numberline {3.2} Estad\IeC {\'\i }stica Inferencial}{16}{subsection.3.2}% 
+\contentsline {subsubsection}{\numberline {3.2.1}Estudiantes de distinto sexo}{16}{subsubsection.3.2.1}% 
+\contentsline {subsubsection}{\numberline {3.2.2}Estudiantes con diferente situaci\IeC {\'o}n de convivencia de los padres}{17}{subsubsection.3.2.2}% 
+\contentsline {subsubsection}{\numberline {3.2.3}Estudiantes que aprueban ($G >= 10$) y estudiantes que suspenden ($G < 10$)}{19}{subsubsection.3.2.3}% 
+\contentsline {subsection}{\numberline {3.3}Modelo de regresi\IeC {\'o}n lineal}{20}{subsection.3.3}% 
+\contentsline {section}{\numberline {4}Estudio de correlaci\IeC {\'o}n}{21}{section.4}% 
+\contentsline {section}{\numberline {5}Conclusiones}{23}{section.5}% 
