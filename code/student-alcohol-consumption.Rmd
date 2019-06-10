@@ -3,15 +3,15 @@ title: "Código Práctica 2: Limpieza dataset 'Student Alcohol Consumption '"
 author: "Gregorio Andrés García Menéndez (gagarcia) & Manuel Gómez Montero (megmontero)"
 date: "Junio, 2019"
 output:
-  pdf_document:
-    toc: yes
-    toc_depth: '2'
   html_document:
     keep_md: yes
     number_sections: yes
     toc: yes
     toc_depth: 2
     toc_float: yes
+  pdf_document:
+    toc: yes
+    toc_depth: '2'
 lang: es
 ---
 
@@ -475,7 +475,37 @@ summary(aov4)
 
 ```
 
+Como podemos observar, no hay correlación entre la calificación del estudiante y el sexo o el estado de convivencia de los padres. Sin embargo, en el desempeño escolar de los estudiantes sí que influye significativamente el consumo de alcohol tanto en fines de semana como entre semana.
 
+Procedemos a realizar otro estudio interesante como es la correlación entre la nota y otras variables numéricas: edad del alumno, número de ausencias del alumno y número de veces que ha suspendido anteriormente. Estudiamos la distribución de las variables y la normalidad de las mismas.
+
+```{r}
+plot(students$age, students$G)
+plot(students$absences, students$G)
+plot(students$failures, students$G)
+
+
+qqnorm(students$G)
+qqline(students$G)
+
+qqnorm(students$age)
+qqline(students$age)
+
+qqnorm(students$absences)
+qqline(students$absences)
+
+qqnorm(students$failures)
+qqline(students$failures)
+```
+
+La única que podemos asumir una distribución normal es la G. Para ver la correlación entre la G y el resto de variables podemos usar el test de Pearson, que no requiere asumir normalidad de las variables. Procedemos a ver la correlación, fijando nuestro nivel de confianza en un 95%:
+
+```{r}
+cor.test(students$G, students$age, method = "pearson", conf.level = 0.95)
+cor.test(students$G, students$absences, method = "pearson", conf.level = 0.95)
+cor.test(students$G, students$failures, method = "pearson", conf.level = 0.95)
+```
+Al ser todos los p-value menores que nuestro nivel alpha (0.05), podemos concluir que hay una fuerte relación entre la edad del alumno y su desempeño académico. Ocurre lo mismo con la ausencias y el número de veces que el alumno ha fallado en el pasado.
 
 
 ## Estudio de normalidad
@@ -525,38 +555,8 @@ Vemos que en ambos casos el p-value está por debajo del 0.05 por lo que podemos
 
 ## Conclusiones
 
-Como podemos observar, no hay correlación entre la calificación del estudiante y el sexo o el estado de convivencia de los padres. Sin embargo, en el desempeño escolar de los estudiantes sí que influye significativamente el consumo de alcohol tanto en fines de semana como entre semana.
 
 
 
 
-Procedemos a realizar otro estudio interesante como es la correlación entre la nota y otras variables numéricas: edad del alumno, número de ausencias del alumno y número de veces que ha suspendido anteriormente. Estudiamos la distribución de las variables y la normalidad de las mismas.
-
-```{r}
-plot(students$age, students$G)
-plot(students$absences, students$G)
-plot(students$failures, students$G)
-
-
-qqnorm(students$G)
-qqline(students$G)
-
-qqnorm(students$age)
-qqline(students$age)
-
-qqnorm(students$absences)
-qqline(students$absences)
-
-qqnorm(students$failures)
-qqline(students$failures)
-```
-
-La única que podemos asumir una distribución normal es la G. Para ver la correlación entre la G y el resto de variables podemos usar el test de Pearson, que no requiere asumir normalidad de las variables. Procedemos a ver la correlación, fijando nuestro nivel de confianza en un 95%:
-
-```{r}
-cor.test(students$G, students$age, method = "pearson", conf.level = 0.95)
-cor.test(students$G, students$absences, method = "pearson", conf.level = 0.95)
-cor.test(students$G, students$failures, method = "pearson", conf.level = 0.95)
-```
-Al ser todos los p-value menores que nuestro nivel alpha (0.05), podemos concluir que hay una fuerte relación entre la edad del alumno y su desempeño académico. Ocurre lo mismo con la ausencias y el número de veces que el alumno ha fallado en el pasado.
 

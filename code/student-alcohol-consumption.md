@@ -598,25 +598,25 @@ summary(students.nonas)
 ##  Max.   :5.000   Max.   :5.000   Max.   :5.000   Max.   :5.000  
 ##    guardian   famsup      studytime        G1.por          G1.mat      
 ##  father:169   no :287   Min.   :1.00   Min.   : 0.00   Min.   : 3.000  
-##  mother:491   yes:437   1st Qu.:1.00   1st Qu.: 9.28   1st Qu.: 8.000  
-##  other : 64             Median :2.00   Median :11.00   Median : 9.116  
-##                         Mean   :1.92   Mean   :11.28   Mean   :10.017  
+##  mother:491   yes:437   1st Qu.:1.00   1st Qu.: 9.51   1st Qu.: 7.930  
+##  other : 64             Median :2.00   Median :11.00   Median : 9.105  
+##                         Mean   :1.92   Mean   :11.29   Mean   :10.000  
 ##                         3rd Qu.:2.00   3rd Qu.:13.00   3rd Qu.:12.000  
 ##                         Max.   :4.00   Max.   :19.00   Max.   :19.000  
 ##      G2.por          G2.mat           G3.por          G3.mat      
 ##  Min.   : 0.00   Min.   : 0.000   Min.   : 0.00   Min.   : 0.000  
-##  1st Qu.:10.00   1st Qu.: 7.779   1st Qu.:10.00   1st Qu.: 7.622  
-##  Median :11.00   Median : 9.035   Median :12.00   Median : 9.055  
-##  Mean   :11.45   Mean   : 9.773   Mean   :11.78   Mean   : 9.535  
+##  1st Qu.:10.00   1st Qu.: 7.770   1st Qu.:10.00   1st Qu.: 7.775  
+##  Median :11.00   Median : 9.000   Median :12.00   Median : 9.373  
+##  Mean   :11.46   Mean   : 9.748   Mean   :11.78   Mean   : 9.593  
 ##  3rd Qu.:13.00   3rd Qu.:12.000   3rd Qu.:14.00   3rd Qu.:12.000  
 ##  Max.   :19.00   Max.   :19.000   Max.   :19.00   Max.   :20.000  
-##   absences.mat     absences.por     paid    
-##  Min.   : 0.000   Min.   : 0.000   no :515  
-##  1st Qu.: 2.000   1st Qu.: 0.000   yes:209  
-##  Median : 5.157   Median : 2.000            
-##  Mean   : 6.350   Mean   : 3.821            
-##  3rd Qu.: 8.047   3rd Qu.: 6.000            
-##  Max.   :75.000   Max.   :32.000
+##   absences.mat     absences.por    paid    
+##  Min.   : 0.000   Min.   : 0.00   no :515  
+##  1st Qu.: 2.000   1st Qu.: 0.00   yes:209  
+##  Median : 5.140   Median : 2.00            
+##  Mean   : 6.394   Mean   : 3.83            
+##  3rd Qu.: 8.303   3rd Qu.: 6.00            
+##  Max.   :75.000   Max.   :32.00
 ```
 
 ```r
@@ -640,25 +640,25 @@ summary(students.zerocolumns)
 ```
 ##       Medu            Fedu          failures          G1.por     
 ##  Min.   :0.000   Min.   :0.000   Min.   :0.0000   Min.   : 0.00  
-##  1st Qu.:2.000   1st Qu.:1.000   1st Qu.:0.0000   1st Qu.: 9.28  
+##  1st Qu.:2.000   1st Qu.:1.000   1st Qu.:0.0000   1st Qu.: 9.51  
 ##  Median :2.000   Median :2.000   Median :0.0000   Median :11.00  
-##  Mean   :2.485   Mean   :2.285   Mean   :0.3453   Mean   :11.28  
+##  Mean   :2.485   Mean   :2.285   Mean   :0.3453   Mean   :11.29  
 ##  3rd Qu.:4.000   3rd Qu.:3.000   3rd Qu.:0.0000   3rd Qu.:13.00  
 ##  Max.   :4.000   Max.   :4.000   Max.   :3.0000   Max.   :19.00  
 ##      G2.por          G2.mat           G3.por          G3.mat      
 ##  Min.   : 0.00   Min.   : 0.000   Min.   : 0.00   Min.   : 0.000  
-##  1st Qu.:10.00   1st Qu.: 7.779   1st Qu.:10.00   1st Qu.: 7.622  
-##  Median :11.00   Median : 9.035   Median :12.00   Median : 9.055  
-##  Mean   :11.45   Mean   : 9.773   Mean   :11.78   Mean   : 9.535  
+##  1st Qu.:10.00   1st Qu.: 7.770   1st Qu.:10.00   1st Qu.: 7.775  
+##  Median :11.00   Median : 9.000   Median :12.00   Median : 9.373  
+##  Mean   :11.46   Mean   : 9.748   Mean   :11.78   Mean   : 9.593  
 ##  3rd Qu.:13.00   3rd Qu.:12.000   3rd Qu.:14.00   3rd Qu.:12.000  
 ##  Max.   :19.00   Max.   :19.000   Max.   :19.00   Max.   :20.000  
-##   absences.mat     absences.por   
-##  Min.   : 0.000   Min.   : 0.000  
-##  1st Qu.: 2.000   1st Qu.: 0.000  
-##  Median : 5.157   Median : 2.000  
-##  Mean   : 6.350   Mean   : 3.821  
-##  3rd Qu.: 8.047   3rd Qu.: 6.000  
-##  Max.   :75.000   Max.   :32.000
+##   absences.mat     absences.por  
+##  Min.   : 0.000   Min.   : 0.00  
+##  1st Qu.: 2.000   1st Qu.: 0.00  
+##  Median : 5.140   Median : 2.00  
+##  Mean   : 6.394   Mean   : 3.83  
+##  3rd Qu.: 8.303   3rd Qu.: 6.00  
+##  Max.   :75.000   Max.   :32.00
 ```
 
 Para el caso de la educación del padre y la madre ya definimos que el valor 0 significa que no poseen ningún tipo de educación.
@@ -729,10 +729,10 @@ summary(students.red)
 ##  3rd Qu.:3.000   3rd Qu.:5.000                          3rd Qu.:2.00  
 ##  Max.   :5.000   Max.   :5.000                          Max.   :4.00  
 ##   paid           G         
-##  no :515   Min.   : 3.678  
-##  yes:209   1st Qu.: 8.833  
+##  no :515   Min.   : 3.760  
+##  yes:209   1st Qu.: 8.783  
 ##            Median :10.333  
-##            Mean   :10.638  
+##            Mean   :10.644  
 ##            3rd Qu.:12.333  
 ##            Max.   :18.333
 ```
@@ -792,11 +792,11 @@ summary(students.red)
 ##  3rd Qu.:3.000   3rd Qu.:5.000                          3rd Qu.:2.00  
 ##  Max.   :5.000   Max.   :5.000                          Max.   :4.00  
 ##   paid           G             absences      
-##  no :515   Min.   : 3.678   Min.   :0.00000  
-##  yes:209   1st Qu.: 8.833   1st Qu.:0.03140  
-##            Median :10.333   Median :0.07074  
-##            Mean   :10.638   Mean   :0.10204  
-##            3rd Qu.:12.333   3rd Qu.:0.13375  
+##  no :515   Min.   : 3.760   Min.   :0.00000  
+##  yes:209   1st Qu.: 8.783   1st Qu.:0.03125  
+##            Median :10.333   Median :0.07115  
+##            Mean   :10.644   Mean   :0.10248  
+##            3rd Qu.:12.333   3rd Qu.:0.13603  
 ##            Max.   :18.333   Max.   :0.87333
 ```
 
@@ -910,11 +910,11 @@ summary(students)
 ##  3rd Qu.:2.000   3rd Qu.:3.000   3rd Qu.:5.000            
 ##  Max.   :5.000   Max.   :5.000   Max.   :5.000            
 ##     absences             G         
-##  Min.   :0.00000   Min.   : 3.678  
-##  1st Qu.:0.03140   1st Qu.: 8.833  
-##  Median :0.07074   Median :10.333  
-##  Mean   :0.10204   Mean   :10.638  
-##  3rd Qu.:0.13375   3rd Qu.:12.333  
+##  Min.   :0.00000   Min.   : 3.760  
+##  1st Qu.:0.03125   1st Qu.: 8.783  
+##  Median :0.07115   Median :10.333  
+##  Mean   :0.10248   Mean   :10.644  
+##  3rd Qu.:0.13603   3rd Qu.:12.333  
 ##  Max.   :0.87333   Max.   :18.333
 ```
 
@@ -954,52 +954,6 @@ Como podemos ver, para el campo edad los alumnos van de los 15 a los 22, siendo 
 plot(students$G)
 ```
 
-<<<<<<< HEAD
-## Análisis de Outliers
-
-Para las variables numéricas realizamos un estudio de outliers. En nuestro caso, las variables a estudiar son "age" y "G". El resto de variables numéricas en realidad no lo son, puesto que son categóricas. Por ejemplo: "studytime" va de 1 a 4, y no hace referencia a las horas que el alumno pasa estudiando, sino que son categorías equivalentes a por ejemplo: Nada, Poco, Normal, Mucho. Podría haber valores erróneos debido a la transcripción de los datos o similar, pero dichos errores ya los hubiéramos detectado en la creación del data set, ya que gracias a la función "summary" vemos los valores mínimos y máximos y para estas variables categóricas numéricas no hay valores erróneos (mínimo y máximo corresponden a las categorías mínimas y máximas).
-
-Procedemos al estudio de "age" y "G":
-
-
-```r
-plot(students$age)
-```
-
-![](student-alcohol-consumption_files/figure-html/unnamed-chunk-15-1.png)<!-- -->
-
-```r
-plot(students$age, students$Walc, xlab="age", ylab="Walc", pch="*", col="red")
-abline(lm(students$Walc ~ students$age), col="blue", lwd=3, lty=2)
-```
-
-![](student-alcohol-consumption_files/figure-html/unnamed-chunk-15-2.png)<!-- -->
-
-```r
-age_no_outliers <- students$age[students$age <= 21]
-walc_no_outliers <- students$Walc[students$age <= 21]
-plot(age_no_outliers, walc_no_outliers, xlab="age", ylab="Walc", pch="*", col="red")
-abline(lm(walc_no_outliers ~ age_no_outliers), col="blue", lwd=3, lty=2)
-```
-
-![](student-alcohol-consumption_files/figure-html/unnamed-chunk-15-3.png)<!-- -->
-Como podemos ver, para el campo edad los alumnos van de los 15 a los 22, siendo las franjas más pobladas los 15, 16 y 17 años. Al haber valores intermedios que en número van disminuyendo gradualmente desde los 18 hasta los 22, no consideramos ningún valor extremo (como el único estudiantes de 22 años) como valor erróneo. Además, al ser tan pocos estudiantes, no los descartamos en nuestros estudios ya que pueden aportar información valiosa, y como podemos ver en la comparativa del conjunto con outliers y sin outliers, no cambia de forma crítica.
-
-
-
-```r
-plot(students$G)
-```
-
-![](student-alcohol-consumption_files/figure-html/unnamed-chunk-16-1.png)<!-- -->
-
-```r
-plot(students$G, students$Walc, xlab="G", ylab="Walc", pch="*", col="red")
-abline(lm(students$Walc ~ students$G), col="blue", lwd=3, lty=2)
-```
-
-![](student-alcohol-consumption_files/figure-html/unnamed-chunk-16-2.png)<!-- -->
-=======
 ![](student-alcohol-consumption_files/figure-html/unnamed-chunk-18-1.png)<!-- -->
 
 ```r
@@ -1008,7 +962,6 @@ abline(lm(students$Walc ~ students$G), col="blue", lwd=3, lty=2)
 ```
 
 ![](student-alcohol-consumption_files/figure-html/unnamed-chunk-18-2.png)<!-- -->
->>>>>>> 93fac94b706af69dd6446afc13085e1d856b1c71
 En el caso de la media de la nota "G" es más claro todavía. Los datos no demuestran valores extremos que se puedan deber a errores, y aquellos más alejados de la mayor concentración de estudiantes son valores que aportan información para los estudios que vamos a realizar en cuanto al consumo de alcohol y de desempeño estudiantil.
 
 
@@ -1099,9 +1052,9 @@ LeveneTest(students$Dalc ~ aprobado)
 
 ```
 ## Levene's Test for Homogeneity of Variance (center = median)
-##        Df F value    Pr(>F)    
-## group   1  15.514 8.983e-05 ***
-##       722                      
+##        Df F value   Pr(>F)    
+## group   1  15.822 7.66e-05 ***
+##       722                     
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -1113,7 +1066,7 @@ LeveneTest(students$Walc ~ aprobado)
 ```
 ## Levene's Test for Homogeneity of Variance (center = median)
 ##        Df F value   Pr(>F)   
-## group   1  9.2516 0.002438 **
+## group   1  8.1072 0.004534 **
 ##       722                    
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
@@ -1245,13 +1198,13 @@ t.test(data_weekday_aprobados, data_weekday_suspensos,  conf.level = 0.95)
 ## 	Welch Two Sample t-test
 ## 
 ## data:  data_weekday_aprobados and data_weekday_suspensos
-## t = -3.8359, df = 598.34, p-value = 0.0001384
+## t = -3.8772, df = 601.54, p-value = 0.0001173
 ## alternative hypothesis: true difference in means is not equal to 0
 ## 95 percent confidence interval:
-##  -0.4078250 -0.1316313
+##  -0.4101583 -0.1343478
 ## sample estimates:
 ## mean of x mean of y 
-##  1.399002  1.668731
+##  1.397500  1.669753
 ```
 Viendo el p-value, podemos decir al 95% que sí hay diferencias entre alumnos que aprueban y alumnos que suspenden en cuanto al consumo de alcohol entre semana.
 
@@ -1270,13 +1223,13 @@ t.test(data_weekend_aprobados, data_weekend_suspensos,  conf.level = 0.95)
 ## 	Welch Two Sample t-test
 ## 
 ## data:  data_weekend_aprobados and data_weekend_suspensos
-## t = -2.9634, df = 653.48, p-value = 0.003153
+## t = -2.8882, df = 656.75, p-value = 0.004002
 ## alternative hypothesis: true difference in means is not equal to 0
 ## 95 percent confidence interval:
-##  -0.47973565 -0.09735104
+##  -0.47212296 -0.08997581
 ## sample estimates:
 ## mean of x mean of y 
-##  2.182045  2.470588
+##  2.185000  2.466049
 ```
 Con un p-value menor que 0.05, al 95% de confianza afirmamos que también hay diferencia en el consumo de alcohol los fines de semana en función de si el alumno aprueba o no.
 
@@ -1396,24 +1349,8 @@ summary(aov1)
 
 ```
 ##               Df Sum Sq Mean Sq F value Pr(>F)
-<<<<<<< HEAD
-## students$sex   1     24   24.46   2.688  0.102
-## Residuals    722   6570    9.10
-```
-
-```r
-# Edad
-aov1 = aov(students$G ~ students$age)
-summary(aov1)
-```
-
-```
-##               Df Sum Sq Mean Sq F value   Pr(>F)    
-## students$age   1    109  109.37   12.18 0.000513 ***
-## Residuals    722   6485    8.98                     
-=======
-## students$sex   1      1   1.223   0.156  0.693
-## Residuals    722   5657   7.835
+## students$sex   1      2   1.725    0.22   0.64
+## Residuals    722   5672   7.856
 ```
 
 ```r
@@ -1423,58 +1360,147 @@ summary(aov2)
 ```
 
 ```
-##                Df Sum Sq Mean Sq F value   Pr(>F)    
-## students$Walc   1    109  109.08   14.19 0.000178 ***
-## Residuals     722   5549    7.69                     
->>>>>>> 93fac94b706af69dd6446afc13085e1d856b1c71
+##                Df Sum Sq Mean Sq F value  Pr(>F)    
+## students$Walc   1    115   115.1   14.95 0.00012 ***
+## Residuals     722   5559     7.7                    
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
 ```r
-<<<<<<< HEAD
-# Consumo de alcohol fines de semana
-aov1 = aov(students$G ~ students$Walc)
-summary(aov1)
-=======
 # Consumo de alcohol entre semana
 aov3 = aov(students$G ~ students$Dalc)
 summary(aov3)
->>>>>>> 93fac94b706af69dd6446afc13085e1d856b1c71
 ```
 
 ```
 ##                Df Sum Sq Mean Sq F value   Pr(>F)    
-<<<<<<< HEAD
-## students$Walc   1    150  150.35   16.84 4.52e-05 ***
-## Residuals     722   6444    8.93                     
-=======
-## students$Dalc   1    123  122.62   15.99 7.01e-05 ***
-## Residuals     722   5535    7.67                     
->>>>>>> 93fac94b706af69dd6446afc13085e1d856b1c71
+## students$Dalc   1    127  126.99   16.53 5.32e-05 ***
+## Residuals     722   5547    7.68                     
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
 ```r
-<<<<<<< HEAD
-# Consumo de alcohol entre semana
-aov1 = aov(students$G ~ students$Dalc)
-summary(aov1)
-=======
 # Situación de los padres
 aov4 = aov(students.red$G ~ students.red$Pstatus)
 summary(aov4)
 ```
 
->>>>>>> 93fac94b706af69dd6446afc13085e1d856b1c71
 ```
 ##                       Df Sum Sq Mean Sq F value Pr(>F)
-## students.red$Pstatus   1      0   0.000       0  0.994
-## Residuals            722   5658   7.837
+## students.red$Pstatus   1      0   0.007   0.001  0.976
+## Residuals            722   5674   7.859
 ```
 
+Como podemos observar, no hay correlación entre la calificación del estudiante y el sexo o el estado de convivencia de los padres. Sin embargo, en el desempeño escolar de los estudiantes sí que influye significativamente el consumo de alcohol tanto en fines de semana como entre semana.
 
+Procedemos a realizar otro estudio interesante como es la correlación entre la nota y otras variables numéricas: edad del alumno, número de ausencias del alumno y número de veces que ha suspendido anteriormente. Estudiamos la distribución de las variables y la normalidad de las mismas.
+
+
+```r
+plot(students$age, students$G)
+```
+
+![](student-alcohol-consumption_files/figure-html/unnamed-chunk-29-1.png)<!-- -->
+
+```r
+plot(students$absences, students$G)
+```
+
+![](student-alcohol-consumption_files/figure-html/unnamed-chunk-29-2.png)<!-- -->
+
+```r
+plot(students$failures, students$G)
+```
+
+![](student-alcohol-consumption_files/figure-html/unnamed-chunk-29-3.png)<!-- -->
+
+```r
+qqnorm(students$G)
+qqline(students$G)
+```
+
+![](student-alcohol-consumption_files/figure-html/unnamed-chunk-29-4.png)<!-- -->
+
+```r
+qqnorm(students$age)
+qqline(students$age)
+```
+
+![](student-alcohol-consumption_files/figure-html/unnamed-chunk-29-5.png)<!-- -->
+
+```r
+qqnorm(students$absences)
+qqline(students$absences)
+```
+
+![](student-alcohol-consumption_files/figure-html/unnamed-chunk-29-6.png)<!-- -->
+
+```r
+qqnorm(students$failures)
+qqline(students$failures)
+```
+
+![](student-alcohol-consumption_files/figure-html/unnamed-chunk-29-7.png)<!-- -->
+
+La única que podemos asumir una distribución normal es la G. Para ver la correlación entre la G y el resto de variables podemos usar el test de Pearson, que no requiere asumir normalidad de las variables. Procedemos a ver la correlación, fijando nuestro nivel de confianza en un 95%:
+
+
+```r
+cor.test(students$G, students$age, method = "pearson", conf.level = 0.95)
+```
+
+```
+## 
+## 	Pearson's product-moment correlation
+## 
+## data:  students$G and students$age
+## t = -3.9974, df = 722, p-value = 7.062e-05
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  -0.21767866 -0.07509065
+## sample estimates:
+##        cor 
+## -0.1471491
+```
+
+```r
+cor.test(students$G, students$absences, method = "pearson", conf.level = 0.95)
+```
+
+```
+## 
+## 	Pearson's product-moment correlation
+## 
+## data:  students$G and students$absences
+## t = -5.1833, df = 722, p-value = 2.833e-07
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  -0.2587031 -0.1181775
+## sample estimates:
+##      cor 
+## -0.18941
+```
+
+```r
+cor.test(students$G, students$failures, method = "pearson", conf.level = 0.95)
+```
+
+```
+## 
+## 	Pearson's product-moment correlation
+## 
+## data:  students$G and students$failures
+## t = -12.006, df = 722, p-value < 2.2e-16
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  -0.4669287 -0.3453459
+## sample estimates:
+##        cor 
+## -0.4079442
+```
+Al ser todos los p-value menores que nuestro nivel alpha (0.05), podemos concluir que hay una fuerte relación entre la edad del alumno y su desempeño académico. Ocurre lo mismo con la ausencias y el número de veces que el alumno ha fallado en el pasado.
 
 
 ## Estudio de normalidad
@@ -1486,18 +1512,13 @@ Para comprobar la normalidad usaremos el test de Shapiro–Wilk utilizando un ni
 ```r
 shapiro.test(aov1$residuals)
 ```
-<<<<<<< HEAD
-##                Df Sum Sq Mean Sq F value   Pr(>F)    
-## students$Dalc   1    139  139.34   15.58 8.66e-05 ***
-## Residuals     722   6455    8.94                     
-=======
 
 ```
 ## 
 ## 	Shapiro-Wilk normality test
 ## 
 ## data:  aov1$residuals
-## W = 0.98869, p-value = 2.218e-05
+## W = 0.9885, p-value = 1.871e-05
 ```
 
 ```r
@@ -1509,7 +1530,7 @@ shapiro.test(aov2$residuals)
 ## 	Shapiro-Wilk normality test
 ## 
 ## data:  aov2$residuals
-## W = 0.99119, p-value = 0.0002573
+## W = 0.99108, p-value = 0.0002306
 ```
 
 ```r
@@ -1521,7 +1542,7 @@ shapiro.test(aov3$residuals)
 ## 	Shapiro-Wilk normality test
 ## 
 ## data:  aov3$residuals
-## W = 0.99194, p-value = 0.0005653
+## W = 0.99211, p-value = 0.000682
 ```
 
 ```r
@@ -1533,7 +1554,7 @@ shapiro.test(aov4$residuals)
 ## 	Shapiro-Wilk normality test
 ## 
 ## data:  aov4$residuals
-## W = 0.98876, p-value = 2.366e-05
+## W = 0.98859, p-value = 2.024e-05
 ```
 
 Con los resultados obtenidos vemos que podemos asumir la normalidad en todos los casos.
@@ -1551,7 +1572,7 @@ LeveneTest(aov1$residuals ~ students$sex)
 ```
 ## Levene's Test for Homogeneity of Variance (center = median)
 ##        Df F value Pr(>F)
-## group   1  1.1311 0.2879
+## group   1  0.8329 0.3617
 ##       722
 ```
 
@@ -1562,9 +1583,8 @@ LeveneTest(aov2$residuals ~ as.factor(students$Walc))
 ```
 ## Levene's Test for Homogeneity of Variance (center = median)
 ##        Df F value   Pr(>F)   
-## group   4  3.3527 0.009874 **
+## group   4  3.3474 0.009964 **
 ##       719                    
->>>>>>> 93fac94b706af69dd6446afc13085e1d856b1c71
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -1576,7 +1596,7 @@ LeveneTest(aov3$residuals ~ as.factor(students$Dalc))
 ```
 ## Levene's Test for Homogeneity of Variance (center = median)
 ##        Df F value   Pr(>F)   
-## group   4  4.4331 0.001516 **
+## group   4  4.6045 0.001122 **
 ##       719                    
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
@@ -1589,7 +1609,7 @@ LeveneTest(aov4$residuals ~ students$Pstatus)
 ```
 ## Levene's Test for Homogeneity of Variance (center = median)
 ##        Df F value Pr(>F)
-## group   1  0.1591 0.6901
+## group   1  0.1709 0.6795
 ##       722
 ```
 
@@ -1609,7 +1629,7 @@ oneway.test(G~Walc,
 ## 	One-way analysis of means (not assuming equal variances)
 ## 
 ## data:  G and Walc
-## F = 5.0444, num df = 4.0, denom df = 241.5, p-value = 0.0006386
+## F = 5.0911, num df = 4.00, denom df = 241.73, p-value = 0.0005903
 ```
 
 ```r
@@ -1624,7 +1644,7 @@ oneway.test(G~Dalc,
 ## 	One-way analysis of means (not assuming equal variances)
 ## 
 ## data:  G and Dalc
-## F = 5.7895, num df = 4.000, denom df = 63.329, p-value = 0.0004909
+## F = 5.9989, num df = 4.000, denom df = 63.377, p-value = 0.0003699
 ```
 
 
@@ -1632,115 +1652,8 @@ Vemos que en ambos casos el p-value está por debajo del 0.05 por lo que podemos
 
 ## Conclusiones
 
-Como podemos observar, no hay correlación entre la calificación del estudiante y el sexo o el estado de convivencia de los padres. Sin embargo, en el desempeño escolar de los estudiantes sí que influye significativamente el consumo de alcohol tanto en fines de semana como entre semana.
 
 
 
 
-Procedemos a realizar otro estudio interesante como es la correlación entre la nota y otras variables numéricas: edad del alumno, número de ausencias del alumno y número de veces que ha suspendido anteriormente. Estudiamos la distribución de las variables y la normalidad de las mismas.
-
-
-```r
-plot(students$age, students$G)
-```
-
-![](student-alcohol-consumption_files/figure-html/unnamed-chunk-26-1.png)<!-- -->
-
-```r
-plot(students$absences, students$G)
-```
-
-![](student-alcohol-consumption_files/figure-html/unnamed-chunk-26-2.png)<!-- -->
-
-```r
-plot(students$failures, students$G)
-```
-
-![](student-alcohol-consumption_files/figure-html/unnamed-chunk-26-3.png)<!-- -->
-
-```r
-qqnorm(students$G)
-qqline(students$G)
-```
-
-![](student-alcohol-consumption_files/figure-html/unnamed-chunk-26-4.png)<!-- -->
-
-```r
-qqnorm(students$age)
-qqline(students$age)
-```
-
-![](student-alcohol-consumption_files/figure-html/unnamed-chunk-26-5.png)<!-- -->
-
-```r
-qqnorm(students$absences)
-qqline(students$absences)
-```
-
-![](student-alcohol-consumption_files/figure-html/unnamed-chunk-26-6.png)<!-- -->
-
-```r
-qqnorm(students$failures)
-qqline(students$failures)
-```
-
-![](student-alcohol-consumption_files/figure-html/unnamed-chunk-26-7.png)<!-- -->
-
-La única que podemos asumir una distribución normal es la G. Para ver la correlación entre la G y el resto de variables podemos usar el test de Pearson, que no requiere asumir normalidad de las variables. Procedemos a ver la correlación, fijando nuestro nivel de confianza en un 95%:
-
-
-```r
-cor.test(students$G, students$age, method = "pearson", conf.level = 0.95)
-```
-
-```
-## 
-## 	Pearson's product-moment correlation
-## 
-## data:  students$G and students$age
-## t = -3.4894, df = 722, p-value = 0.0005135
-## alternative hypothesis: true correlation is not equal to 0
-## 95 percent confidence interval:
-##  -0.19976954 -0.05644669
-## sample estimates:
-##        cor 
-## -0.1287805
-```
-
-```r
-cor.test(students$G, students$absences, method = "pearson", conf.level = 0.95)
-```
-
-```
-## 
-## 	Pearson's product-moment correlation
-## 
-## data:  students$G and students$absences
-## t = -2.1015, df = 722, p-value = 0.03594
-## alternative hypothesis: true correlation is not equal to 0
-## 95 percent confidence interval:
-##  -0.149982929 -0.005137181
-## sample estimates:
-##         cor 
-## -0.07797151
-```
-
-```r
-cor.test(students$G, students$failures, method = "pearson", conf.level = 0.95)
-```
-
-```
-## 
-## 	Pearson's product-moment correlation
-## 
-## data:  students$G and students$failures
-## t = -13.997, df = 722, p-value < 2.2e-16
-## alternative hypothesis: true correlation is not equal to 0
-## 95 percent confidence interval:
-##  -0.5174457 -0.4026933
-## sample estimates:
-##       cor 
-## -0.462001
-```
-Al ser todos los p-value menores que nuestro nivel alpha (0.05), podemos concluir que hay una fuerte relación entre la edad del alumno y su desempeño académico. Ocurre lo mismo con la ausencias y el número de veces que el alumno ha fallado en el pasado.
 
