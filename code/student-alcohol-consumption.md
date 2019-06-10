@@ -563,6 +563,7 @@ mf <-missForest(students.nonas, maxiter = 10, ntree = 100, variablewise = FALSE,
 ##   missForest iteration 4 in progress...done!
 ##   missForest iteration 5 in progress...done!
 ##   missForest iteration 6 in progress...done!
+##   missForest iteration 7 in progress...done!
 ```
 
 ```r
@@ -609,24 +610,24 @@ summary(students.nonas)
 ##  Max.   :5.000   Max.   :5.000   Max.   :5.000   Max.   :5.000  
 ##    guardian   famsup      studytime        G1.por           G1.mat      
 ##  father:169   no :287   Min.   :1.00   Min.   : 0.000   Min.   : 3.000  
-##  mother:491   yes:437   1st Qu.:1.00   1st Qu.: 9.345   1st Qu.: 7.958  
-##  other : 64             Median :2.00   Median :11.000   Median : 9.210  
-##                         Mean   :1.92   Mean   :11.280   Mean   :10.053  
+##  mother:491   yes:437   1st Qu.:1.00   1st Qu.: 9.485   1st Qu.: 7.950  
+##  other : 64             Median :2.00   Median :11.000   Median : 9.095  
+##                         Mean   :1.92   Mean   :11.284   Mean   :10.040  
 ##                         3rd Qu.:2.00   3rd Qu.:13.000   3rd Qu.:12.000  
 ##                         Max.   :4.00   Max.   :19.000   Max.   :19.000  
 ##      G2.por          G2.mat           G3.por          G3.mat      
 ##  Min.   : 0.00   Min.   : 0.000   Min.   : 0.00   Min.   : 0.000  
-##  1st Qu.:10.00   1st Qu.: 7.940   1st Qu.:10.00   1st Qu.: 7.816  
-##  Median :11.00   Median : 9.045   Median :12.00   Median : 9.250  
-##  Mean   :11.45   Mean   : 9.842   Mean   :11.77   Mean   : 9.616  
+##  1st Qu.:10.00   1st Qu.: 7.718   1st Qu.:10.00   1st Qu.: 7.585  
+##  Median :11.00   Median : 9.000   Median :12.00   Median : 9.220  
+##  Mean   :11.47   Mean   : 9.785   Mean   :11.78   Mean   : 9.593  
 ##  3rd Qu.:13.00   3rd Qu.:12.000   3rd Qu.:14.00   3rd Qu.:12.000  
 ##  Max.   :19.00   Max.   :19.000   Max.   :19.00   Max.   :20.000  
 ##   absences.mat     absences.por     paid    
 ##  Min.   : 0.000   Min.   : 0.000   no :515  
 ##  1st Qu.: 2.000   1st Qu.: 0.000   yes:209  
-##  Median : 5.180   Median : 2.000            
-##  Mean   : 6.401   Mean   : 3.798            
-##  3rd Qu.: 8.273   3rd Qu.: 6.000            
+##  Median : 5.050   Median : 2.000            
+##  Mean   : 6.358   Mean   : 3.817            
+##  3rd Qu.: 8.000   3rd Qu.: 6.000            
 ##  Max.   :75.000   Max.   :32.000
 ```
 
@@ -652,24 +653,24 @@ summary(students.zerocolumns)
 ```
 ##       Medu            Fedu          failures          G1.por      
 ##  Min.   :0.000   Min.   :0.000   Min.   :0.0000   Min.   : 0.000  
-##  1st Qu.:2.000   1st Qu.:1.000   1st Qu.:0.0000   1st Qu.: 9.345  
+##  1st Qu.:2.000   1st Qu.:1.000   1st Qu.:0.0000   1st Qu.: 9.485  
 ##  Median :2.000   Median :2.000   Median :0.0000   Median :11.000  
-##  Mean   :2.485   Mean   :2.285   Mean   :0.3453   Mean   :11.280  
+##  Mean   :2.485   Mean   :2.285   Mean   :0.3453   Mean   :11.284  
 ##  3rd Qu.:4.000   3rd Qu.:3.000   3rd Qu.:0.0000   3rd Qu.:13.000  
 ##  Max.   :4.000   Max.   :4.000   Max.   :3.0000   Max.   :19.000  
 ##      G2.por          G2.mat           G3.por          G3.mat      
 ##  Min.   : 0.00   Min.   : 0.000   Min.   : 0.00   Min.   : 0.000  
-##  1st Qu.:10.00   1st Qu.: 7.940   1st Qu.:10.00   1st Qu.: 7.816  
-##  Median :11.00   Median : 9.045   Median :12.00   Median : 9.250  
-##  Mean   :11.45   Mean   : 9.842   Mean   :11.77   Mean   : 9.616  
+##  1st Qu.:10.00   1st Qu.: 7.718   1st Qu.:10.00   1st Qu.: 7.585  
+##  Median :11.00   Median : 9.000   Median :12.00   Median : 9.220  
+##  Mean   :11.47   Mean   : 9.785   Mean   :11.78   Mean   : 9.593  
 ##  3rd Qu.:13.00   3rd Qu.:12.000   3rd Qu.:14.00   3rd Qu.:12.000  
 ##  Max.   :19.00   Max.   :19.000   Max.   :19.00   Max.   :20.000  
 ##   absences.mat     absences.por   
 ##  Min.   : 0.000   Min.   : 0.000  
 ##  1st Qu.: 2.000   1st Qu.: 0.000  
-##  Median : 5.180   Median : 2.000  
-##  Mean   : 6.401   Mean   : 3.798  
-##  3rd Qu.: 8.273   3rd Qu.: 6.000  
+##  Median : 5.050   Median : 2.000  
+##  Mean   : 6.358   Mean   : 3.817  
+##  3rd Qu.: 8.000   3rd Qu.: 6.000  
 ##  Max.   :75.000   Max.   :32.000
 ```
 
@@ -739,11 +740,11 @@ summary(students.red)
 ##  3rd Qu.:3.000   3rd Qu.:5.000                          3rd Qu.:2.00  
 ##  Max.   :5.000   Max.   :5.000                          Max.   :4.00  
 ##   paid           G         
-##  no :515   Min.   : 3.565  
-##  yes:209   1st Qu.: 8.833  
-##            Median :10.338  
-##            Mean   :10.668  
-##            3rd Qu.:12.467  
+##  no :515   Min.   : 3.742  
+##  yes:209   1st Qu.: 8.802  
+##            Median :10.333  
+##            Mean   :10.658  
+##            3rd Qu.:12.333  
 ##            Max.   :18.333
 ```
 
@@ -802,11 +803,11 @@ summary(students.red)
 ##  3rd Qu.:3.000   3rd Qu.:5.000                          3rd Qu.:2.00  
 ##  Max.   :5.000   Max.   :5.000                          Max.   :4.00  
 ##   paid           G             absences      
-##  no :515   Min.   : 3.565   Min.   :0.00000  
-##  yes:209   1st Qu.: 8.833   1st Qu.:0.03125  
-##            Median :10.338   Median :0.06947  
-##            Mean   :10.668   Mean   :0.10202  
-##            3rd Qu.:12.467   3rd Qu.:0.13375  
+##  no :515   Min.   : 3.742   Min.   :0.00000  
+##  yes:209   1st Qu.: 8.802   1st Qu.:0.03120  
+##            Median :10.333   Median :0.06991  
+##            Mean   :10.658   Mean   :0.10203  
+##            3rd Qu.:12.333   3rd Qu.:0.13395  
 ##            Max.   :18.333   Max.   :0.87333
 ```
 
@@ -942,11 +943,11 @@ summary(students.red)
 ##  3rd Qu.:3.000   3rd Qu.:5.000                                   
 ##  Max.   :5.000   Max.   :5.000                                   
 ##   paid           G             absences      
-##  no :515   Min.   : 3.565   Min.   :0.00000  
-##  yes:209   1st Qu.: 8.833   1st Qu.:0.03125  
-##            Median :10.338   Median :0.06947  
-##            Mean   :10.668   Mean   :0.10202  
-##            3rd Qu.:12.467   3rd Qu.:0.13375  
+##  no :515   Min.   : 3.742   Min.   :0.00000  
+##  yes:209   1st Qu.: 8.802   1st Qu.:0.03120  
+##            Median :10.333   Median :0.06991  
+##            Mean   :10.658   Mean   :0.10203  
+##            3rd Qu.:12.333   3rd Qu.:0.13395  
 ##            Max.   :18.333   Max.   :0.87333
 ```
 
@@ -1021,11 +1022,11 @@ summary(students)
 ##  3rd Qu.:2.000   3rd Qu.:3.000   3rd Qu.:5.000            
 ##  Max.   :5.000   Max.   :5.000   Max.   :5.000            
 ##     absences             G         
-##  Min.   :0.00000   Min.   : 3.565  
-##  1st Qu.:0.03125   1st Qu.: 8.833  
-##  Median :0.06947   Median :10.338  
-##  Mean   :0.10202   Mean   :10.668  
-##  3rd Qu.:0.13375   3rd Qu.:12.467  
+##  Min.   :0.00000   Min.   : 3.742  
+##  1st Qu.:0.03120   1st Qu.: 8.802  
+##  Median :0.06991   Median :10.333  
+##  Mean   :0.10203   Mean   :10.658  
+##  3rd Qu.:0.13395   3rd Qu.:12.333  
 ##  Max.   :0.87333   Max.   :18.333
 ```
 
@@ -1117,9 +1118,9 @@ LeveneTest(students$Dalc ~ aprobado)
 
 ```
 ## Levene's Test for Homogeneity of Variance (center = median)
-##        Df F value    Pr(>F)    
-## group   1   12.18 0.0005124 ***
-##       722                      
+##        Df F value   Pr(>F)    
+## group   1   13.57 0.000247 ***
+##       722                     
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -1131,7 +1132,7 @@ LeveneTest(students$Walc ~ aprobado)
 ```
 ## Levene's Test for Homogeneity of Variance (center = median)
 ##        Df F value   Pr(>F)   
-## group   1  8.2494 0.004196 **
+## group   1  7.5477 0.006158 **
 ##       722                    
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
@@ -1261,13 +1262,13 @@ t.test(data_weekday_aprobados, data_weekday_suspensos,  conf.level = 0.95)
 ## 	Welch Two Sample t-test
 ## 
 ## data:  data_weekday_aprobados and data_weekday_suspensos
-## t = -3.4197, df = 620.49, p-value = 0.0006681
+## t = -3.6077, df = 620.51, p-value = 0.0003338
 ## alternative hypothesis: true difference in means is not equal to 0
 ## 95 percent confidence interval:
-##  -0.3774441 -0.1020732
+##  -0.3898627 -0.1150303
 ## sample estimates:
 ## mean of x mean of y 
-##  1.413366  1.653125
+##  1.406015  1.658462
 ```
 Viendo el p-value, podemos decir al 95% que sí hay diferencias entre alumnos que aprueban y alumnos que suspenden en cuanto al consumo de alcohol entre semana.
 
@@ -1286,13 +1287,13 @@ t.test(data_weekend_aprobados, data_weekend_suspensos,  conf.level = 0.95)
 ## 	Welch Two Sample t-test
 ## 
 ## data:  data_weekend_aprobados and data_weekend_suspensos
-## t = -2.9652, df = 653.04, p-value = 0.003136
+## t = -2.8729, df = 662.13, p-value = 0.004198
 ## alternative hypothesis: true difference in means is not equal to 0
 ## 95 percent confidence interval:
-##  -0.47989547 -0.09751789
+##  -0.46994659 -0.08835686
 ## sample estimates:
 ## mean of x mean of y 
-##  2.183168  2.471875
+##  2.185464  2.464615
 ```
 Con un p-value menor que 0.05, al 95% de confianza afirmamos que también hay diferencia en el consumo de alcohol los fines de semana en función de si el alumno aprueba o no.
 
@@ -1409,8 +1410,8 @@ summary(aov1)
 
 ```
 ##               Df Sum Sq Mean Sq F value Pr(>F)
-## students$sex   1      3   2.513   0.322  0.571
-## Residuals    722   5634   7.803
+## students$sex   1      2   1.755   0.222  0.638
+## Residuals    722   5712   7.911
 ```
 
 ```r
@@ -1421,8 +1422,8 @@ summary(aov2)
 
 ```
 ##                Df Sum Sq Mean Sq F value   Pr(>F)    
-## students$Walc   1    116  115.76   15.14 0.000109 ***
-## Residuals     722   5521    7.65                     
+## students$Walc   1    110  109.64   14.13 0.000185 ***
+## Residuals     722   5604    7.76                     
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -1435,8 +1436,8 @@ summary(aov3)
 
 ```
 ##                Df Sum Sq Mean Sq F value   Pr(>F)    
-## students$Dalc   1    121  120.51   15.77 7.86e-05 ***
-## Residuals     722   5516    7.64                     
+## students$Dalc   1    122  121.60    15.7 8.16e-05 ***
+## Residuals     722   5592    7.75                     
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -1449,8 +1450,8 @@ summary(aov4)
 
 ```
 ##                       Df Sum Sq Mean Sq F value Pr(>F)
-## students.red$Pstatus   1      0   0.003       0  0.985
-## Residuals            722   5637   7.807
+## students.red$Pstatus   1      0   0.047   0.006  0.939
+## Residuals            722   5714   7.913
 ```
 
 Como podemos observar, no hay significancia entre el sexo o el estado de convivencia de los padres y la calificación del estudiante.
@@ -1470,7 +1471,7 @@ shapiro.test(aov1$residuals)
 ## 	Shapiro-Wilk normality test
 ## 
 ## data:  aov1$residuals
-## W = 0.9893, p-value = 3.952e-05
+## W = 0.98887, p-value = 2.639e-05
 ```
 
 ```r
@@ -1482,7 +1483,7 @@ shapiro.test(aov2$residuals)
 ## 	Shapiro-Wilk normality test
 ## 
 ## data:  aov2$residuals
-## W = 0.99173, p-value = 0.0004532
+## W = 0.99154, p-value = 0.0003695
 ```
 
 ```r
@@ -1494,7 +1495,7 @@ shapiro.test(aov3$residuals)
 ## 	Shapiro-Wilk normality test
 ## 
 ## data:  aov3$residuals
-## W = 0.99237, p-value = 0.0009011
+## W = 0.9922, p-value = 0.0007492
 ```
 
 ```r
@@ -1506,7 +1507,7 @@ shapiro.test(aov4$residuals)
 ## 	Shapiro-Wilk normality test
 ## 
 ## data:  aov4$residuals
-## W = 0.98943, p-value = 4.485e-05
+## W = 0.98897, p-value = 2.889e-05
 ```
 
 Con los resultados obtenidos vemos que podemos asumir la normalidad en todos los casos.
@@ -1523,7 +1524,7 @@ LeveneTest(aov1$residuals ~ students$sex)
 ```
 ## Levene's Test for Homogeneity of Variance (center = median)
 ##        Df F value Pr(>F)
-## group   1  0.9451 0.3313
+## group   1   0.687 0.4075
 ##       722
 ```
 
@@ -1533,9 +1534,9 @@ LeveneTest(aov2$residuals ~ as.factor(students$Walc))
 
 ```
 ## Levene's Test for Homogeneity of Variance (center = median)
-##        Df F value   Pr(>F)   
-## group   4  3.3902 0.009262 **
-##       719                    
+##        Df F value  Pr(>F)   
+## group   4  3.5156 0.00747 **
+##       719                   
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -1547,7 +1548,7 @@ LeveneTest(aov3$residuals ~ as.factor(students$Dalc))
 ```
 ## Levene's Test for Homogeneity of Variance (center = median)
 ##        Df F value   Pr(>F)   
-## group   4  4.1727 0.002392 **
+## group   4  4.3049 0.001898 **
 ##       719                    
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
@@ -1560,7 +1561,7 @@ LeveneTest(aov4$residuals ~ students$Pstatus)
 ```
 ## Levene's Test for Homogeneity of Variance (center = median)
 ##        Df F value Pr(>F)
-## group   1  0.1555 0.6935
+## group   1  0.2753    0.6
 ##       722
 ```
 
@@ -1580,7 +1581,7 @@ oneway.test(G~Walc,
 ## 	One-way analysis of means (not assuming equal variances)
 ## 
 ## data:  G and Walc
-## F = 5.2893, num df = 4.00, denom df = 241.05, p-value = 0.0004233
+## F = 4.9193, num df = 4.00, denom df = 241.68, p-value = 0.0007878
 ```
 
 ```r
@@ -1595,7 +1596,7 @@ oneway.test(G~Dalc,
 ## 	One-way analysis of means (not assuming equal variances)
 ## 
 ## data:  G and Dalc
-## F = 5.6489, num df = 4.000, denom df = 63.048, p-value = 0.0005968
+## F = 5.6083, num df = 4.000, denom df = 63.208, p-value = 0.0006289
 ```
 
 Vemos que en ambos casos el p-value está por debajo del 0.05 por lo que podemos concluir que en ambos casos si hay una influencia significativa.
@@ -1663,13 +1664,13 @@ cor.test(students$G, students$age, method = "pearson", conf.level = 0.95)
 ## 	Pearson's product-moment correlation
 ## 
 ## data:  students$G and students$age
-## t = -4.1401, df = 722, p-value = 3.882e-05
+## t = -4.0576, df = 722, p-value = 5.499e-05
 ## alternative hypothesis: true correlation is not equal to 0
 ## 95 percent confidence interval:
-##  -0.22267298 -0.08030772
+##  -0.21978668 -0.07729174
 ## sample estimates:
 ##        cor 
-## -0.1522802
+## -0.1493144
 ```
 
 ```r
@@ -1681,13 +1682,13 @@ cor.test(students$G, students$absences, method = "pearson", conf.level = 0.95)
 ## 	Pearson's product-moment correlation
 ## 
 ## data:  students$G and students$absences
-## t = -4.9522, df = 722, p-value = 9.143e-07
+## t = -5.0998, df = 722, p-value = 4.35e-07
 ## alternative hypothesis: true correlation is not equal to 0
 ## 95 percent confidence interval:
-##  -0.2508014 -0.1098372
+##  -0.2558523 -0.1151661
 ## sample estimates:
 ##        cor 
-## -0.1812501
+## -0.1864649
 ```
 
 ```r
@@ -1699,13 +1700,13 @@ cor.test(students$G, students$failures, method = "pearson", conf.level = 0.95)
 ## 	Pearson's product-moment correlation
 ## 
 ## data:  students$G and students$failures
-## t = -12.116, df = 722, p-value < 2.2e-16
+## t = -12.045, df = 722, p-value < 2.2e-16
 ## alternative hypothesis: true correlation is not equal to 0
 ## 95 percent confidence interval:
-##  -0.4698433 -0.3486302
+##  -0.4679626 -0.3465106
 ## sample estimates:
-##       cor 
-## -0.411052
+##        cor 
+## -0.4090465
 ```
 Al ser todos los p-value menores que nuestro nivel alpha (0.05), podemos concluir que hay una fuerte relación entre la edad del alumno y su desempeño académico. Ocurre lo mismo con la ausencias y el número de veces que el alumno ha fallado en el pasado.
 
