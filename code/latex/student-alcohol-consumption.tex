@@ -14,9 +14,10 @@
 \usepackage{multicol} 
 \usepackage{appendix}
 \usepackage{tikz}
-\usepackage{subfig}
+%\usepackage{subfig}
 \usepackage{alltt}
 \usepackage{spverbatim}
+\usepackage{subfigure}
 \usetikzlibrary{positioning}
 \usepackage{listings,xcolor}
 \usetikzlibrary {positioning}
@@ -176,11 +177,30 @@ En primer lugar vamos a encargarnos de los valores perdidos que se dan unicament
 
 Por lo tanto la opción escogida para los valores perdidos es la siguiente: 
 
+
+ \begin{figure}[ht!]
+	\centering
+	\includegraphics[trim = 0mm 0mm 0mm 0mm, clip,scale=0.5]{images/nonas_paid}
+	\caption{Unificación variable paid}
+	\label{fig:nonas_paid}
+\end{figure}
+
+
 \begin{itemize}
-	\item \textit{paid}: Unificaremos las variables de ambos cursos tomando un valor ``yes'' cuando el alumno de clases extras pagadas de alguno de los cursos. 
-	\item \textit{absences}: Viendo los números parece que las ausencias son mayores en matemáticas. Como lo que nos interesa es saber los alumnos que han faltado más o menos veces y queremos evitar que tenga un mayor peso los alumnos de matemáticas, normalizaremos estos valores y en el caso de que los alumnos hayan asistido a ambos cursos utilizaremos la media de ambos valores.
-	 \item \textit{calificaciones}: En este caso todas las calificaciones se mueven en el mismo rango por lo que en el caso de los alumnos que hayan asistido a ambos cursos aplicaremos la media de ambos. 
+	\item \textit{paid}: Unificaremos las variables de ambos cursos tomando un valor ``yes'' cuando el alumno de clases extras pagadas de alguno de los cursos.
+	\item \textit{calificaciones} y {absences}: Utilizaremos el método \textit{missForest} que utiliza árboles de decisión para imputar los valores perdidos en variables tanto numéricas como categóricas.  
+	 
 \end{itemize}
+
+ \begin{figure}[ht!]
+	\centering
+	\includegraphics[trim = 0mm 0mm 0mm 0mm, clip,scale=0.5]{images/nonas_cal}
+	\caption{Imputación valores perdidos con missForest}
+	\label{fig:nonas_cal}
+\end{figure}
+
+
+
  \begin{figure}[ht!]
 	\centering
 	\includegraphics[trim = 0mm 0mm 0mm 0mm, clip,scale=0.4]{images/summary_nonas}
@@ -193,22 +213,66 @@ Por lo tanto la opción escogida para los valores perdidos es la siguiente:
 En el notebook se pueden ver los detalles de estos procesos en la figura \ref{fig:sum2} podemos ver la salida del comando \textit{summary} para este nuevo dataset.
 
 
+\subsection{Análisis de 0s}
+Vamos a analizar uno por uno los casos en los que existen valores 0 y a definir si son valores posibles de la variable o por el contrario se trata de valores vacíos indicados como 0. Las variables que contienen valores 0 son:
+
+
+ \begin{figure}[ht!]
+	\centering
+	\includegraphics[trim = 0mm 0mm 0mm 0mm, clip,scale=0.4]{images/summary_0s}
+	\caption{Summary atributos con 0s}
+	\label{fig:sum_0s}
+\end{figure}
+
+
+Para el caso de la educación del padre y la madre ya definimos que el valor 0 significa que no poseen ningún tipo de educación.
+
+Para el resto de casos vemos que el valor 0 también es posible ya que:
+
+\begin{itemize}
+	 
+
+\item Es posible no haber suspendido ninguna asignatura, de hecho más del 75\% de alumnos así lo han hecho.
+\item En las calificaciones es posible sacar un 0.
+\item En el caso de las ausencias también existen alumnos que no han faltado a ninguna clase. En el caso \item de las clases de portugués más del 25\%.
+\end{itemize}
+
 
 \subsection{Selección de variables/Reducción de dimensionalidad}
-Observando el dataset vemos que, aún tras la unión de los datasets, tenemos una gran cantidad de dimensiones, en concreto 33, lo que puede dificultar nuestro análisis. En esta primera fase vamos a hacer una primera aproximación para reducir la dimensionalidad. Posteriormente en los primeros apartados del análisis estadístico reduciremos aún más esta dimensionalidad.
+Observando el dataset vemos que, aún tras la unión de los datasets, tenemos una gran cantidad de dimensiones, en concreto 37, lo que puede dificultar nuestro análisis. En esta primera fase vamos a hacer una primera aproximación para reducir la dimensionalidad. Posteriormente en los primeros apartados del análisis estadístico reduciremos aún más esta dimensionalidad.
 
 En primer lugar existen variables que, a priori, tienen poca significancia para nuestro análisis como puede ser la escuela a la que asiste el alumno, por lo que podemos eliminar esta variable. 
 
 Por otro lado podemos agrupar las calificaciones en una única variable que nos indique la calificación media del alumno. 
 
-Con estos detalles que pueden observarse en el notebook vemos que hemos conseguido reducir a 30 la dimensionalidad.
+
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[trim = 0mm 0mm 0mm 0mm, clip,scale=0.5]{images/red_calif}
+	\caption{Unificación calificaciones}
+	\label{fig:redcal}
+\end{figure}
+
+
+También vamos a realizar el mismo paso para las audiencia, pero observando los datos parece que las ausencias son mayores en matemáticas. Como lo que nos interesa es saber los alumnos que han faltado más o menos veces y queremos evitar que tenga un mayor peso los alumnos de matemáticas, normalizaremos estos valores antes de realizar la media. 
+
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[trim = 0mm 0mm 0mm 0mm, clip,scale=0.5]{images/red_aus}
+	\caption{Unificación ausencias}
+	\label{fig:redaus}
+\end{figure}
+
+
+
+Con estos detalles que pueden observarse en el notebook vemos que hemos conseguido reducir a 30 la dimensionalidad con las variables que aparecen en la figura \ref{fig:sum_red}.
 
 
 \begin{figure}[ht!]
 \centering
 \includegraphics[trim = 0mm 0mm 0mm 0mm, clip,scale=0.4]{images/summary_nonas}
 \caption{Summary dataset reducido}
-\label{fig:sum3}
+\label{fig:sum_red}
 \end{figure}
 
 
@@ -218,14 +282,14 @@ En los tipos mostrados hay algunos que no es correcto el tipo. En la educación 
 
 La explicación de considerar el tiempo de estudio y el tiempo de viaje es que, aunque pueden parecer numéricas, en realizar son factores. En la descripción del dataset aparece explicado:
 
-studytime: Weekly study time: (numeric: 1 - <2 hours, 2 - 2 to 5 hours, 3 - 5 to 10 hours, or 4 - >10 hours)
-traveltime: Home to school travel time (numeric: 1 - <15 min., 2 - 15 to 30 min., 3 - 30 min. to 1 hour, or 4 - >1 hour)
+studytime: Weekly study time: (numeric: 1 - $<$2 hours, 2 - 2 to 5 hours, 3 - 5 to 10 hours, or 4 - $>$10 hours)
+traveltime: Home to school travel time (numeric: 1 - $<$15 min., 2 - 15 to 30 min., 3 - 30 min. to 1 hour, or 4 - $>$1 hour)
 
 Por lo tanto, al ser categorías, las tratamos como factores y no como numéricas.
 
 
 \subsection{Análisis de Outliers}
-Para las variables numéricas realizamos un estudio de outliers. En nuestro caso, las variables a estudiar son "age" y "G". El resto de variables numéricas en realidad no lo son, puesto que son categóricas. Por ejemplo: "studytime" va de 1 a 4, y no hace referencia a las horas que el alumno pasa estudiando, sino que son categorías equivalentes a por ejemplo: Nada, Poco, Normal, Mucho. Podría haber valores erróneos debido a la transcripción de los datos o similar, pero dichos errores ya los hubiéramos detectado en la creación del data set, ya que gracias a la función "summary" vemos los valores mínimos y máximos y para estas variables categóricas numéricas no hay valores erróneos (mínimo y máximo corresponden a las categorías mínimas y máximas).
+Para las variables numéricas realizamos un estudio de outliers. En nuestro caso, las variables a estudiar son ``age'' y ``G''. El resto de variables numéricas en realidad no lo son, puesto que son categóricas. Por ejemplo: "studytime" va de 1 a 4, y no hace referencia a las horas que el alumno pasa estudiando, sino que son categorías equivalentes a por ejemplo: Nada, Poco, Normal, Mucho. Podría haber valores erróneos debido a la transcripción de los datos o similar, pero dichos errores ya los hubiéramos detectado en la creación del data set, ya que gracias a la función ``summary'' vemos los valores mínimos y máximos y para estas variables categóricas numéricas no hay valores erróneos (mínimo y máximo corresponden a las categorías mínimas y máximas).
 
 Procedemos al estudio de age y G:
 
@@ -268,21 +332,58 @@ En el caso de la media de la nota G es más claro todavía. Los datos no demuest
 
 \section{Análisis Estadístico}
 \subsection{Análisis gráfico inicial}
-Observando las gráficas vemos que hay variables que parece que sí tienen influencia a simple vista en el consumo de alcohol tanto a diario como los fines de semana, como pueden ser el sexo y el estado de los padres. Sin embargo vemos otros que, a priori, no parece que tengan influencia así que en un primer momento vamos a dejar fuera del análisis si el alumno tiene internet, si tiene una relación, el tutor, la dirección, si realiza actividades extraescolares, si recibe clases de pago o si  recibe el apoyo de su familia en el estudio. 
+Observando las gráficas vemos que hay variables que parece que sí tienen influencia a simple vista en el consumo de alcohol tanto a diario como los fines de semana, como pueden ser el sexo y el estado de los padres. Sin embargo vemos otros que, a priori, no parece que tengan influencia así que en un primer momento vamos a dejar fuera del análisis la dirección, si el alumno tiene internet, si tiene una relación, el tutor, si realiza actividades extraescolares o si recibe clases de pago. 
+
+
+En este apartado vamos a mostrar únicamente las gráficas de las variables que hemos descartado en el estudio inicial, para ver que, efectivamente, a priori no tienen influencia en el consumo de alcohol. Las gráficas completas se muestran en el \textit{notebook}. 
+
+
+\begin{figure}[ht!]
+	\subfigure[Fin de semana]{\includegraphics[trim = 0mm 0mm 20mm 0mm, clip,scale=0.27]{images/bp_address_weekend.png}}\hfill
+	\subfigure[Diario]{\includegraphics[trim = 0mm 0mm 20mm 0mm, clip,scale=0.27]{images/bp_address_week.png}}
+	 \caption{Boxplot dirección - consumo alcohol}
+	 \label{fig:bpaddress}
+\end{figure}
+
+ \begin{figure}[hbp!]
+ 	\subfigure[Fin de semana]{\includegraphics[trim = 0mm 0mm 23mm 0mm, clip,scale=0.27]{images/bp_inet_weekend.png}}\hfill
+ 	\subfigure[Diario]{\includegraphics[trim = 0mm 0mm 0mm 0mm, clip,scale=0.27]{images/bp_inet_week.png}}
+ 	\caption{Boxplot Internet - consumo alcohol}
+ 	\label{fig:bpinet}
+ \end{figure}
+
+
+\begin{figure}[ht!]
+	\subfigure[Fin de semana]{\includegraphics[trim = 0mm 0mm 0mm 0mm, clip,scale=0.27]{images/bp_rom_weekend.png}}\hfill
+	\subfigure[Diario]{\includegraphics[trim = 0mm 0mm 0mm 0mm, clip,scale=0.27]{images/bp_rom_week.png}}
+	\caption{Boxplot relación romántica - consumo alcohol}
+	\label{fig:bprom}
+\end{figure}
+
+
+\begin{figure}[ht!]
+	\subfigure[Fin de semana]{\includegraphics[trim = 0mm 0mm 0mm 0mm, clip,scale=0.27]{images/bp_tutor_weekend.png}}\hfill
+	\subfigure[Diario]{\includegraphics[trim = 0mm 0mm 0mm 0mm, clip,scale=0.27]{images/bp_tutor_week.png}}
+	\caption{Boxplot tutor - consumo alcohol}
+	\label{fig:bptutor}
+\end{figure}
 
 
 
 \begin{figure}[ht!]
-  \centering
-  \begin{minipage}[b]{0.4\textwidth}
-    \includegraphics[trim = 0mm 0mm 0mm 0mm, clip,scale=0.4]{images/boxplot_walc_sex}
-    \caption{Consumo en fines de semana por sexo}
-  \end{minipage}
-  \hfill
-  \begin{minipage}[b]{0.4\textwidth}
-    \includegraphics[trim = 0mm 0mm 0mm 0mm, clip,scale=0.4]{images/boxplot_dalc_sex}
-    \caption{Consumo entre semana por sexo}
-  \end{minipage}
+	\subfigure[Fin de semana]{\includegraphics[trim = 0mm 0mm 0mm 0mm, clip,scale=0.27]{images/bp_act_weekend.png}}\hfill
+	\subfigure[Diario]{\includegraphics[trim = 0mm 0mm 0mm 0mm, clip,scale=0.27]{images/bp_act_week.png}}
+	\caption{Boxplot actividades extraescolares - consumo alcohol}
+	\label{fig:bpact}
+\end{figure}
+
+
+
+\begin{figure}[ht!]
+	\subfigure[Fin de semana]{\includegraphics[trim = 0mm 0mm 0mm 0mm, clip,scale=0.27]{images/bp_paid_weekend.png}}\hfill
+	\subfigure[Diario]{\includegraphics[trim = 0mm 0mm 0mm 0mm, clip,scale=0.27]{images/bp_paid_week.png}}
+	\caption{Boxplot clases pago - consumo alcohol}
+	\label{fig:bppaid}
 \end{figure}
 
 
@@ -294,9 +395,15 @@ Observando las gráficas vemos que hay variables que parece que sí tienen influ
 \end{figure}
 
 
+
+
+
+
+
 En la figura \ref{fig:sum4} podemos ver el resumen del dataset. Tras la fase de limpieza y este pequeño análisis hemos pasado de tener dos datasets con 33 dimensiones a \textbf{un único dataset con 21 dimensiones} pasando por un dataset conjunto de 41 dimensiones.  
 
 
+\clearpage
 
 \subsection{ Estadística Inferencial}
 En este apartado vamos a ver si hay diferencia significativas en el consumo de alcohol a diario y fines de semana entre estudiantes en función del sexo y de situación de los padres. También veremos si el consumo de alcohol es distinto entre estudiantes que aprueban y que suspenden:

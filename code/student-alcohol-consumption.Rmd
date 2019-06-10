@@ -3,15 +3,15 @@ title: "Código Práctica 2: Limpieza dataset 'Student Alcohol Consumption '"
 author: "Gregorio Andrés García Menéndez (gagarcia) & Manuel Gómez Montero (megmontero)"
 date: "Junio, 2019"
 output:
+  pdf_document:
+    toc: yes
+    toc_depth: '2'
   html_document:
     keep_md: yes
     number_sections: yes
     toc: yes
     toc_depth: 2
     toc_float: yes
-  pdf_document:
-    toc: yes
-    toc_depth: '2'
 lang: es
 ---
 
@@ -28,6 +28,11 @@ options(knitr.kable.NA = '', root.dir = working_directory)
 ```{r load_libraries, include=FALSE}
 library(knitr)
 library(statnet.common)
+library(missForest)
+library(dplyr)
+library(ggplot2)
+library(DescTools)
+
 ```
 
 **Introducción**
@@ -68,7 +73,7 @@ students=merge(students.mat,students.por,by=c("school","sex","age","address","fa
 summary(students)
 ```
 
-
+No obstante, pensamos que existen otro conjunto de variables que son únicas para cada estudiante independientemente del curso como son el tiempo de camino al colegio, los suspensos anteriores si el alumno ha suspendido alguna asignatura anteriormente, si tiene soporte en el colegio, si realiza actividades extraescolares, si tiene pensado estudiar ... 
 ```{r}
 students.both=merge(students.mat,students.por,by=c("school","sex","age","address","famsize","Pstatus","Medu","Fedu","Mjob","Fjob","reason","nursery","internet", "traveltime", "failures", "schoolsup", "activities", "higher", "romantic", "famrel", "freetime", "goout", "Dalc", "Walc", "health"))
 
@@ -78,11 +83,11 @@ summary(students.both)
 Vemos cuáles realmente serían del mismo conjunto
 
 ```{r}
-print(nrow(students.both[students$guardian.y!=students$guardian.x,c("guardian.x", "guardian.y")]))
-print(nrow(students.both[students$guardian.y!=students$guardian.x,c("famsup.x", "famsup.y")]))
-print(nrow(students.both[students$studytime.y!=students$studytime.x,c("studytime.x", "studytime.y")]))
-print(nrow(students.both[students$paid.y!=students$paid.x,c("paid.x", "paid.y")]))
-print(nrow(students.both[students$absences.y!=students$absences.x,c("absences.x", "absences.y")]))
+print(nrow(students.both[students.both$guardian.y!=students.both$guardian.x,c("guardian.x", "guardian.y")]))
+print(nrow(students.both[students.both$guardian.y!=students.both$guardian.x,c("famsup.x", "famsup.y")]))
+print(nrow(students.both[students.both$studytime.y!=students.both$studytime.x,c("studytime.x", "studytime.y")]))
+print(nrow(students.both[students.both$paid.y!=students.both$paid.x,c("paid.x", "paid.y")]))
+print(nrow(students.both[students.both$absences.y!=students.both$absences.x,c("absences.x", "absences.y")]))
 
 ```
 
@@ -92,7 +97,7 @@ students.merge=merge(students.mat,students.por,by=c("school","sex","age","addres
 summary(students.merge)
 
 # Save the dataset temporaly 
-write.table(students, "../data/students.csv", sep=",", col.names=TRUE, row.names=TRUE, quote=TRUE, na="NA")
+write.table(students, "../data/students_merge.csv", sep=",", col.names=TRUE, row.names=TRUE, quote=TRUE, na="NA")
 ```
 
 
@@ -100,9 +105,9 @@ write.table(students, "../data/students.csv", sep=",", col.names=TRUE, row.names
 ## Eliminamos NAs
 
 
-Primeros creamos un nuevo dataset y unificamos la variable paid. 
+Primeros creamos un nuevo dataset y unificamos la variable paid estableciendo el valor "yes" si el estudiante recibe clases de pago en alguna de las clases. 
 ```{r}
-students.nonas <- students.merge[, c("school","sex","age","address","famsize","Pstatus","Medu","Fedu","Mjob","Fjob","reason","nursery","internet", "traveltime", "failures", "schoolsup", "activities", "higher", "romantic", "famrel", "freetime", "goout", "Dalc", "Walc", "health", "guardian", "famsup", "studytime")]
+students.nonas <- students.merge[, c("school","sex","age","address","famsize","Pstatus","Medu","Fedu","Mjob","Fjob","reason","nursery","internet", "traveltime", "failures", "schoolsup", "activities", "higher", "romantic", "famrel", "freetime", "goout", "Dalc", "Walc", "health", "guardian", "famsup", "studytime", "G1.por", "G1.mat", "G2.por", "G2.mat", "G3.por", "G3.mat", "absences.mat", "absences.por")]
 students.nonas$paid <- "no"
 students.nonas$paid[NVL(students.merge$paid.mat == 'yes' | students.merge$paid.por == 'yes', FALSE)] <- "yes"
 students.nonas$paid <- as.factor(students.nonas$paid)
@@ -112,17 +117,70 @@ summary(students.nonas)
 ```
 
 
-Aplicamos un proceso similar para las calificaciones, utilizando la media en el caso que existan ambas:
+
+Para el resto de valores nulos utilizamos el método missForest que utiliza árboles de decisión para imputar los valores perdidos en variables tanto numéricas como categóricas. 
 
 ```{r}
-students.nonas$G1 <- rowMeans(students.merge[c('G1.mat', 'G1.por')], na.rm=TRUE)
-students.nonas$G2 <- rowMeans(students.merge[c('G2.mat', 'G2.por')], na.rm=TRUE)
-students.nonas$G3 <- rowMeans(students.merge[c('G3.mat', 'G3.por')], na.rm=TRUE)
+
+mf <-missForest(students.nonas, maxiter = 10, ntree = 100, variablewise = FALSE,
+                       decreasing = FALSE, verbose = FALSE,
+                       mtry = floor(sqrt(ncol(students.nonas))), replace = TRUE,
+                       classwt = NULL, cutoff = NULL, strata = NULL,
+                       sampsize = NULL, nodesize = NULL, maxnodes = NULL,
+                       xtrue = NA, parallelize = c('no', 'variables', 'forests'))
+
+
+students.nonas <- mf$ximp
+
 summary(students.nonas)
+ncol(students.nonas)
 
 ```
-Por último lo aplicamos a las ausencias, antes de aplicar la media normalizamos los valores
 
+## Análisis de  0s
+Vamos a analizar uno por uno los casos en los que existen valores 0 y a definir si son valores posibles de la variable o por el contrario se trata de valores vacíos indicados como 0. Las variables que contienen valores 0 son: 
+
+```{r}
+
+students.numeric = select_if(students.nonas, is.numeric)
+students.zerocolumns <- students.numeric[sapply(students.numeric, function(x) min(abs(x)))==0]
+summary(students.zerocolumns)
+
+```
+
+Para el caso de la educación del padre y la madre ya definimos que el valor 0 significa que no poseen ningún tipo de educación.
+
+Para el resto de casos vemos que el valor 0 también es posible ya que: 
+
+- Es posible no haber suspendido ninguna asignatura, de hecho más del 75\% de alumnos así lo han hecho.
+- En las calificaciones es posible sacar un 0. 
+- En el caso de las ausencias también existen alumnos que no han faltado a ninguna clase. En el caso de las clases de portugués más del 25\%.
+
+
+
+
+## Reducción dimensionalidad
+
+ vamos a unificar las calificaciones y las ausencias de ambas clases. En el caso de las calificaciones tiene sentido realizar la media entre ambas, 
+
+
+En primer lugar como no vamos a centrar los estudios comparando estudiantes de distintos colegios, en primer lugar, eliminamos la variable School
+```{r}
+students.red <- students.nonas[, c("sex","age","address","famsize","Pstatus","Medu","Fedu","Mjob","Fjob","reason","nursery","internet", "traveltime", "failures", "schoolsup", "activities", "higher", "romantic", "famrel", "freetime", "goout", "Dalc", "Walc", "health", "guardian", "famsup", "studytime", "paid")]
+```
+
+
+Para las calificaciones vamos a crear un único campo que contenga la media de todas las calificaciones obtenidas por el estudiante. 
+
+```{r}
+
+students.red$G <- rowMeans(students.nonas[c('G1.mat', 'G1.por','G2.mat', 'G2.por','G3.mat', 'G3.por' )])
+summary(students.red)
+```
+
+
+
+En el caso de las ausencias vamos a aplicar el mismo método, sin embargo antes de realizar la media vamos a normalizar para evitar que tengan más peso las ausencias en matemáticas:
 ```{r}
 normalized<-function(y) {
   x<-y[!is.na(y)]
@@ -132,26 +190,14 @@ normalized<-function(y) {
 }
 
 
-students.nonas$absences <- rowMeans(sapply(students.merge[c('absences.mat', 'absences.por')], normalized), na.rm=TRUE)
+students.red$absences <- rowMeans(sapply(students.nonas[c('absences.mat', 'absences.por')], normalized), na.rm=TRUE)
 
-summary(students.nonas)  
-
-```
-
-
-
-
-## Reducción dimensionalidad
-
-
-Como no vamos a centrar los estudios comparando estudiantes de distintos colegios, eliminamos la variable School, y calculamos la evaluacion como la media:
-```{r}
-students.red <- students.nonas[,c("sex","age","address","famsize","Pstatus","Medu","Fedu","Mjob","Fjob","reason","nursery","internet", "traveltime", "failures", "schoolsup", "activities", "higher", "romantic", "famrel", "freetime", "goout", "Dalc", "Walc", "health", "guardian", "famsup", "studytime", "absences", "paid")]
-students.red$G <-  rowMeans(students.nonas[c('G1', 'G2', 'G3')])
-
-summary(students.red)
+summary(students.red)  
 
 ```
+
+
+
 
 ## Tipo de variables
 
@@ -183,22 +229,21 @@ Por lo tanto, al ser categorías, las tratamos como factores y no como numérica
 ## Análisis gráfico inicial
 
 ```{r}
+
 vars = c("sex","age","address","famsize","Pstatus","Medu","Fedu","Mjob","Fjob","reason","nursery","internet", "traveltime", "failures", "schoolsup", "activities", "higher", "romantic", "famrel", "freetime", "goout", "health", "guardian", "famsup", "studytime", "absences", "paid", "G")
-objs = c("Dalc", "Wcalc")
 
 
 
-library(ggplot2)
 
 for(i in vars) {
   if(is.factor(students.red[,i])){
-    f1 = students.red[,i]
-    plot <- ggplot(data = students.red, aes(x = f1, y = students.red[,"Walc"])) + 
-            geom_boxplot(aes(fill = f1), width = 0.8) + theme_bw()  +
+    var = students.red[,i]
+    plot <- ggplot(data = students.red, aes(x = var, y = students.red[,"Walc"])) + 
+            geom_boxplot(aes(fill = var), width = 0.8) + theme_bw()  +
             xlab(i) + ylab("Weekend Consumption")
     print(plot)
-    plot <- ggplot(data = students.red, aes(x = f1, y = students.red[,"Dalc"])) + 
-            geom_boxplot(aes(fill = f1), width = 0.8) + theme_bw()  +
+    plot <- ggplot(data = students.red, aes(x = var, y = students.red[,"Dalc"])) + 
+            geom_boxplot(aes(fill = var), width = 0.8) + theme_bw()  +
             xlab(i) + ylab("Weekday Consumption")
     print(plot)
   }
@@ -212,7 +257,7 @@ Viendo las gráficas vemos que hay variables que parece que sí tienen influenci
 El dataset resultante y con el que continuaremos trabajando es el siguiente: 
 
 ```{r}
-students <- students.red[,c("sex","age","famsize","Pstatus","Medu","Fedu","Mjob","Fjob","reason", "traveltime", "failures", "schoolsup", "higher",  "famrel", "freetime", "goout", "Dalc", "Walc", "health", "studytime", "absences", "G")]
+students <- students.red[,c("sex","age","famsize","Pstatus","Medu","Fedu","Mjob","Fjob","reason", "traveltime", "failures", "schoolsup", "higher", "famsup", "famrel", "freetime", "goout", "Dalc", "Walc", "health", "studytime", "absences", "G")]
 summary(students)
 ```
 
@@ -255,6 +300,9 @@ En este apartado vamos a ver si hay diferencia significativas en el consumo de a
 Se trata de un problema de diferencia de medias entre dos muestras.
 
 
+
+### Hipótesis
+
 Para cada caso la hipótesis sería: 
 
 
@@ -270,13 +318,36 @@ $$
 Se trata de un problema de diferencia de medias en el que no conocemos la varianza poblacional. Tampoco sabemos a priori si los datos siguen una distribución normal, pero el tamaño de las muestras es lo suficientemente grande para tener en cuenta el teorema del límite central.
 
 
+### Comprobación de homocedasticidad
+En cuanto a la varianza, podemos usar el test de Levene para comprobar si estas son iguales:
+
+```{r}
+
+aprobado <- as.factor(students$G >= 10)
+LeveneTest(students$Dalc ~ students$sex)
+LeveneTest(students$Walc ~ students$sex)
+LeveneTest(students$Dalc ~ students$Pstatus)
+LeveneTest(students$Walc ~ students$Pstatus)
+LeveneTest(students$Dalc ~ aprobado)
+LeveneTest(students$Walc ~ aprobado)
+
+```
+
+Consideramos igualdad de varianza unicamente para el estado de los padres. Para el resto de casos se asumirá heterocedasticidad.
+
+
+
+
+### Realización tests
+
+
 Para el alcohol en fines de semana por sexo: 
 
 ```{r}
 data_weekend_sex_m <- students$Walc[students$sex == 'M'] 
 data_weekend_sex_f <- students$Walc[students$sex == 'F'] 
 
-t.test(data_weekend_sex_m, data_weekend_sex_f, var.equal = TRUE, conf.level = 0.95)
+t.test(data_weekend_sex_m, data_weekend_sex_f,  conf.level = 0.95)
 ```
 Por el p-value vemos que no podemos aceptar la hipótesis nula, y concluimos que al 95% de nivel de confianza los estudiantes masculinos y femeninos no tienen el mismo consumo de alcohol los fines de semana.  
 
@@ -288,7 +359,7 @@ Por sexo entre semana:
 data_weekday_sex_m <- students$Dalc[students$sex == 'M'] 
 data_weekday_sex_f <- students$Dalc[students$sex == 'F'] 
 
-t.test(data_weekday_sex_m, data_weekday_sex_f, var.equal = TRUE, conf.level = 0.95)
+t.test(data_weekday_sex_m, data_weekday_sex_f,  conf.level = 0.95)
 ```
 
 Por el p-value vemos que ocurre lo mismo que en los fines de semana. No podemos acepta la hipotésis nula y al 95% afirmamos que hay diferencia en el consumo de alcohol entre estudiantes masculinos y femeninos para los días entre semana.
@@ -319,7 +390,7 @@ Por último, realizamos el estudio para el consumo de alcohol según las calific
 data_weekday_aprobados <- students$Dalc[students$G >= 10] 
 data_weekday_suspensos <- students$Dalc[students$G < 10] 
 
-t.test(data_weekday_aprobados, data_weekday_suspensos, var.equal = TRUE, conf.level = 0.95)
+t.test(data_weekday_aprobados, data_weekday_suspensos,  conf.level = 0.95)
 ```
 Viendo el p-value, podemos decir al 95% que sí hay diferencias entre alumnos que aprueban y alumnos que suspenden en cuanto al consumo de alcohol entre semana.
 
@@ -329,7 +400,7 @@ En el caso del consumo los fines de semana:
 data_weekend_aprobados <- students$Walc[students$G >= 10] 
 data_weekend_suspensos <- students$Walc[students$G < 10] 
 
-t.test(data_weekend_aprobados, data_weekend_suspensos, var.equal = TRUE, conf.level = 0.95)
+t.test(data_weekend_aprobados, data_weekend_suspensos,  conf.level = 0.95)
 ```
 Con un p-value menor que 0.05, al 95% de confianza afirmamos que también hay diferencia en el consumo de alcohol los fines de semana en función de si el alumno aprueba o no.
 
@@ -378,31 +449,85 @@ En este caso, el modelo explica un 48% de la variabilidad en los datos.
 
 Estudiamos el de nivel de significancia de la relación entre la calificación que obtienen los alumnos y otro tipo de factores:
   - Sexo
-  - Edad
   - Consumo de alcohol los fines de semana
   - Consumo de alcohol entre semana
   - Situación de los padres (cohabitando o no)
   
-Al estudiar el nivel de relación entre una variable contínua (la nota) y variables categóricas (el resto), usamos el test ANOVA para obtener este nivel de significancia:
+Al estudiar el nivel de relación entre una variable contínua (la nota) y variables categóricas (el resto), usamos el test ANOVA para obtener este nivel de significancia. Una vez realizado comprobaremos la adecuación del modelo  analizando la normalidad y homoscedasticidad de los residuos. 
+
+
+## ANOVA 
+
+
 ```{r}
 # Sexo
 aov1 = aov(students$G ~ students$sex)
 summary(aov1)
-# Edad
-aov1 = aov(students$G ~ students$age)
-summary(aov1)
 # Consumo de alcohol fines de semana
-aov1 = aov(students$G ~ students$Walc)
-summary(aov1)
+aov2 = aov(students$G ~ students$Walc)
+summary(aov2)
 # Consumo de alcohol entre semana
-aov1 = aov(students$G ~ students$Dalc)
-summary(aov1)
+aov3 = aov(students$G ~ students$Dalc)
+summary(aov3)
 # Situación de los padres
-aov1 = aov(students.red$G ~ students.red$Pstatus)
-summary(aov1)
+aov4 = aov(students.red$G ~ students.red$Pstatus)
+summary(aov4)
 
 ```
-Como podemos observar, no hay correlación entre la calificación del estudiante y el sexo o el estado de convivencia de los padres. Sin embargo, en el desempeño escolar de los estudiantes sí que influyen significativamente la edad y el consumo de alcohol tanto en fines de semana como entre semana.
+
+
+
+
+## Estudio de normalidad
+
+Para comprobar la normalidad usaremos el test de Shapiro–Wilk utilizando un nivel de confianza del 95\% por lo que consideraremos la normalidad en aquellos casos en los que el p-value se encuentre por debajor de 0.05. 
+
+
+```{r}
+shapiro.test(aov1$residuals)
+shapiro.test(aov2$residuals)
+shapiro.test(aov3$residuals)
+shapiro.test(aov4$residuals)
+
+```
+
+Con los resultados obtenidos vemos que podemos asumir la normalidad en todos los casos.
+
+
+## Estudio de homoscedasticidad
+
+Para comprobar la homocedasticidad usaremos el test de Levene, considerando que se produce siempre que el p-value se encuentre por encima de 0.05.  
+
+```{r}
+LeveneTest(aov1$residuals ~ students$sex)
+LeveneTest(aov2$residuals ~ as.factor(students$Walc))
+LeveneTest(aov3$residuals ~ as.factor(students$Dalc))
+LeveneTest(aov4$residuals ~ students$Pstatus)
+```
+
+En este caso, solo podemos asumir homocedasticidad para el sexo y el estado de los padres, por lo que para el resto de casos ante el incumplimiento de la condición de homoscedasticidad, se podría aplicar una transformación de los datos (logaritmo, función inversa,…), o, por ejemplo el método Anova con corrección de Welch, como haremos a continuación, que no asume igualdad de varianzas.
+
+
+```{r}
+#Consumo entre semana
+oneway.test(G~Walc,
+            data=students,
+            var.equal=FALSE)
+#Consumo fin de semana
+oneway.test(G~Dalc,
+            data=students,
+            var.equal=FALSE)
+
+```
+
+
+Vemos que en ambos casos el p-value está por debajo del 0.05 por lo que podemos concluir que en ambos casos si hay una influencia significativa.
+
+## Conclusiones
+
+Como podemos observar, no hay correlación entre la calificación del estudiante y el sexo o el estado de convivencia de los padres. Sin embargo, en el desempeño escolar de los estudiantes sí que influye significativamente el consumo de alcohol tanto en fines de semana como entre semana.
+
+
 
 
 Procedemos a realizar otro estudio interesante como es la correlación entre la nota y otras variables numéricas: edad del alumno, número de ausencias del alumno y número de veces que ha suspendido anteriormente. Estudiamos la distribución de las variables y la normalidad de las mismas.
